@@ -13,5 +13,87 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\in-side">
+      <UniqueIdentifier>{b7d6bbb5-d76a-4277-b345-bfcb32a3805d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\nil-in-side">
+      <UniqueIdentifier>{a6c801b5-ccbd-4168-92f7-23a35e4ec109}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\in-side\in-in-side">
+      <UniqueIdentifier>{b83f0f44-e025-4f8f-a505-a8cdd888b0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\nil-in-side\nil-side">
+      <UniqueIdentifier>{cabc2cf2-caed-41ff-9504-eb6b9cb64c05}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Matrix3d.cpp">
+      <Filter>소스 파일\in-side\in-in-side</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>소스 파일\in-side</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일\in-side</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\nil-in-side\nil-side</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>소스 파일\nil-in-side\nil-side</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3d.cpp">
+      <Filter>소스 파일\nil-in-side</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectGlutModel.cpp">
+      <Filter>소스 파일\nil-in-side</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectCamera.cpp">
+      <Filter>소스 파일\nil-in-side</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFromOBJ.cpp">
+      <Filter>소스 파일\nil-in-side</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Vector3.h">
+      <Filter>소스 파일\in-side\in-in-side</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3d.h">
+      <Filter>소스 파일\in-side\in-in-side</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>소스 파일\in-side</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>소스 파일\nil-in-side\nil-side</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>소스 파일\nil-in-side\nil-side</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3d.h">
+      <Filter>소스 파일\nil-in-side</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectGlutModel.h">
+      <Filter>소스 파일\nil-in-side</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectCamera.h">
+      <Filter>소스 파일\nil-in-side</Filter>
+    </ClInclude>
+    <ClInclude Include="Type3.h">
+      <Filter>소스 파일\in-side\in-in-side</Filter>
+    </ClInclude>
+    <ClInclude Include="Color3.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFromOBJ.h">
+      <Filter>소스 파일\nil-in-side</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
