@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <list>
 #include "Vector3.h"
 #include "Color3.h"
 #include "Matrix3d.h"
@@ -20,13 +20,14 @@ protected:
 		};
 		Vector3	axis;
 	};
+public:
 	union {
 		GLfloat v[16];
 		Matrix3d matrix;
 	};
-public:
+	bool userRotation;
 
-	std::vector<Object*> child;
+	std::list<Object*> child;
 	int hierarchyLevel;
 
 protected:
@@ -44,6 +45,7 @@ public:
 	virtual void release();
 
 	void addChild(Object* _child);
+	void deleteChild(Object* _child);
 
 	void setVisible(const bool _b);
 	void setRotationAxis(const float _r);
@@ -58,6 +60,7 @@ public:
 	void setAxis(float _x, float _y, float _z);
 	void setAxis(const Vector3 _axis);
 
+	void setScale(float _s);
 	void setScale(float _x, float _y, float _z);
 	void setScale(const Vector3 _scale);
 
@@ -68,6 +71,7 @@ public:
 	Vector3 getRotation() const;
 	Vector3 getScale() const;
 	Vector3 getColor() const;
+	bool getVisible() const;
 
 	void adjustPosition(float _x, float _y, float _z);
 	void adjustPosition(const Vector3 _position);
@@ -80,4 +84,9 @@ public:
 
 	void adjustColor(float _r, float _g, float _b);
 	void adjustColor(const Vector3 _color);
+
+	inline bool operator==(const Object& rhs)
+	{
+		return this == &rhs;
+	}
 };

@@ -19,8 +19,9 @@ void Object::initialize()
 
 void Object::update()
 {
-	for (auto& v : child)
-		if (v) v->update();
+	if (child.size())
+		for (auto& v : child)
+			if (v) v->update();
 }
 
 void Object::preRender()
@@ -34,7 +35,7 @@ void Object::preRender()
 	glRotatef(rotation.z, 0, 0, 1);
 	glRotatef(rotation.y, 0, 1, 0);
 	glRotatef(rotation.x, 1, 0, 0);
-	//glMultMatrixf(v);
+	glMultMatrixf(v);
 	if (axisX != 0 && axisY != 0 && axisZ != 0)
 		glRotatef(rotationAxis, axisX, axisY, axisZ);
 	glScalef(scale.x, scale.y, scale.z);
@@ -43,8 +44,9 @@ void Object::preRender()
 
 void Object::postRender()
 {
-	for (auto& v : child)
-		if (v) v->render();
+	if(child.size())
+		for (auto& v : child)
+			if (v) v->render();
 	glPopMatrix();
 }
 
@@ -62,6 +64,11 @@ void Object::addChild(Object* _child)
 {
 	_child->hierarchyLevel = hierarchyLevel + 1;
 	child.push_back(_child);
+}
+
+void Object::deleteChild(Object* _child)
+{
+	child.remove(_child);
 }
 
 void Object::setVisible(const bool _b)
@@ -92,6 +99,11 @@ void Object::setRotation(float _x, float _y, float _z)
 void Object::setAxis(float _x, float _y, float _z)
 {
 	axis = Vector3{ _x, _y, _z };
+}
+
+void Object::setScale(float _s)
+{
+	scale = Vector3{ _s, _s, _s };
 }
 
 void Object::setScale(float _x, float _y, float _z)
@@ -150,6 +162,11 @@ Vector3 Object::getScale() const
 Vector3 Object::getColor() const
 {
 	return color;
+}
+
+bool Object::getVisible() const
+{
+	return bVisible;
 }
 
 void Object::adjustPosition(float _x, float _y, float _z)

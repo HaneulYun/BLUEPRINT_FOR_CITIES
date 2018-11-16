@@ -37,7 +37,10 @@ public:
 	static GLvoid MenuFunc(int button);
 	static GLvoid TimerFunction(int value);
 
+	Scene* getScene();
+
 	int run();
 };
 
 #define g_app App::instance()
+#define g_scene g_app->getScene()

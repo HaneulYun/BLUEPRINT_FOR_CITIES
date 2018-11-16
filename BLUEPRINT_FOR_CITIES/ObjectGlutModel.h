@@ -4,11 +4,16 @@
 enum e_model_type
 {
 	e_model_none,
-	e_model_cone,
 	e_model_cube,
 	e_model_sphere,
+	e_model_cone,
 	e_model_torus,
 	e_model_teapot,
+
+	e_model_tetrahedron,
+	e_model_octahedron,
+	e_model_dodecahedron,
+	e_model_icosahedron,
 
 	e_model_num,
 };
@@ -16,6 +21,8 @@ enum e_model_type
 class ObjectGlutModel : public Object
 {
 	bool solid;
+	bool wire;
+	Color3 wireColor;
 
 	e_model_type model;
 	union
@@ -48,10 +55,16 @@ public:
 	void release();
 
 	void setSolid(const bool _b);
+	void setWire(const bool _b);
 
-	void setModelCone(double _base, double _height, int _slices, int _stacks);
 	void setModelCube(double _size);
 	void setModelSphere(double _radius, int _slices, int _stacks);
+	void setModelCone(double _base, double _height, int _slices, int _stacks);
 	void setModelTorus(double _innerRadius, double _outerRadius, int _nSlides, int _nRings);
 	void setModelTeapot(double _size);
+	
+	void setModelTetrahedron();
+	void setModelOctahedron();
+	void setModelDodecahedron();
+	void setModelIcosahedron();
 };

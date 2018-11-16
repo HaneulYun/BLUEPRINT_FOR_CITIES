@@ -2,6 +2,9 @@
 
 class Scene
 {
+protected:
+	float viewportWidth;
+	float viewportHeight;
 public:
 	Scene();
 	virtual ~Scene();

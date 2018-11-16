@@ -1,16 +1,15 @@
 #pragma once
-#include <ctime>
-#include <chrono>
+#include <list>
 #include "Scene.h"
 #include "Object3d.h"
-#include "ObjectGlutModel.h"
-#include "ObjectFromObj.h"
 #include "ObjectCamera.h"
+#include "ObjectFromOBJ.h"
 
 class GameScene : public Scene
 {
 	ObjectCamera camera;
 	Object3d plane;
+	ObjectFromOBJ obj;
 
 public:
 	GameScene();

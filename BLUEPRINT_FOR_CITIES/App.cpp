@@ -30,13 +30,7 @@ App* App::instance()
 
 void App::initialize(POINT winPosition, SIZE winSize, char* title)
 {
-	m_winPosition = winPosition;
-	m_winSize = winSize;
-
-	m_title = new char[strlen(title) + 1];
-	strcpy_s(m_title, strlen(title) + 1, title);
-
-	GLinit();
+	initialize(winPosition.x, winPosition.y, winSize.cx, winSize.cy, title);
 }
 
 void App::initialize(int x, int y, int width, int height, char* title)
@@ -61,6 +55,16 @@ void App::GLinit()
 	glutInitWindowPosition(m_winPosition.x, m_winPosition.y);
 	glutInitWindowSize(m_winSize.cx, m_winSize.cy);
 	glutCreateWindow(m_title);
+
+	glutDisplayFunc(App::drawScene);
+	glutReshapeFunc(App::Reshape);
+	glutKeyboardFunc(App::Keyboard);
+	glutSpecialFunc(App::Special);
+	glutMouseFunc(App::Mouse);
+	glutMotionFunc(App::Motion);
+	glutCreateMenu(App::MenuFunc);
+	glutTimerFunc(1000 / 60, App::TimerFunction, 1);
+
 	glEnable(GL_DEPTH_TEST);
 }
 
@@ -76,14 +80,6 @@ void App::release()
 
 int App::run()
 {
-	glutDisplayFunc(App::drawScene);
-	glutReshapeFunc(App::Reshape);
-	glutKeyboardFunc(App::Keyboard);
-	glutSpecialFunc(App::Special);
-	glutMouseFunc(App::Mouse);
-	glutMotionFunc(App::Motion);
-	glutCreateMenu(App::MenuFunc);
-	glutTimerFunc(1000 / 60, App::TimerFunction, 1);
 	glutMainLoop();
 	return 0;
 }
@@ -134,4 +130,9 @@ GLvoid App::TimerFunction(int value)
 {
 	if (g_app->m_pScene)
 		g_app->m_pScene->timerFunction(value);
+}
+
+Scene* App::getScene()
+{
+	return m_pScene;
 }
