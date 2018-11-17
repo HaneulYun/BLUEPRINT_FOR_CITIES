@@ -1,15 +1,27 @@
 #pragma once
-#include <list>
+#include <vector>
+#include <glm/glm.hpp>
 #include "Scene.h"
-#include "Object3d.h"
-#include "ObjectCamera.h"
-#include "ObjectFromOBJ.h"
 
 class GameScene : public Scene
 {
-	ObjectCamera camera;
-	Object3d plane;
-	ObjectFromOBJ obj;
+	std::vector< glm::vec3 > vertices;
+
+	GLuint VertexArrayID;
+
+	GLuint programID;
+	GLuint matrixID;
+	GLuint viewMatrixID;
+	GLuint modelMatrixID;
+
+	GLuint texture;
+	GLuint textureID;
+
+	GLuint lightID;
+
+	GLuint vertexbuffer;
+	GLuint uvbuffer;
+	GLuint normalbuffer;
 
 public:
 	GameScene();
@@ -19,13 +31,4 @@ public:
 	void update();
 	void render();
 	void release();
-
-	void drawScene(void);
-	void reshape(int w, int h);
-	void keyboard(unsigned char key, int x, int y);
-	void special(int key, int x, int y);
-	void mouse(int button, int state, int x, int y);
-	void motion(int x, int y);
-	void menuFunc(int button);
-	void timerFunction(int value);
 };

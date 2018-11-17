@@ -2,8 +2,9 @@
 #include "GameScene.h"
 
 App* App::m_instance = nullptr;
+extern GLFWwindow* window;
 
-App::App(int argc, char** argv) : m_argc(argc), m_argv(argv),
+App::App() : m_argc(NULL), m_argv(nullptr),
 	m_winPosition({ NULL, NULL }), m_winSize({ NULL, NULL }),
 	m_title(nullptr), m_pScene(nullptr)
 {
@@ -14,10 +15,10 @@ App::~App()
 	release();
 }
 
-App* App::create(int argc, char** argv)
+App* App::create()
 {
 	if (!m_instance)
-		m_instance = new App(argc, argv);
+		m_instance = new App();
 	return m_instance;
 }
 
@@ -41,31 +42,51 @@ void App::initialize(int x, int y, int width, int height, char* title)
 	m_title = new char[strlen(title) + 1];
 	strcpy_s(m_title, strlen(title) + 1, title);
 
-	GLinit();
+	//GLUTinit();
+	GLFWinit();
 
 	m_pScene = new GameScene();
 	if (m_pScene)
 		m_pScene->initialize();
 }
 
-void App::GLinit()
+int App::GLFWinit()
 {
-	glutInit(&m_argc, m_argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-	glutInitWindowPosition(m_winPosition.x, m_winPosition.y);
-	glutInitWindowSize(m_winSize.cx, m_winSize.cy);
-	glutCreateWindow(m_title);
+	if (!glfwInit())
+	{
+		fprintf(stderr, "GLFWinit failed\n");
+		return -1;
+	}
 
-	glutDisplayFunc(App::drawScene);
-	glutReshapeFunc(App::Reshape);
-	glutKeyboardFunc(App::Keyboard);
-	glutSpecialFunc(App::Special);
-	glutMouseFunc(App::Mouse);
-	glutMotionFunc(App::Motion);
-	glutCreateMenu(App::MenuFunc);
-	glutTimerFunc(1000 / 60, App::TimerFunction, 1);
+	glfwWindowHint(GLFW_SAMPLES, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+	::window = window = glfwCreateWindow(m_winSize.cx, m_winSize.cy, m_title, NULL, NULL);
+	if (window == NULL) {
+		fprintf(stderr, "GLFWinit failed\n");
+		glfwTerminate();
+		return -1;
+	}
+	glfwMakeContextCurrent(window);
+	glewExperimental = true;
+	if (glewInit() != GLEW_OK) {
+		fprintf(stderr, "GLEW failed\n");
+		return -1;
+	}
+
+	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+	glfwPollEvents();
+	glfwSetCursorPos(window, 1024 / 2, 768 / 2);
+
+	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 }
 
 void App::release()
@@ -80,56 +101,16 @@ void App::release()
 
 int App::run()
 {
-	glutMainLoop();
+	do {
+		m_pScene->update();
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		m_pScene->render();
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	} while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+		glfwWindowShouldClose(window) == 0);
 	return 0;
-}
-
-GLvoid App::drawScene(GLvoid)
-{
-	if (g_app->m_pScene)
-		g_app->m_pScene->drawScene();
-}
-
-GLvoid App::Reshape(int w, int h)
-{
-	if (g_app->m_pScene)
-		g_app->m_pScene->reshape(w, h);
-}
-
-GLvoid App::Keyboard(unsigned char key, int x, int y)
-{
-	if (g_app->m_pScene)
-		g_app->m_pScene->keyboard(key, x, y);
-}
-
-GLvoid App::Special(int key, int x, int y)
-{
-	if (g_app->m_pScene)
-		g_app->m_pScene->special(key, x, y);
-}
-
-GLvoid App::Mouse(int button, int state, int x, int y)
-{
-	if (g_app->m_pScene)
-		g_app->m_pScene->mouse(button, state, x, y);
-}
-
-GLvoid App::Motion(int x, int y)
-{
-	if (g_app->m_pScene)
-		g_app->m_pScene->motion(x, y);
-}
-
-GLvoid App::MenuFunc(int button)
-{
-	if (g_app->m_pScene)
-		g_app->m_pScene->menuFunc(button);
-}
-
-GLvoid App::TimerFunction(int value)
-{
-	if (g_app->m_pScene)
-		g_app->m_pScene->timerFunction(value);
 }
 
 Scene* App::getScene()

@@ -1,7 +1,15 @@
 #include <gl/glew.h>
 #include <gl/gl.h>
+#include <glm/gtx/transform.hpp>
 #include "GameScene.h"
 #include "App.h"
+
+#include "shader.hpp"
+#include "texture.hpp"
+#include "controls.hpp"
+#include "objloader.hpp"
+
+using namespace glm;
 
 #define PI 3.141592f
 
@@ -15,127 +23,112 @@ GameScene::~GameScene()
 
 void GameScene::initialize()
 {
-	camera.setPosition({ 0, 300, 300 });
-	camera.setRotation({ -45, 90, 0 });
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
 
-	// plane
-	{
-		camera.addChild(&plane);
-		plane.setBeginMode(GL_QUADS);
-		plane.vectors.push_back({ -200, 0, -200 });
-		plane.vectors.push_back({ -200, 0,  200 });
-		plane.vectors.push_back({  200, 0,  200 });
-		plane.vectors.push_back({  200, 0, -200 });
-		plane.setPosition({ 0.f, 0.f, 0.f });
-		plane.setColor(0.5f, 0.5f, 0.5f);
-	}
+	programID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
+	matrixID = glGetUniformLocation(programID, "MVP");
+	viewMatrixID = glGetUniformLocation(programID, "V");
+	modelMatrixID = glGetUniformLocation(programID, "M");
 
-	camera.addChild(&obj);
-	obj.loadOBJ("resources/chicken.obj");
+	texture = loadBMP_custom("resources/T_PolygonCity_Texture_01_A.bmp");
+	textureID = glGetUniformLocation(programID, "myTextureSampler");
+
+	std::vector< glm::vec2 > uvs;
+	std::vector< glm::vec3 > normals;
+	bool res = loadOBJ("resources/SM_Env_Tree_03_Internal.obj", vertices, uvs, normals);
+
+	for (auto& v : vertices)
+		v /= 400.f;
+
+	mat4 projection = perspective(radians(45.f), 4.f / 3.f, 0.1f, 100.f);
+	mat4 view = lookAt(vec3(4, 3, 3), vec3(0, 0, 0), vec3(0, 1, 0));
+	mat4 model = mat4(1.f);
+	mat4 mvp = projection * view * model;
+
+	glGenBuffers(1, &vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vec3), &vertices[0], GL_STATIC_DRAW);
+
+	glGenBuffers(1, &uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(vec2), &uvs[0], GL_STATIC_DRAW);
+
+	glGenBuffers(1, &normalbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
+
+	glUseProgram(programID);
+	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 }
 
 void GameScene::update()
 {
-	camera.update();
+	glUseProgram(programID);
+
+	computeMatricesFromInputs();
+	mat4 projectionMatrix = getProjectionMatrix();
+	mat4 viewMatrix = getViewMatrix();
+	mat4 modelMatrix = mat4(1.f);
+	mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
+
+	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
+	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
+	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
 }
 
 void GameScene::render()
 {
-	camera.render();
-	//static const GLfloat g_vertex_buffer_data[] =
-	//{
-	//	-100.f, -100.f, 0.f,
-	//	100.f, -100.f, 0.f,
-	//	0.f, 100.f, 0.f
-	//};
-	//
-	//GLuint vertexbuffer;
-	//glGenBuffers(1, &vertexbuffer);
-	//glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW)
+	vec3 lightPos = vec3(4, 4, 4);
+	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glUniform1i(textureID, 0);
+
+	// 1rst attribute buffer : vertices
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+	// 2nd attribute buffer : colors
+	//glEnableVertexAttribArray(1);
+	//glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	//glVertexAttribPointer(
+	//	1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
+	//	3,                                // size
+	//	GL_FLOAT,                         // type
+	//	GL_FALSE,                         // normalized?
+	//	0,                                // stride
+	//	(void*)0                          // array buffer offset
+	//);
+
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+	glEnableVertexAttribArray(2);
+	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+	// Draw the triangle !
+	glDrawArrays(GL_TRIANGLES, 0, vertices.size()); // 12*3 indices starting at 0 -> 12 triangles -> 6 squares
+
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
 }
 
 void GameScene::release()
 {
-}
+	// Cleanup VBO and shader
+	glDeleteBuffers(1, &vertexbuffer);
+	glDeleteBuffers(1, &uvbuffer);
+	glDeleteProgram(programID);
+	glDeleteTextures(1, &textureID);
+	glDeleteVertexArrays(1, &VertexArrayID);
 
-void GameScene::drawScene(void)
-{
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	render();
-
-	glutSwapBuffers();
-}
-
-void GameScene::reshape(int w, int h)
-{
-	viewportWidth = w;
-	viewportHeight = h;
-	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	gluPerspective(60, w / h, 1, 1000);
-	//glOrtho(-400, 400, -300, 300, -1000, 1000);
-
-	glTranslatef(0.f, 0.f, 0.f);
-}
-
-void GameScene::keyboard(unsigned char key, int x, int y)
-{
-	switch (key)
-	{
-	case '0':
-		camera.setRotation(0, 0, 0);
-		camera.setPosition(0, 0, 0);
-		break;
-	case 'w':	camera.adjustRotation(1, 0, 0);			break;
-	case 's':	camera.adjustRotation(-1, 0, 0);		break;
-	case 'a':	camera.adjustRotation(0, 1, 0);			break;
-	case 'd':	camera.adjustRotation(0, -1, 0);		break;
-	case 'q':	camera.adjustRotation(0, 0, -1);		break;
-	case 'e':	camera.adjustRotation(0, 0, 1);			break;
-	case '+':	camera.adjustPosition(0.f, 0.f, -10.f);	break;
-	case '-':	camera.adjustPosition(0.f, 0.f, 10.f);	break;
-	}
-}
-
-void GameScene::special(int key, int x, int y)
-{
-	switch (key)
-	{
-	case GLUT_KEY_LEFT:
-		camera.adjustPosition({ -10.f, 0.f, 0.f });
-		break;
-	case GLUT_KEY_RIGHT:
-		camera.adjustPosition({ 10.f, 0.f, 0.f });
-		break;
-	case GLUT_KEY_UP:
-		camera.adjustPosition({ 0.f, 10.f, 0.f });
-		break;
-	case GLUT_KEY_DOWN:
-		camera.adjustPosition({ 0.f, -10.f, 0.f });
-		break;
-	}
-}
-
-void GameScene::mouse(int button, int state, int x, int y)
-{
-}
-
-void GameScene::motion(int x, int y)
-{
-}
-
-void GameScene::menuFunc(int button)
-{
-}
-
-void GameScene::timerFunction(int value)
-{
-	update();
-	glutTimerFunc(1000 / 60, App::TimerFunction, 1);
-	glutPostRedisplay();
+	// Close OpenGL window and terminate GLFW
+	glfwTerminate();
 }
