@@ -10,6 +10,7 @@ class App
 {
 	static App* m_instance;
 	GLFWwindow* window{ nullptr };
+	GLuint	VertexArrayID{ NULL };
 
 	POINT	m_winPosition{ NULL, NULL };
 	SIZE	m_winSize{ NULL,NULL };

@@ -75,7 +75,6 @@ int App::GLFWinit()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
@@ -106,6 +105,7 @@ void App::release()
 	}
 	delete[] m_title;
 
+	glDeleteVertexArrays(1, &VertexArrayID);
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 }
