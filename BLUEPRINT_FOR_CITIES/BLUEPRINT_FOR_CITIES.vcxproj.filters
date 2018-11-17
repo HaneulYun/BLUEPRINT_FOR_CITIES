@@ -42,9 +42,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix3d.cpp">
-      <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
-    </ClCompile>
     <ClCompile Include="App.cpp">
       <Filter>소스 파일\00_ENTRY</Filter>
     </ClCompile>
@@ -56,18 +53,6 @@
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일\02_OBJECT\01_BASE</Filter>
-    </ClCompile>
-    <ClCompile Include="Object3d.cpp">
-      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectCamera.cpp">
-      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectFromOBJ.cpp">
-      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectGlutModel.cpp">
-      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>소스 파일\01_SCENE\01_INSTANCE</Filter>
@@ -86,18 +71,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vector3.h">
-      <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
-    </ClInclude>
-    <ClInclude Include="Color3.h">
-      <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix3d.h">
-      <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
-    </ClInclude>
-    <ClInclude Include="Type3.h">
-      <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
-    </ClInclude>
     <ClInclude Include="App.h">
       <Filter>소스 파일\00_ENTRY</Filter>
     </ClInclude>
@@ -106,18 +79,6 @@
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>소스 파일\02_OBJECT\01_BASE</Filter>
-    </ClInclude>
-    <ClInclude Include="Object3d.h">
-      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectCamera.h">
-      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectFromOBJ.h">
-      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectGlutModel.h">
-      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
     </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>소스 파일\01_SCENE\01_INSTANCE</Filter>

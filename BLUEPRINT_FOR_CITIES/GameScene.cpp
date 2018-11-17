@@ -65,13 +65,13 @@ void GameScene::initialize()
 void GameScene::update()
 {
 	glUseProgram(programID);
-
+	
 	computeMatricesFromInputs();
 	mat4 projectionMatrix = getProjectionMatrix();
 	mat4 viewMatrix = getViewMatrix();
 	mat4 modelMatrix = mat4(1.f);
 	mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
-
+	
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
@@ -81,17 +81,17 @@ void GameScene::render()
 {
 	vec3 lightPos = vec3(4, 4, 4);
 	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
-
+	
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
-
+	
 	glUniform1i(textureID, 0);
-
+	
 	// 1rst attribute buffer : vertices
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
+	
 	// 2nd attribute buffer : colors
 	//glEnableVertexAttribArray(1);
 	//glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
@@ -103,18 +103,18 @@ void GameScene::render()
 	//	0,                                // stride
 	//	(void*)0                          // array buffer offset
 	//);
-
+	
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
+	
 	glEnableVertexAttribArray(2);
 	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
+	
 	// Draw the triangle !
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size()); // 12*3 indices starting at 0 -> 12 triangles -> 6 squares
-
+	
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(2);
@@ -125,10 +125,7 @@ void GameScene::release()
 	// Cleanup VBO and shader
 	glDeleteBuffers(1, &vertexbuffer);
 	glDeleteBuffers(1, &uvbuffer);
-	glDeleteProgram(programID);
 	glDeleteTextures(1, &textureID);
 	glDeleteVertexArrays(1, &VertexArrayID);
-
-	// Close OpenGL window and terminate GLFW
-	glfwTerminate();
+	glDeleteProgram(programID);
 }

@@ -1,40 +1,41 @@
 #pragma once
 #include <gl/glew.h>
 #include <GLFW/glfw3.h>
-#include <gl/freeglut.h>
+#include <Windows.h>
 #include "Scene.h"
+
+#pragma comment (lib, "opengl32.lib")
 
 class App
 {
 	static App* m_instance;
+	GLFWwindow* window{ nullptr };
 
-	int		m_argc;
-	char**	m_argv;
-	POINT	m_winPosition;
-	char*	m_title;
+	POINT	m_winPosition{ NULL, NULL };
+	SIZE	m_winSize{ NULL,NULL };
+	char*	m_title{ nullptr };
 	
+	Scene*	m_pScene{ nullptr };
+
 	App();
 	~App();
 
-	GLFWwindow* window;
-
-	Scene*	m_pScene;
-
 public:
-	SIZE	m_winSize;
 
 public:
 	static App* create();
 	static App* instance();
 
-	void initialize(POINT winPosition, SIZE winSize, char* title);
 	void initialize(int x, int y, int width, int height, char* title);
-	int GLFWinit();
+	void update();
+	void render();
 	void release();
+
+	int GLFWinit();
+	int run();
 
 	Scene* getScene();
 
-	int run();
 };
 
 #define g_app App::instance()

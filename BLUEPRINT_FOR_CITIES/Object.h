@@ -1,37 +1,22 @@
 #pragma once
 #include <list>
-#include "Vector3.h"
-#include "Color3.h"
-#include "Matrix3d.h"
+#include <glm/glm.hpp>
 
 class Object
 {
 protected:
-	Vector3	position;
-	Vector3	rotation;
-	Vector3	scale;
-	Color3	color;
-	union {
-		struct {
-			float axisX;
-			float axisY;
-			float axisZ;
-			float rotationAxis;
-		};
-		Vector3	axis;
-	};
-public:
-	union {
-		GLfloat v[16];
-		Matrix3d matrix;
-	};
-	bool userRotation;
+	glm::vec3 position{};
+	glm::vec3 rotation{};
+	glm::vec3 scale{ 1 };
+	glm::vec3 color{ 1 };
+
+	glm::mat4 mat{ 1 };
+	glm::vec4 transformedVector{ 0 };
 
 	std::list<Object*> child;
-	int hierarchyLevel;
+	int hierarchyLevel{ 0 };
 
-protected:
-	bool bVisible;
+	bool bVisible{ true };
 
 public:
 	Object();
@@ -47,43 +32,31 @@ public:
 	void addChild(Object* _child);
 	void deleteChild(Object* _child);
 
-	void setVisible(const bool _b);
-	void setRotationAxis(const float _r);
-	void adjustRotationAxis(const float _r);
-
 	void setPosition(float _x, float _y, float _z);
-	void setPosition(const Vector3 _position);
-
+	void setPosition(const glm::vec3 _position);
 	void setRotation(float _x, float _y, float _z);
-	void setRotation(const Vector3 _rotation);
-
-	void setAxis(float _x, float _y, float _z);
-	void setAxis(const Vector3 _axis);
-
+	void setRotation(const glm::vec3 _rotation);
 	void setScale(float _s);
 	void setScale(float _x, float _y, float _z);
-	void setScale(const Vector3 _scale);
-
+	void setScale(const glm::vec3 _scale);
 	void setColor(float _r, float _g, float _b);
-	void setColor(const Vector3 _color);
+	void setColor(const glm::vec3 _color);
+	void setVisible(const bool _b);
 
-	Vector3 getPosition() const;
-	Vector3 getRotation() const;
-	Vector3 getScale() const;
-	Vector3 getColor() const;
+	glm::vec3 getPosition() const;
+	glm::vec3 getRotation() const;
+	glm::vec3 getScale() const;
+	glm::vec3 getColor() const;
 	bool getVisible() const;
 
 	void adjustPosition(float _x, float _y, float _z);
-	void adjustPosition(const Vector3 _position);
-
+	void adjustPosition(const glm::vec3 _position);
 	void adjustRotation(float _x, float _y, float _z);
-	void adjustRotation(const Vector3 _rotation);
-
+	void adjustRotation(const glm::vec3 _rotation);
 	void adjustScale(float _x, float _y, float _z);
-	void adjustScale(const Vector3 _scale);
-
+	void adjustScale(const glm::vec3 _scale);
 	void adjustColor(float _r, float _g, float _b);
-	void adjustColor(const Vector3 _color);
+	void adjustColor(const glm::vec3 _color);
 
 	inline bool operator==(const Object& rhs)
 	{

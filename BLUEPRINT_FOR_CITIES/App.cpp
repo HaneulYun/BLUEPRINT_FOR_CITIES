@@ -4,9 +4,7 @@
 App* App::m_instance = nullptr;
 extern GLFWwindow* window;
 
-App::App() : m_argc(NULL), m_argv(nullptr),
-	m_winPosition({ NULL, NULL }), m_winSize({ NULL, NULL }),
-	m_title(nullptr), m_pScene(nullptr)
+App::App()
 {
 }
 
@@ -29,11 +27,6 @@ App* App::instance()
 	return nullptr;
 }
 
-void App::initialize(POINT winPosition, SIZE winSize, char* title)
-{
-	initialize(winPosition.x, winPosition.y, winSize.cx, winSize.cy, title);
-}
-
 void App::initialize(int x, int y, int width, int height, char* title)
 {
 	m_winPosition = { x , y };
@@ -42,7 +35,6 @@ void App::initialize(int x, int y, int width, int height, char* title)
 	m_title = new char[strlen(title) + 1];
 	strcpy_s(m_title, strlen(title) + 1, title);
 
-	//GLUTinit();
 	GLFWinit();
 
 	m_pScene = new GameScene();
@@ -61,7 +53,6 @@ int App::GLFWinit()
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	::window = window = glfwCreateWindow(m_winSize.cx, m_winSize.cy, m_title, NULL, NULL);
@@ -77,16 +68,33 @@ int App::GLFWinit()
 		return -1;
 	}
 
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+	GLuint VertexArrayID;
+	glGenVertexArrays(1, &VertexArrayID);
+	glBindVertexArray(VertexArrayID);
 
 	glfwPollEvents();
-	glfwSetCursorPos(window, 1024 / 2, 768 / 2);
+	glfwSetCursorPos(window, m_winSize.cx / 2, m_winSize.cy / 2);
 
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+}
+
+void App::update()
+{
+	m_pScene->update();
+}
+
+void App::render()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	m_pScene->render();
+	glfwSwapBuffers(window);
+	glfwPollEvents();
 }
 
 void App::release()
@@ -97,17 +105,16 @@ void App::release()
 		delete m_pScene;
 	}
 	delete[] m_title;
+
+	// Close OpenGL window and terminate GLFW
+	glfwTerminate();
 }
 
 int App::run()
 {
 	do {
-		m_pScene->update();
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		m_pScene->render();
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+		update();
+		render();
 	} while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
 	return 0;
