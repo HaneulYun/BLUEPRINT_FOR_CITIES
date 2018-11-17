@@ -36,6 +36,7 @@ public:
 	int run();
 
 	Scene* getScene();
+	SIZE getSize() const { return m_winSize; }
 
 };
 

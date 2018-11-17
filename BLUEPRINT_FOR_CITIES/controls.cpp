@@ -1,3 +1,4 @@
+#include "App.h"
 // Include GLFW
 #include <GLFW/glfw3.h>
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
@@ -6,6 +7,7 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
+
 
 #include "controls.hpp"
 
@@ -35,6 +37,7 @@ float mouseSpeed = 0.005f;
 
 
 void computeMatricesFromInputs(){
+	SIZE size = g_app->getSize();
 
 	// glfwGetTime is called only once, the first time this function is called
 	static double lastTime = glfwGetTime();
@@ -48,11 +51,11 @@ void computeMatricesFromInputs(){
 	glfwGetCursorPos(window, &xpos, &ypos);
 
 	// Reset mouse position for next frame
-	glfwSetCursorPos(window, 1024/2, 768/2);
+	glfwSetCursorPos(window, size.cx/2, size.cy/2);
 
 	// Compute new orientation
-	horizontalAngle += mouseSpeed * float(1024/2 - xpos );
-	verticalAngle   += mouseSpeed * float( 768/2 - ypos );
+	horizontalAngle += mouseSpeed * float(size.cx/2 - xpos );
+	verticalAngle   += mouseSpeed * float(size.cy/2 - ypos );
 
 	// Direction : Spherical coordinates to Cartesian coordinates conversion
 	glm::vec3 direction(

@@ -1,3 +1,5 @@
+#include <random>
+
 #include <gl/glew.h>
 #include <gl/gl.h>
 #include <glm/gtx/transform.hpp>
@@ -31,15 +33,26 @@ void Object3d::initialize()
 
 	std::vector< glm::vec2 > uvs;
 	std::vector< glm::vec3 > normals;
-	bool res = loadOBJ("resources/SM_Env_Tree_03_Internal.obj", vertices, uvs, normals);
+
+	static std::uniform_int_distribution<int> uid(0, 6);
+	static std::default_random_engine dre;
+
+	bool res;
+	switch (uid(dre))
+	{
+	case 0: res = loadOBJ("resources/SM_Env_Tree_01_Internal.obj", vertices, uvs, normals); break;
+	case 1: res = loadOBJ("resources/SM_Env_Tree_02_Internal.obj", vertices, uvs, normals); break;
+	case 2: case 3: case 4: case 5: case 6: 
+		res = loadOBJ("resources/SM_Env_Tree_03_Internal.obj", vertices, uvs, normals); break;
+	}
 
 	for (auto& v : vertices)
 		v /= 400.f;
 
-	mat4 projection = perspective(radians(45.f), 4.f / 3.f, 0.1f, 100.f);
-	mat4 view = lookAt(vec3(4, 3, 3), vec3(0, 0, 0), vec3(0, 1, 0));
-	mat4 model = mat4(1.f);
-	mat4 mvp = projection * view * model;
+	//mat4 projection = perspective(radians(45.f), 4.f / 3.f, 0.1f, 100.f);
+	//mat4 view = lookAt(vec3(4, 3, 3), vec3(0, 0, 0), vec3(0, 1, 0));
+	//mat4 model = mat4(1.f);
+	//mat4 mvp = projection * view * model;
 
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -60,16 +73,6 @@ void Object3d::initialize()
 void Object3d::update()
 {
 	glUseProgram(programID);
-
-	computeMatricesFromInputs();
-	//mat4 projectionMatrix = getProjectionMatrix();
-	//mat4 viewMatrix = getViewMatrix();
-	//mat4 modelMatrix = mat4(1.f);
-	mat4 mvp = getProjectionMatrix() * getViewMatrix() * mat;
-
-	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
-	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &mat[0][0]);
-	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &getViewMatrix()[0][0]);
 }
 
 void Object3d::render()
@@ -79,31 +82,33 @@ void Object3d::render()
 	vec3 lightPos = vec3(4, 4, 4);
 	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
 
+	mat4 projectionMatrix = getProjectionMatrix();
+	mat4 viewMatrix = getViewMatrix();
+	mat4 modelMatrix = mat;
+	mat4 mvp = getProjectionMatrix() * getViewMatrix() * modelMatrix;
+	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
+	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
+	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	glUniform1i(textureID, 0);
 
-	// 1rst attribute buffer : vertices
 	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
+
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	// 2nd attribute buffer : colors
-	//glEnableVertexAttribArray(1);
-	//glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	glEnableVertexAttribArray(2);
 	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	// Draw the triangle !
-	glDrawArrays(GL_TRIANGLES, 0, vertices.size()); // 12*3 indices starting at 0 -> 12 triangles -> 6 squares
+	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

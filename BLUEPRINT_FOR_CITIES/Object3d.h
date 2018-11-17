@@ -22,6 +22,7 @@ class Object3d : public Object
 	GLuint uvbuffer;
 	GLuint normalbuffer;
 public:
+
 	Object3d();
 	~Object3d();
 

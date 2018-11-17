@@ -4,7 +4,7 @@
 
 class GameScene : public Scene
 {
-	Object3d object;
+	Object3d obj[10][10];
 public:
 	GameScene();
 	~GameScene();
