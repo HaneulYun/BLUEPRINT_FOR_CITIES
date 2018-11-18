@@ -28,26 +28,17 @@ void Object3d::initialize()
 	viewMatrixID = glGetUniformLocation(programID, "V");
 	modelMatrixID = glGetUniformLocation(programID, "M");
 
-	texture = loadBMP_custom("resources/T_PolygonCity_Texture_01_A.bmp");
+	texture = loadBMP_custom(urlBMP.c_str());
 	textureID = glGetUniformLocation(programID, "myTextureSampler");
 
+	std::vector< glm::vec3 > vertices;
 	std::vector< glm::vec2 > uvs;
 	std::vector< glm::vec3 > normals;
 
-	static std::uniform_int_distribution<int> uid(0, 6);
-	static std::default_random_engine dre;
-
-	bool res;
-	switch (uid(dre))
-	{
-	case 0: res = loadOBJ("resources/SM_Env_Tree_01_Internal.obj", vertices, uvs, normals); break;
-	case 1: res = loadOBJ("resources/SM_Env_Tree_02_Internal.obj", vertices, uvs, normals); break;
-	case 2: case 3: case 4: case 5: case 6: 
-		res = loadOBJ("resources/SM_Env_Tree_03_Internal.obj", vertices, uvs, normals); break;
-	}
-
+	bool res = loadOBJ(urlOBJ.c_str(), vertices, uvs, normals);
 	for (auto& v : vertices)
 		v /= 400.f;
+	verticesSize = vertices.size();
 
 	//mat4 projection = perspective(radians(45.f), 4.f / 3.f, 0.1f, 100.f);
 	//mat4 view = lookAt(vec3(4, 3, 3), vec3(0, 0, 0), vec3(0, 1, 0));
@@ -108,7 +99,7 @@ void Object3d::render()
 	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+	glDrawArrays(GL_TRIANGLES, 0, verticesSize);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
@@ -124,4 +115,14 @@ void Object3d::release()
 	glDeleteBuffers(1, &uvbuffer);
 	glDeleteTextures(1, &textureID);
 	glDeleteProgram(programID);
+}
+
+void Object3d::setBMP(std::string _url)
+{
+	urlBMP = _url;
+}
+
+void Object3d::setOBJ(std::string _url)
+{
+	urlOBJ = _url;
 }

@@ -1,12 +1,17 @@
 #pragma once
 #include <vector>
+#include <string>
 #include <gl/glew.h>
 #include <glm/glm.hpp>
 #include "Object.h"
 
 class Object3d : public Object
 {
-	std::vector< glm::vec3 > vertices;
+	GLsizei verticesSize;
+
+	GLuint vertexbuffer;
+	GLuint uvbuffer;
+	GLuint normalbuffer;
 
 	GLuint programID;
 	GLuint matrixID;
@@ -18,9 +23,9 @@ class Object3d : public Object
 
 	GLuint lightID;
 
-	GLuint vertexbuffer;
-	GLuint uvbuffer;
-	GLuint normalbuffer;
+	std::string urlBMP;
+	std::string urlOBJ;
+
 public:
 
 	Object3d();
@@ -30,4 +35,7 @@ public:
 	void update();
 	void render();
 	void release();
+
+	void setBMP(std::string _url);
+	void setOBJ(std::string _url);
 };
