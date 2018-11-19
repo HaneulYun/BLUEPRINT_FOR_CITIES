@@ -26,7 +26,9 @@ class Object3d : public Object
 	std::string urlBMP;
 	std::string urlOBJ;
 
+
 public:
+	static float radian;
 
 	Object3d();
 	~Object3d();

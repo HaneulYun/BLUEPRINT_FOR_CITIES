@@ -73,6 +73,7 @@ int App::GLFWinit()
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	glDepthFunc(GL_LESS);
 
 	glGenVertexArrays(1, &VertexArrayID);
