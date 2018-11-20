@@ -4,13 +4,15 @@
 #include <gl/glew.h>
 #include <glm/glm.hpp>
 #include "Object.h"
-#include "objloader.hpp"
+#include "shader.hpp"
 #include "texture.hpp"
+#include "objloader.hpp"
 
 class Object3d : public Object
 {
-	static MeshManager meshManager;
+	static ShaderManager shagerManager;
 	static TextureManager textureManager;
+	static MeshManager meshManager;
 
 	MeshIDData meshData;
 	TextureIDData textureData;

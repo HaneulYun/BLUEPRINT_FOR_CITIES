@@ -13,8 +13,9 @@
 
 using namespace glm;
 
-MeshManager Object3d::meshManager;
+ShaderManager Object3d::shagerManager;
 TextureManager Object3d::textureManager;
+MeshManager Object3d::meshManager;
 
 Object3d::Object3d()
 {
@@ -26,7 +27,7 @@ Object3d::~Object3d()
 
 void Object3d::initialize()
 {
-	programID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
+	programID = shagerManager.loadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
 	matrixID = glGetUniformLocation(programID, "MVP");
 	viewMatrixID = glGetUniformLocation(programID, "V");
 	modelMatrixID = glGetUniformLocation(programID, "M");
