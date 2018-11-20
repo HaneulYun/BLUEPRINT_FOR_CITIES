@@ -26,7 +26,7 @@ void GameScene::initialize()
 
 void GameScene::update()
 {
-	Object3d::radian += 0.001f;
+	Object3d::radian += 0.01f;
 	computeMatricesFromInputs();
 	for (auto& v : tree)
 		v.update();

@@ -70,7 +70,7 @@ void Object3d::render()
 {
 	Object::preRender();
 
-	vec3 lightPos = vec3(40 * cos(radian), 40 * sin(radian), 0);
+	vec3 lightPos = vec3(20 * cos(radian), 20 * sin(radian), 0);
 	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
 
 	mat4 projectionMatrix = getProjectionMatrix();
