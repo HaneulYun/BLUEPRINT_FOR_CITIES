@@ -4,14 +4,16 @@
 #include <gl/glew.h>
 #include <glm/glm.hpp>
 #include "Object.h"
+#include "objloader.hpp"
 
 class Object3d : public Object
 {
-	GLsizei verticesSize;
+	static MeshManager manager;
 
-	GLuint vertexbuffer;
-	GLuint uvbuffer;
-	GLuint normalbuffer;
+	//GLuint vertexbuffer;
+	//GLuint uvbuffer;
+	//GLuint normalbuffer;
+	MeshIDData meshData;
 
 	GLuint programID;
 	GLuint matrixID;
