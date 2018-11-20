@@ -29,7 +29,7 @@ GLuint ShaderManager::loadShaders(const std::string vertex_path, const std::stri
 		}
 		else
 		{
-			printf("Impossible to open %s.\n", vertex_path);
+			printf("Impossible to open %s.\n", vertex_path.c_str());
 			getchar();
 			return {};
 		}
@@ -48,7 +48,7 @@ GLuint ShaderManager::loadShaders(const std::string vertex_path, const std::stri
 		int InfoLogLength;
 
 
-		printf("Compiling shader : %s\n", vertex_path);
+		printf("Compiling shader : %s\n", vertex_path.c_str());
 		char const * VertexSourcePointer = VertexShaderCode.c_str();
 		glShaderSource(VertexShaderID, 1, &VertexSourcePointer, NULL);
 		glCompileShader(VertexShaderID);
@@ -64,7 +64,7 @@ GLuint ShaderManager::loadShaders(const std::string vertex_path, const std::stri
 
 
 
-		printf("Compiling shader : %s\n", fragment_path);
+		printf("Compiling shader : %s\n", fragment_path.c_str());
 		char const * FragmentSourcePointer = FragmentShaderCode.c_str();
 		glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer, NULL);
 		glCompileShader(FragmentShaderID);

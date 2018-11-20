@@ -8,7 +8,7 @@ TextureIDData TextureManager::loadBMP(const std::string path, GLuint programID)
 	auto iter = textureDatas.find(path);
 	if (iter == textureDatas.end())
 	{
-		printf("Reading image %s\n", path);
+		printf("Reading image %s\n", path.c_str());
 
 		unsigned char header[54];
 		unsigned int dataPos;
@@ -19,7 +19,7 @@ TextureIDData TextureManager::loadBMP(const std::string path, GLuint programID)
 		FILE * file = fopen(path.c_str(), "rb");
 		if (!file)
 		{
-			printf("%s could not be opened.\n", path);
+			printf("%s could not be opened.\n", path.c_str());
 			getchar();
 			return {};
 		}
