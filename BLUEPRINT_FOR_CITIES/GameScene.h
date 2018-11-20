@@ -25,7 +25,7 @@ public:
 		obj.initialize();
 		obj.setPosition(uid_200(dre) / 20.f, 0, uid_200(dre) / 20.f);
 		obj.setRotation(0, float(uid_360(dre)), 0);
-
+		obj.setScale(1 + float(uid_200(dre) / 200.f));
 	}
 	void update()
 	{
@@ -139,10 +139,9 @@ public:
 
 class GameScene : public Scene
 {
-	Object3d obj[10][10];
-	Tree tree[100];
-	Chicken chicken[30];
-	BabyChicken babychicken[50];
+	Tree tree[300];
+	Chicken chicken[50];
+	BabyChicken babychicken[150];
 public:
 	GameScene();
 	~GameScene();

@@ -4,22 +4,23 @@
 #include <gl/glew.h>
 #include <glm/glm.hpp>
 #include "Object.h"
+#include "shader.hpp"
+#include "texture.hpp"
+#include "objloader.hpp"
 
 class Object3d : public Object
 {
-	GLsizei verticesSize;
+	static ShaderManager shagerManager;
+	static TextureManager textureManager;
+	static MeshManager meshManager;
 
-	GLuint vertexbuffer;
-	GLuint uvbuffer;
-	GLuint normalbuffer;
+	MeshIDData meshData;
+	TextureIDData textureData;
 
 	GLuint programID;
 	GLuint matrixID;
 	GLuint viewMatrixID;
 	GLuint modelMatrixID;
-
-	GLuint texture;
-	GLuint textureID;
 
 	GLuint lightID;
 

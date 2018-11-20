@@ -1,6 +1,11 @@
-#ifndef SHADER_HPP
-#define SHADER_HPP
+#pragma once
+#include <map>
+#include <GL/glew.h>
 
-GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path);
+class ShaderManager
+{
+	std::map<std::pair<std::string, std::string>, GLuint> programDatas;
 
-#endif
+public:
+	GLuint loadShaders(const std::string vertex_path, const std::string fragment_path);
+};

@@ -13,6 +13,10 @@
 
 using namespace glm;
 
+ShaderManager Object3d::shagerManager;
+TextureManager Object3d::textureManager;
+MeshManager Object3d::meshManager;
+
 Object3d::Object3d()
 {
 }
@@ -23,39 +27,14 @@ Object3d::~Object3d()
 
 void Object3d::initialize()
 {
-	programID = LoadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
+	programID = shagerManager.loadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
 	matrixID = glGetUniformLocation(programID, "MVP");
 	viewMatrixID = glGetUniformLocation(programID, "V");
 	modelMatrixID = glGetUniformLocation(programID, "M");
 
-	texture = loadBMP_custom(urlBMP.c_str());
-	textureID = glGetUniformLocation(programID, "myTextureSampler");
+	textureData = textureManager.loadBMP(urlBMP, programID);
 
-	std::vector< glm::vec3 > vertices;
-	std::vector< glm::vec2 > uvs;
-	std::vector< glm::vec3 > normals;
-
-	bool res = loadOBJ(urlOBJ.c_str(), vertices, uvs, normals);
-	for (auto& v : vertices)
-		v /= 400.f;
-	verticesSize = vertices.size();
-
-	//mat4 projection = perspective(radians(45.f), 4.f / 3.f, 0.1f, 100.f);
-	//mat4 view = lookAt(vec3(4, 3, 3), vec3(0, 0, 0), vec3(0, 1, 0));
-	//mat4 model = mat4(1.f);
-	//mat4 mvp = projection * view * model;
-
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vec3), &vertices[0], GL_STATIC_DRAW);
-
-	glGenBuffers(1, &uvbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(vec2), &uvs[0], GL_STATIC_DRAW);
-
-	glGenBuffers(1, &normalbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
+	meshData = meshManager.loadOBJ(urlOBJ);
 
 	glUseProgram(programID);
 	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
@@ -82,24 +61,24 @@ void Object3d::render()
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, textureData.textureID);
 
-	glUniform1i(textureID, 0);
+	glUniform1i(textureData.textureSID, 0);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, meshData.vertexbufferID);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, meshData.uvbufferID);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, meshData.normalbufferID);
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	glDrawArrays(GL_TRIANGLES, 0, verticesSize);
+	glDrawArrays(GL_TRIANGLES, 0, meshData.verticesSize);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
@@ -111,9 +90,9 @@ void Object3d::render()
 void Object3d::release()
 {
 	// Cleanup VBO and shader
-	glDeleteBuffers(1, &vertexbuffer);
-	glDeleteBuffers(1, &uvbuffer);
-	glDeleteTextures(1, &textureID);
+	glDeleteBuffers(1, &meshData.vertexbufferID);
+	glDeleteBuffers(1, &meshData.uvbufferID);
+	glDeleteTextures(1, &meshData.normalbufferID);
 	glDeleteProgram(programID);
 }
 
