@@ -10,9 +10,6 @@ class Object3d : public Object
 {
 	static MeshManager manager;
 
-	//GLuint vertexbuffer;
-	//GLuint uvbuffer;
-	//GLuint normalbuffer;
 	MeshIDData meshData;
 
 	GLuint programID;
