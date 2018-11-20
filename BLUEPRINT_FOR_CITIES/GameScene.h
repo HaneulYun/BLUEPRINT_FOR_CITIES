@@ -41,7 +41,7 @@ public:
 	}
 };
 
-class Hamberger
+class Hamburger
 {
 	Object3d obj;
 public:
