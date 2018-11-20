@@ -5,20 +5,20 @@
 #include <glm/glm.hpp>
 #include "Object.h"
 #include "objloader.hpp"
+#include "texture.hpp"
 
 class Object3d : public Object
 {
-	static MeshManager manager;
+	static MeshManager meshManager;
+	static TextureManager textureManager;
 
 	MeshIDData meshData;
+	TextureIDData textureData;
 
 	GLuint programID;
 	GLuint matrixID;
 	GLuint viewMatrixID;
 	GLuint modelMatrixID;
-
-	GLuint texture;
-	GLuint textureID;
 
 	GLuint lightID;
 

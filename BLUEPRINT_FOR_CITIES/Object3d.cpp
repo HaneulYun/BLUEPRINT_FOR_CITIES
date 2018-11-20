@@ -13,7 +13,8 @@
 
 using namespace glm;
 
-MeshManager Object3d::manager;
+MeshManager Object3d::meshManager;
+TextureManager Object3d::textureManager;
 
 Object3d::Object3d()
 {
@@ -30,10 +31,9 @@ void Object3d::initialize()
 	viewMatrixID = glGetUniformLocation(programID, "V");
 	modelMatrixID = glGetUniformLocation(programID, "M");
 
-	texture = loadBMP_custom(urlBMP.c_str());
-	textureID = glGetUniformLocation(programID, "myTextureSampler");
+	textureData = textureManager.loadBMP(urlBMP, programID);
 
-	meshData = manager.loadOBJ(urlOBJ);
+	meshData = meshManager.loadOBJ(urlOBJ);
 
 	glUseProgram(programID);
 	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
@@ -60,9 +60,9 @@ void Object3d::render()
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, textureData.textureID);
 
-	glUniform1i(textureID, 0);
+	glUniform1i(textureData.textureSID, 0);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);

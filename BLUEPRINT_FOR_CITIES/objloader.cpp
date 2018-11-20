@@ -26,6 +26,7 @@ MeshIDData MeshManager::loadOBJ(const std::string path)
 		if (file == NULL) {
 			printf("Impossible to open the file!\n");
 			getchar();
+			return {};
 		}
 
 		while (1) {
