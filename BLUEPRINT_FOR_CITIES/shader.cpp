@@ -78,25 +78,26 @@ GLuint ShaderManager::loadShaders(const std::string vertex_path, const std::stri
 			printf("%s\n", &FragmentShaderErrorMessage[0]);
 		}
 
-		programDatas.insert(std::pair<std::pair<std::string, std::string>, GLuint>(std::pair<std::string, std::string>(vertex_path, fragment_path), {}));
+		auto&& key = std::pair<std::string, std::string>(vertex_path, fragment_path);
+		programDatas.insert(std::pair<std::pair<std::string, std::string>, GLuint>(key, {}));
 
 		printf("Linking program\n");
-		programDatas[std::pair<std::string, std::string>(vertex_path, fragment_path)] = glCreateProgram();
-		glAttachShader(programDatas[std::pair<std::string, std::string>(vertex_path, fragment_path)], VertexShaderID);
-		glAttachShader(programDatas[std::pair<std::string, std::string>(vertex_path, fragment_path)], FragmentShaderID);
-		glLinkProgram(programDatas[std::pair<std::string, std::string>(vertex_path, fragment_path)]);
+		programDatas[key] = glCreateProgram();
+		glAttachShader(programDatas[key], VertexShaderID);
+		glAttachShader(programDatas[key], FragmentShaderID);
+		glLinkProgram(programDatas[key]);
 
-		glGetProgramiv(programDatas[std::pair<std::string, std::string>(vertex_path, fragment_path)], GL_LINK_STATUS, &Result);
-		glGetProgramiv(programDatas[std::pair<std::string, std::string>(vertex_path, fragment_path)], GL_INFO_LOG_LENGTH, &InfoLogLength);
+		glGetProgramiv(programDatas[key], GL_LINK_STATUS, &Result);
+		glGetProgramiv(programDatas[key], GL_INFO_LOG_LENGTH, &InfoLogLength);
 		if (InfoLogLength > 0)
 		{
 			std::vector<char> ProgramErrorMessage(InfoLogLength + 1);
-			glGetProgramInfoLog(programDatas[std::pair<std::string, std::string>(vertex_path, fragment_path)], InfoLogLength, NULL, &ProgramErrorMessage[0]);
+			glGetProgramInfoLog(programDatas[key], InfoLogLength, NULL, &ProgramErrorMessage[0]);
 			printf("%s\n", &ProgramErrorMessage[0]);
 		}
 
-		glDetachShader(programDatas[std::pair<std::string, std::string>(vertex_path, fragment_path)], VertexShaderID);
-		glDetachShader(programDatas[std::pair<std::string, std::string>(vertex_path, fragment_path)], FragmentShaderID);
+		glDetachShader(programDatas[key], VertexShaderID);
+		glDetachShader(programDatas[key], FragmentShaderID);
 
 		glDeleteShader(VertexShaderID);
 		glDeleteShader(FragmentShaderID);
