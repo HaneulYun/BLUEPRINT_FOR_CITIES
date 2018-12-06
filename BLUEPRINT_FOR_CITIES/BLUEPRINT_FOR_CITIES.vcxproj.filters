@@ -72,6 +72,9 @@
     <ClCompile Include="texture.cpp">
       <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
     </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -100,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="objloader.hpp">
       <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

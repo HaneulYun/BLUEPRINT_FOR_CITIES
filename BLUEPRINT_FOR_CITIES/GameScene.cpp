@@ -18,10 +18,6 @@ void GameScene::initialize()
 {
 	for (auto& v : tree)
 		v.initialize();
-	for (auto& v : babychicken)
-		v.initialize();
-	for (auto& v : chicken)
-		v.initialize();
 }
 
 void GameScene::update()
@@ -30,28 +26,16 @@ void GameScene::update()
 	computeMatricesFromInputs();
 	for (auto& v : tree)
 		v.update();
-	for (auto& v : babychicken)
-		v.update();
-	for (auto& v : chicken)
-		v.update();
 }
 
 void GameScene::render()
 {
 	for (auto& v : tree)
 		v.render();
-	for (auto& v : babychicken)
-		v.render();
-	for (auto& v : chicken)
-		v.render();
 }
 
 void GameScene::release()
 {
 	for (auto& v : tree)
-		v.release();
-	for (auto& v : babychicken)
-		v.release();
-	for (auto& v : chicken)
 		v.release();
 }
