@@ -40,6 +40,10 @@ void App::initialize(int x, int y, int width, int height, char* title)
 	m_pScene = GameScene::create();
 	if (m_pScene)
 		m_pScene->initialize();
+
+	m_pInputManager = InputManager::create();
+	if (m_pInputManager)
+		m_pInputManager->initialize();
 }
 
 int App::GLFWinit()

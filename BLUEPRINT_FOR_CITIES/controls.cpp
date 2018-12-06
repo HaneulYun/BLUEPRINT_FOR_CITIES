@@ -8,6 +8,7 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
 
+#include "InputManager.h"
 #include "App.h"
 #include "GameScene.h"
 #include "controls.hpp"
@@ -49,6 +50,7 @@ void computeMatricesFromInputs(){
 	float deltaTime = float(currentTime - lastTime);
 
 
+
 	// Get mouse position
 	double xpos, ypos;
 	glfwGetCursorPos(window, &xpos, &ypos);
@@ -88,6 +90,7 @@ void computeMatricesFromInputs(){
 
 	// Move forward
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+		g_pInputManager->m_CurKeyState[GLFW_KEY_W] = true;
 		position += direction * deltaTime * speed;
 	}
 	// Move backward
@@ -103,9 +106,8 @@ void computeMatricesFromInputs(){
 		position -= right * deltaTime * speed;
 	}
 	// viewMode
-	if (glfwGetKey(window, 341) == GLFW_PRESS) {
+	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
 		g_gameScene->viewMode = !g_gameScene->viewMode;
-		printf("*****\n");
 	}
 
 	float FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
