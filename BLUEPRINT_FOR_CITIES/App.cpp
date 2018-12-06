@@ -1,5 +1,6 @@
 #include "App.h"
 #include "GameScene.h"
+#include "InputManager.h"
 
 App* App::m_instance = nullptr;
 extern GLFWwindow* window;
@@ -90,6 +91,7 @@ int App::GLFWinit()
 void App::update()
 {
 	m_pScene->update();
+	g_pInputManager->update();
 }
 
 void App::render()
