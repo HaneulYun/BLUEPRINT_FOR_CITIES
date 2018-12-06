@@ -60,9 +60,6 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>소스 파일\01_SCENE\01_INSTANCE</Filter>
     </ClCompile>
-    <ClCompile Include="controls.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Object3d.cpp">
       <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
     </ClCompile>
@@ -85,7 +82,10 @@
       <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClCompile>
+    <ClCompile Include="controls.cpp">
+      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +101,6 @@
     <ClInclude Include="GameScene.h">
       <Filter>소스 파일\01_SCENE\01_INSTANCE</Filter>
     </ClInclude>
-    <ClInclude Include="controls.hpp">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Object3d.h">
       <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
     </ClInclude>
@@ -118,6 +115,18 @@
     </ClInclude>
     <ClInclude Include="Tree.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectUI.h">
+      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="controls.hpp">
+      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
