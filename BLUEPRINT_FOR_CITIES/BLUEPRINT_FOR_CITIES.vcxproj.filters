@@ -75,6 +75,9 @@
     <ClCompile Include="Tree.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectUI.cpp">
+      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="Tree.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectUI.h">
+      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

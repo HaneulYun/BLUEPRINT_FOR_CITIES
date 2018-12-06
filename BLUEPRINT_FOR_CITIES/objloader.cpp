@@ -10,7 +10,7 @@ MeshIDData MeshManager::loadOBJ(const std::string path)
 	auto iter = meshDatas.find(path);
 	if (iter == meshDatas.end())
 	{
-		printf("Loading OBJ file %s...\n", path.c_str());
+		printf("Loading OBJ file %s...!!\n", path.c_str());
 
 		std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
 		std::vector<glm::vec3> temp_vertices;

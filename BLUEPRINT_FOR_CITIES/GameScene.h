@@ -5,13 +5,25 @@
 
 class GameScene : public Scene
 {
+	static GameScene* m_instance;
+
 	Tree tree[100];
+
 public:
+	bool viewMode{ true };
+
+private:
 	GameScene();
 	~GameScene();
+
+public:
+	static GameScene* create();
+	static GameScene* instance();
 
 	void initialize();
 	void update();
 	void render();
 	void release();
 };
+
+#define g_gameScene GameScene::instance()
