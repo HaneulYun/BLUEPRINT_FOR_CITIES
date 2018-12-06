@@ -116,17 +116,17 @@
     <ClInclude Include="Tree.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectUI.h">
-      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
-    </ClInclude>
     <ClInclude Include="Terrain.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
     <ClInclude Include="controls.hpp">
       <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectUI.h">
+      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
