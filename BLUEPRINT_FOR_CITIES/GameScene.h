@@ -6,6 +6,7 @@
 class GameScene : public Scene
 {
 	Tree tree[100];
+
 public:
 	GameScene();
 	~GameScene();
