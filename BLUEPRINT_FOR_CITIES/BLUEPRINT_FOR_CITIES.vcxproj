@@ -145,9 +145,11 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="controls.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Object3d.cpp" />
+    <ClCompile Include="ObjectUI.cpp" />
     <ClCompile Include="objloader.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="shader.cpp" />
@@ -159,8 +161,10 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="controls.hpp" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Object3d.h" />
+    <ClInclude Include="ObjectUI.h" />
     <ClInclude Include="objloader.hpp" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="shader.hpp" />

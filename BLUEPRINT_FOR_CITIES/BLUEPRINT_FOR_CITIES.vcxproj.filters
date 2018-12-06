@@ -40,6 +40,9 @@
     <Filter Include="소스 파일\02_OBJECT\00_CORE">
       <UniqueIdentifier>{2239ef86-3e50-487a-a5cf-1f0a15f53b8c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\00_ENTRY\00_CORE">
+      <UniqueIdentifier>{bebd05b1-4ae0-40ed-90a8-982d263c93af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -75,6 +78,12 @@
     <ClCompile Include="Tree.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectUI.cpp">
+      <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
+    </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -109,9 +118,6 @@
     </ClInclude>
     <ClInclude Include="Tree.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -37,9 +37,13 @@ void App::initialize(int x, int y, int width, int height, char* title)
 
 	GLFWinit();
 
-	m_pScene = new GameScene();
+	m_pScene = GameScene::create();
 	if (m_pScene)
 		m_pScene->initialize();
+
+	m_pInputManager = InputManager::create();
+	if (m_pInputManager)
+		m_pInputManager->initialize();
 }
 
 int App::GLFWinit()
@@ -73,9 +77,8 @@ int App::GLFWinit()
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	glDepthFunc(GL_LESS);
-
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 

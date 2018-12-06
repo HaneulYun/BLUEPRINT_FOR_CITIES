@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <Windows.h>
 #include "Scene.h"
+#include "InputManager.h"
 
 #pragma comment (lib, "opengl32.lib")
 
@@ -17,6 +18,8 @@ class App
 	char*	m_title{ nullptr };
 	
 	Scene*	m_pScene{ nullptr };
+
+	InputManager* m_pInputManager{ nullptr };
 
 	App();
 	~App();
