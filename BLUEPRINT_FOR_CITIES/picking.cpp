@@ -172,7 +172,7 @@ glm::vec4 MousePicker::toEyeCoords(glm::vec4 clipCoords) {
 glm::vec2 MousePicker::getNormalisedDeviceCoordinates(float mouseX, float mouseY) {
 	float x = (2.0f * mouseX) / g_app->getSize().cx - 1.f;
 	float y = (2.0f * mouseY) / g_app->getSize().cy - 1.f;
-	return glm::vec2(x, y);
+	return glm::vec2(x, y * 9 / 16);
 }
 
 glm::vec3 MousePicker::getPointOnRay(glm::vec3 ray, float distance) {
