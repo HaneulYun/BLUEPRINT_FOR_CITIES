@@ -4,6 +4,7 @@
 #include "Tree.h"
 #include "Terrain.h"
 #include "TopBar.h"
+#include "LowerBar.h"
 
 class GameScene : public Scene
 {
@@ -11,6 +12,7 @@ class GameScene : public Scene
 
 	Tree tree[100];
 	TopBar topBar;
+	LowerBar lowerBar;
 
 public:
 	Terrain terrain;

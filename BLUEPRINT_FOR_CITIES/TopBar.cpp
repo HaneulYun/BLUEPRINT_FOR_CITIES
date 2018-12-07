@@ -11,7 +11,7 @@ TopBar::~TopBar()
 void TopBar::initialize()
 {
 	obj.setBMP("resources/menucolor.bmp");
-	obj.setOBJ("resources/menubar.obj");
+	obj.setOBJ("resources/topbar.obj");
 	obj.initialize();
 	obj.setPosition(0, float(0.95), 0);
 }
