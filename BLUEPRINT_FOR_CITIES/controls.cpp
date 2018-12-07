@@ -107,7 +107,11 @@ void computeMatricesFromInputs(){
 	// viewMode
 	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
 		if (g_pInputManager->m_CurKeyState[GLFW_KEY_LEFT_CONTROL] == false)
+		{
 			g_gameScene->viewMode = !g_gameScene->viewMode;
+			if(g_gameScene->viewMode)
+				glfwSetCursorPos(window, size.cx / 2, size.cy / 2);
+		}
 		g_pInputManager->m_CurKeyState[GLFW_KEY_LEFT_CONTROL] = true;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_RELEASE) {
