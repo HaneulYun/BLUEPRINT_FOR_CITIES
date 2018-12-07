@@ -37,10 +37,10 @@ void Terrain::initialize()
 			//glNormal3f(normal[0], normal[1], normal[2]);
 			if(x)
 			{
-				out_vertices.push_back({ (x - 30) / 3.f, heights[z][x], (z - 30) / 3.f });
-				out_vertices.push_back({ (x - 30) / 3.f, heights[z][x], (z - 30) / 3.f });
-				out_vertices.push_back({ (x - 1 - 30) / 3.f, heights[z + 1][x - 1], (z + 1 - 30) / 3.f });
-				out_vertices.push_back({ (x - 30) / 3.f, heights[z + 1][x], (z + 1 - 30) / 3.f });
+				out_vertices.push_back({ -terrainWidth / 2.f + float(x) / width * terrainWidth, heights[z][x], -terrainLength / 2.f + float(z) / length * terrainLength });
+				out_vertices.push_back({ -terrainWidth / 2.f + float(x) / width * terrainWidth, heights[z][x], -terrainLength / 2.f + float(z) / length * terrainLength });
+				out_vertices.push_back({ -terrainWidth / 2.f + float(x - 1) / width * terrainWidth, heights[z + 1][x - 1], -terrainLength / 2.f + float(z + 1) / length * terrainLength });
+				out_vertices.push_back({ -terrainWidth / 2.f + float(x) / width * terrainWidth, heights[z + 1][x], -terrainLength / 2.f + float(z + 1) / length * terrainLength });
 
 				out_normals.push_back(normals[z][x]);
 				out_normals.push_back(normals[z][x]);
@@ -52,8 +52,8 @@ void Terrain::initialize()
 			//glNormal3f(normal[0], normal[1], normal[2]);
 			if (x < width - 1)
 			{
-				out_vertices.push_back({ (x - 30) / 3.f, heights[z][x], (z - 30) / 3.f });
-				out_vertices.push_back({ (x - 30) / 3.f, heights[z + 1][x], (z + 1 - 30) / 3.f });
+				out_vertices.push_back({ -terrainWidth / 2.f + float(x) / width * terrainWidth, heights[z][x], -terrainLength / 2.f + float(z) / length * terrainLength });
+				out_vertices.push_back({ -terrainWidth / 2.f + float(x) / width * terrainWidth, heights[z + 1][x],  -terrainLength / 2.f + float(z + 1) / length * terrainLength });
 
 				out_normals.push_back(normals[z][x]);
 				out_normals.push_back(normals[z + 1][x]);
@@ -124,6 +124,12 @@ void Terrain::release()
 	for (int i = 0; i < length; i++)
 		delete[] normals[i];
 	delete[] normals;
+}
+
+void Terrain::setTerrainSize(int _width, int _length)
+{
+	terrainWidth = _width;
+	terrainLength = _length;
 }
 
 void Terrain::setSize(int _width, int _length)
@@ -297,15 +303,17 @@ float Terrain::getHeight(int x, int z) const
 	return heights[z][x];
 }
 
-float Terrain::getHeight(float x, float z) const
+float Terrain::getHeightByPosition(float x, float z) const
 {
-	float ratioWidth = x - int(x);
-	float ratioLength = z - int(z);
-	int over_x = x + 1 < width ? x + 1 : x;
-	int over_z = z + 1 < length ? z + 1 : z;
+	float x_terrain = (x + terrainWidth / 2) / terrainWidth * width;
+	float z_terrain = (z + terrainLength / 2) / terrainLength * length;
+	float ratioWidth = x_terrain - int(x_terrain);
+	float ratioLength = z_terrain - int(z_terrain);
+	int over_x = x_terrain + 1 < width ? x_terrain + 1 : x_terrain;
+	int over_z = z_terrain + 1 < length ? z_terrain + 1 : z_terrain;
 
-	return (1 - ratioLength) * ((1 - ratioWidth) * getHeight(int(x), int(z)) + ratioWidth * getHeight(over_x, int(z))) +
-		ratioLength * ((1 - ratioWidth) * getHeight(int(x), over_z) + ratioWidth * getHeight(over_x, over_z));
+	return (1 - ratioLength) * ((1 - ratioWidth) * getHeight(x_terrain, z_terrain) + ratioWidth * getHeight(over_x, z_terrain)) +
+		ratioLength * ((1 - ratioWidth) * getHeight(x_terrain, over_z) + ratioWidth * getHeight(over_x, over_z));
 }
 
 glm::vec3 Terrain::getNormal(int x, int z) const

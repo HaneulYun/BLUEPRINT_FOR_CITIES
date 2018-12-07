@@ -32,7 +32,8 @@ GameScene* GameScene::instance()
 
 void GameScene::initialize()
 {
-	terrain.loadTerrain("resources\\map.bmp", 3);
+	terrain.setTerrainSize(20, 20);
+	terrain.loadTerrain("resources\\terrain01.bmp", 5);
 	for (auto& v : tree)
 		v.initialize();
 	topBar.initialize();

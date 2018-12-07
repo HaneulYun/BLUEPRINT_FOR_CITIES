@@ -27,7 +27,7 @@ void Tree::initialize()
 	}
 	obj.initialize();
 	glm::vec3 position{ uid_400(dre) / 20.f, 0, uid_400(dre) / 20.f };
-	position.y = g_gameScene->terrain.getHeight((position.x + 10) * 3, (position.z + 10) * 3);
+	position.y = g_gameScene->terrain.getHeightByPosition(position.x, position.z);
 	obj.setPosition(position);
 	obj.setRotation(0, float(uid_360(dre)), 0);
 	obj.setScale(1 + float(uid_200(dre) / 200.f));
