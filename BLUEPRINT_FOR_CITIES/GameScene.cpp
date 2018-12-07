@@ -32,8 +32,12 @@ GameScene* GameScene::instance()
 
 void GameScene::initialize()
 {
-	terrain.setTerrainSize(20, 20);
-	terrain.loadTerrain("resources\\terrain01.bmp", 5);
+	terrain = new Terrain();
+	terrain->setTerrainSize(20, 20);
+	terrain->loadTerrain("resources\\terrain01.bmp", 5);
+
+	mousePicker = new MousePicker(getProjectionMatrix(), terrain);
+
 	for (auto& v : tree)
 		v.initialize();
 	for (auto& v : carAmbo)
@@ -46,7 +50,9 @@ void GameScene::update()
 {
 	Object::radian += 0.01f;
 	computeMatricesFromInputs();
-	terrain.update();
+	terrain->update();
+	mousePicker->update();
+
 	for (auto& v : tree)
 		v.update();
 	for (auto& v : carAmbo)
@@ -57,7 +63,7 @@ void GameScene::update()
 
 void GameScene::render()
 {
-	terrain.render();
+	terrain->render();
 	for (auto& v : tree)
 		v.render();
 	for (auto& v : carAmbo)
@@ -68,7 +74,7 @@ void GameScene::render()
 
 void GameScene::release()
 {
-	terrain.release();
+	terrain->release();
 	for (auto& v : tree)
 		v.release();
 	for (auto& v : carAmbo)

@@ -209,8 +209,10 @@ bool MousePicker::intersectionInRange(float start, float finish, glm::vec3 ray) 
 
 bool MousePicker::isUnderGround(glm::vec3 testPoint) {
 	float height = 0;
-	if (terrain != nullptr) {
-		height = terrain->getHeightByPosition(testPoint.x, testPoint.z);
+	if (terrain != nullptr)
+	{
+		if(terrain->existInner(testPoint.x, testPoint.z))
+			height = terrain->getHeightByPosition(testPoint.x, testPoint.z);
 	}
 	if (testPoint.y < height) {
 		return true;

@@ -1,8 +1,10 @@
 #pragma once
 #include "Scene.h"
 #include "Object3d.h"
-#include "Tree.h"
 #include "Terrain.h"
+#include "picking.h"
+
+#include "Tree.h"
 #include "TopBar.h"
 #include "LowerBar.h"
 #include "CarAmbo.h"
@@ -17,7 +19,8 @@ class GameScene : public Scene
 	CarAmbo carAmbo[20];
 
 public:
-	Terrain terrain;
+	Terrain* terrain;
+	MousePicker* mousePicker;
 
 public:
 	bool viewMode{ true };
