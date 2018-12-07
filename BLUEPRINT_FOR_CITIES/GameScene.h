@@ -6,6 +6,7 @@
 #include "TopBar.h"
 #include "LowerBar.h"
 #include "CarAmbo.h"
+#include "Cloud.h"
 
 class GameScene : public Scene
 {
@@ -15,6 +16,7 @@ class GameScene : public Scene
 	TopBar topBar;
 	LowerBar lowerBar;
 	CarAmbo carAmbo[20];
+	Cloud cloud[10];
 
 public:
 	Terrain terrain;

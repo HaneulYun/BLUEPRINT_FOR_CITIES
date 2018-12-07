@@ -108,6 +108,15 @@
     <ClCompile Include="picking.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="text2D.cpp">
+      <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeBar.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClCompile>
+    <ClCompile Include="Cloud.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -153,6 +162,27 @@
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
     <ClInclude Include="LowerBar.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="picking.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="text2D.hpp">
+      <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeBar.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="Cloud.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="CarAmbo.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
   </ItemGroup>

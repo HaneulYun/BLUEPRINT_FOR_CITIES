@@ -38,6 +38,8 @@ void GameScene::initialize()
 		v.initialize();
 	for (auto& v : carAmbo)
 		v.initialize();
+	for (auto& v : cloud)
+		v.initialize();
 	topBar.initialize();
 	lowerBar.initialize();
 }
@@ -51,6 +53,8 @@ void GameScene::update()
 		v.update();
 	for (auto& v : carAmbo)
 		v.update();
+	for (auto& v : cloud)
+		v.update();
 	topBar.update();
 	lowerBar.update();
 }
@@ -62,6 +66,8 @@ void GameScene::render()
 		v.render();
 	for (auto& v : carAmbo)
 		v.render();
+	for (auto& v : cloud)
+		v.render();
 	topBar.render();
 	lowerBar.render();
 }
@@ -72,6 +78,8 @@ void GameScene::release()
 	for (auto& v : tree)
 		v.release();
 	for (auto& v : carAmbo)
+		v.release();
+	for (auto& v : cloud)
 		v.release();
 	topBar.release();
 	lowerBar.release();

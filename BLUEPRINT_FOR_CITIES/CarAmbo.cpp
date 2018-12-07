@@ -20,8 +20,8 @@ void CarAmbo::initialize()
 	obj.setBMP("resources/T_PolygonCity_Texture_01_A.bmp");
 	obj.setOBJ("resources/carAmbo.obj");
 	obj.initialize();
-	glm::vec3 position{ uid_400(dre) / 20.f, 10, uid_400(dre) / 20.f };
-	position.y = g_gameScene->terrain.getHeightByPosition(position.x, position.z);
+	glm::vec3 position{ uid_400(dre) / 20.f, 0, uid_400(dre) / 20.f };
+	position.y = g_gameScene->terrain.getHeightByPosition(position.x, position.z) + 0.15f;
 	obj.setPosition(position);
 	obj.setRotation(0, float(uid_360(dre)), 0);
 	obj.setScale(0.5f);
