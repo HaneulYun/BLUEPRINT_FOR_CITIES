@@ -10,6 +10,7 @@
 #include "CarAmbo.h"
 #include "Cloud.h"
 #include "TimeBar.h"
+#include "StreetLight.h"
 
 class GameScene : public Scene
 {
@@ -21,6 +22,7 @@ class GameScene : public Scene
 	CarAmbo carAmbo[20];
 	Cloud cloud[10];
 	TimeBar timeBar;
+	StreetLight streetLight[50];
 
 public:
 	Terrain* terrain;

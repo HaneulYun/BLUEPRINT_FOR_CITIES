@@ -16,12 +16,16 @@ using namespace glm;
 
 glm::mat4 ViewMatrix;
 glm::mat4 ProjectionMatrix;
+glm::mat4 UIProjectionMatrix;
 
 glm::mat4 getViewMatrix(){
 	return ViewMatrix;
 }
-glm::mat4 getProjectionMatrix(){
+glm::mat4 getProjectionMatrix() {
 	return ProjectionMatrix;
+}
+glm::mat4 getUIProjectionMatrix() {
+	return UIProjectionMatrix;
 }
 
 
@@ -122,6 +126,7 @@ void computeMatricesFromInputs(){
 
 	// Projection matrix : 45?Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 100.0f);
+	UIProjectionMatrix = glm::ortho(-800, 800, -450, 450, -1000, 1000);
 	// Camera matrix
 	ViewMatrix       = glm::lookAt(
 								position,           // Camera is here
