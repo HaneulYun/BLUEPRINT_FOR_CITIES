@@ -29,4 +29,3 @@ public:
 	float getHeight(int x, int z) const;
 	glm::vec3 getNormal(int x, int z) const;
 };
-
