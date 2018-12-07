@@ -16,6 +16,7 @@ class GameScene : public Scene
 	static GameScene* m_instance;
 
 	Tree tree[100];
+	Tree treeOnMouse;
 	TopBar topBar;
 	LowerBar lowerBar;
 	CarAmbo carAmbo[20];

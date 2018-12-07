@@ -3,6 +3,7 @@
 
 class Tree
 {
+public:
 	Object3d obj;
 
 public:

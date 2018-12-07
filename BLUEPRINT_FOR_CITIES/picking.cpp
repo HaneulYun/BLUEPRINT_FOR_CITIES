@@ -1,3 +1,4 @@
+#include <iostream>
 #include "picking.h"
 #include "App.h"
 
@@ -146,7 +147,7 @@ glm::vec3 MousePicker::calculateMouseRay() {
 	glfwGetCursorPos(window, &xpos, &ypos);
 
 	float mouseX = xpos;
-	float mouseY = ypos;
+	float mouseY = g_app->getSize().cy - ypos;
 	glm::vec2 normalizedCoords = getNormalisedDeviceCoordinates(mouseX, mouseY);
 	glm::vec4 clipCoords = glm::vec4(normalizedCoords.x, normalizedCoords.y, -1.0f, 1.0f);
 	glm::vec4 eyeCoords = toEyeCoords(clipCoords);

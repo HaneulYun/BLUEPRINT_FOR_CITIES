@@ -17,6 +17,7 @@ private:
 	glm::mat4 viewMatrix;
 
 	Terrain* terrain;
+public:
 	glm::vec3 currentTerrainPoint;
 
 public:

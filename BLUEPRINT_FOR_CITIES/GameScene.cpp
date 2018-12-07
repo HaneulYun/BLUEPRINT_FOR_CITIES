@@ -3,6 +3,7 @@
 
 #include "GameScene.h"
 #include "controls.hpp"
+#include "InputManager.h"
 
 GameScene* GameScene::m_instance = nullptr;
 
@@ -44,6 +45,7 @@ void GameScene::initialize()
 		v.initialize();
 	for (auto& v : cloud)
 		v.initialize();
+	treeOnMouse.initialize();
 	topBar.initialize();
 	lowerBar.initialize();
 	timeBar.initialize();
@@ -53,8 +55,18 @@ void GameScene::update()
 {
 	Object::radian += 0.01f;
 	computeMatricesFromInputs();
+	if (!viewMode)
+	{
+		mousePicker->update();
+		glm::vec3 v = mousePicker->currentTerrainPoint;
+		if (v != glm::vec3{})
+		{
+			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+			treeOnMouse.obj.setPosition(v);
+		}
+	}
+	
 	terrain->update();
-	mousePicker->update();
 
 	for (auto& v : tree)
 		v.update();
@@ -62,6 +74,7 @@ void GameScene::update()
 		v.update();
 	for (auto& v : cloud)
 		v.update();
+	treeOnMouse.update();
 	topBar.update();
 	lowerBar.update();
 	timeBar.update();
@@ -76,6 +89,7 @@ void GameScene::render()
 		v.render();
 	for (auto& v : cloud)
 		v.render();
+	treeOnMouse.render();
 	topBar.render();
 	lowerBar.render();
 	timeBar.render();
@@ -90,6 +104,7 @@ void GameScene::release()
 		v.release();
 	for (auto& v : cloud)
 		v.release();
+	treeOnMouse.release();
 	topBar.release();
 	lowerBar.release();
 	timeBar.release();
