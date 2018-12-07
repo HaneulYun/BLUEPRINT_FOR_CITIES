@@ -1,4 +1,5 @@
 #include "TopBar.h"
+#include "GameScene.h"
 
 TopBar::TopBar()
 {
@@ -11,15 +12,19 @@ TopBar::~TopBar()
 void TopBar::initialize()
 {
 	obj.setBMP("resources/menucolor.bmp");
-	obj.setOBJ("resources/menubar.obj");
+	obj.setOBJ("resources/topbar.obj");
 	obj.initialize();
-	obj.setPosition(0, float(0.95), 0);
+	obj.setPosition(0, float(2.0), 0);
 	obj.setColor(209.f / 255, 178.f / 255, 255.f / 255);
 }
 
 void TopBar::update()
 {
 	obj.update();
+	if (g_gameScene->viewMode)
+		obj.setPosition(0, float(2.0), 0);
+	else
+		obj.setPosition(0, float(0.92), 0);
 }
 
 void TopBar::render()

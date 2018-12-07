@@ -36,6 +36,7 @@ void GameScene::initialize()
 	for (auto& v : tree)
 		v.initialize();
 	topBar.initialize();
+	lowerBar.initialize();
 }
 
 void GameScene::update()
@@ -46,6 +47,7 @@ void GameScene::update()
 	for (auto& v : tree)
 		v.update();
 	topBar.update();
+	lowerBar.update();
 }
 
 void GameScene::render()
@@ -54,6 +56,7 @@ void GameScene::render()
 	for (auto& v : tree)
 		v.render();
 	topBar.render();
+	lowerBar.render();
 }
 
 void GameScene::release()
@@ -62,4 +65,5 @@ void GameScene::release()
 	for (auto& v : tree)
 		v.release();
 	topBar.release();
+	lowerBar.release();
 }

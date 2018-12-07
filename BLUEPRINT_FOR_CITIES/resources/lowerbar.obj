@@ -1,16 +1,16 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 07.12.2018 15:20:29
+# File Created: 07.12.2018 18:23:56
 
-mtllib menubar.mtl
+mtllib lowerbar.mtl
 
 #
 # object Plane001
 #
 
-v  -96.0000 5.0000 0.0000
-v  -96.0000 -5.0000 -0.0000
-v  96.0000 5.0000 0.0000
-v  96.0000 -5.0000 -0.0000
+v  -80.0000 13.0169 0.0000
+v  -80.0000 -13.0169 -0.0000
+v  80.0000 13.0169 0.0000
+v  80.0000 -13.0169 -0.0000
 # 4 vertices
 
 vn 0.0000 -0.0000 1.0000
