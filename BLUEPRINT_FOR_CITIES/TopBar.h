@@ -1,9 +1,9 @@
 #pragma once
-#include "Object3d.h"
+#include "ObjectUI.h"
 
 class TopBar
 {
-	Object3d obj;
+	ObjectUI obj;
 public:
 	TopBar();
 	~TopBar();
