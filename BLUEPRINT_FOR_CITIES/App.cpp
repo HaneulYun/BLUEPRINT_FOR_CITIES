@@ -90,8 +90,8 @@ int App::GLFWinit()
 
 void App::update()
 {
-	m_pScene->update();
 	g_pInputManager->update();
+	m_pScene->update();
 }
 
 void App::render()

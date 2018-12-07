@@ -9,6 +9,8 @@ class InputManager
 public:
 	bool m_OldKeyState[348];
 	bool m_CurKeyState[348];
+	double xpos;
+	double ypos;
 	static InputManager* m_instance;
 
 public:

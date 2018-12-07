@@ -52,8 +52,8 @@ void computeMatricesFromInputs(){
 
 
 	// Get mouse position
-	double xpos, ypos;
-	glfwGetCursorPos(window, &xpos, &ypos);
+	//double xpos, ypos;
+	//glfwGetCursorPos(window, &xpos, &ypos);
 
 	if (g_gameScene->viewMode)
 	{
@@ -61,8 +61,8 @@ void computeMatricesFromInputs(){
 		glfwSetCursorPos(window, size.cx / 2, size.cy / 2);
 
 		// Compute new orientation
-		horizontalAngle += mouseSpeed * float(size.cx / 2 - xpos);
-		verticalAngle += mouseSpeed * float(size.cy / 2 - ypos);
+		horizontalAngle += mouseSpeed * float(size.cx / 2 - g_pInputManager->xpos);
+		verticalAngle += mouseSpeed * float(size.cy / 2 - g_pInputManager->ypos);
 
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	}

@@ -13,7 +13,6 @@ Cloud::~Cloud()
 
 void Cloud::initialize()
 {
-
 	std::uniform_int_distribution<int> uid_10(1, 10);
 	std::uniform_int_distribution<int> uid_400(-200, 199);
 	std::default_random_engine dre(std::chrono::steady_clock::now().time_since_epoch().count());
@@ -25,11 +24,14 @@ void Cloud::initialize()
 	glm::vec3 position{ uid_400(dre) / 20.f, 5.f, uid_400(dre) / 20.f };
 	obj.setPosition(position);
 	//obj.setRotation(0, float(uid_10(dre)), 0);
-	obj.setScale(1+ uid_10(dre) / 5.f);
+	oriScale = 1 + uid_10(dre) / 5.f;
+	elapsedTime = uid_10(dre) / 5.f * 3.141592;
 }
 
 void Cloud::update()
 {
+	elapsedTime += 0.01;
+	obj.setScale(oriScale + 0.2 * sin(elapsedTime));
 	obj.update();
 }
 

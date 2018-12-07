@@ -4,6 +4,8 @@
 class Cloud
 {
 	Object3d obj;
+	float oriScale;
+	float elapsedTime;
 public:
 	Cloud();
 	~Cloud();
