@@ -5,6 +5,8 @@
 #include "controls.hpp"
 #include "InputManager.h"
 
+#define PI 3.141592
+
 GameScene* GameScene::m_instance = nullptr;
 
 float Object::radian = 0;
@@ -45,6 +47,8 @@ void GameScene::initialize()
 		v.initialize();
 	for (auto& v : cloud)
 		v.initialize();
+	for (auto& v : streetLight)
+		v.initialize();
 	treeOnMouse.initialize();
 	topBar.initialize();
 	lowerBar.initialize();
@@ -54,6 +58,7 @@ void GameScene::initialize()
 void GameScene::update()
 {
 	Object::radian += 0.01f;
+	//Object::radian = (Object::radian + 0.01f) % 2 * PI;
 	computeMatricesFromInputs();
 	if (!viewMode)
 	{
@@ -74,6 +79,8 @@ void GameScene::update()
 		v.update();
 	for (auto& v : cloud)
 		v.update();
+	for (auto& v : streetLight)
+		v.update();
 	treeOnMouse.update();
 	topBar.update();
 	lowerBar.update();
@@ -89,10 +96,15 @@ void GameScene::render()
 		v.render();
 	for (auto& v : cloud)
 		v.render();
+	for (auto& v : streetLight)
+		v.render();
+	//topBar.render();
+	//lowerBar.render();
+	//timeBar.render();
 	treeOnMouse.render();
-	topBar.render();
-	lowerBar.render();
-	timeBar.render();
+	//topBar.render();
+	//lowerBar.render();
+	//timeBar.render();
 }
 
 void GameScene::release()
@@ -103,6 +115,8 @@ void GameScene::release()
 	for (auto& v : carAmbo)
 		v.release();
 	for (auto& v : cloud)
+		v.release();
+	for (auto& v : streetLight)
 		v.release();
 	treeOnMouse.release();
 	topBar.release();

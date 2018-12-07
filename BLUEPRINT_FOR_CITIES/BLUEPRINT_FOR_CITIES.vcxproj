@@ -157,6 +157,7 @@
     <ClCompile Include="picking.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="StreetLight.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="text2D.cpp" />
     <ClCompile Include="texture.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="picking.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="shader.hpp" />
+    <ClInclude Include="StreetLight.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="text2D.hpp" />
     <ClInclude Include="texture.hpp" />

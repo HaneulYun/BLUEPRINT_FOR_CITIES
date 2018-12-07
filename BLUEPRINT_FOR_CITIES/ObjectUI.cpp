@@ -47,7 +47,7 @@ void ObjectUI::render()
 	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
 	glUniform3f(colorID, color.r, color.g, color.b);
 
-	mat4 projectionMatrix = getProjectionMatrix();
+	mat4 projectionMatrix = getUIProjectionMatrix();
 	mat4 viewMatrix = getViewMatrix();
 	mat4 modelMatrix = mat;
 	mat4 mvp = modelMatrix;

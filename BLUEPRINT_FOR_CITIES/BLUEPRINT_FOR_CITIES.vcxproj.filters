@@ -117,6 +117,9 @@
     <ClCompile Include="Cloud.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClCompile>
+    <ClCompile Include="StreetLight.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -183,6 +186,9 @@
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
     <ClInclude Include="CarAmbo.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="StreetLight.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
   </ItemGroup>
