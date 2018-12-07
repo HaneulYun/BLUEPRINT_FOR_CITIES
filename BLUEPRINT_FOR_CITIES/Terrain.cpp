@@ -304,8 +304,8 @@ float Terrain::getHeight(float x, float z) const
 	int over_x = x + 1 < width ? x + 1 : x;
 	int over_z = z + 1 < length ? z + 1 : z;
 
-	return (1 - ratioLength) * ((1 - ratioWidth) * getHeight(int(x), int(z)) + ratioWidth * getHeight(int(x + 1), int(z))) +
-		ratioLength * ((1 - ratioWidth) * getHeight(int(x), int(z + 1)) + ratioWidth * getHeight(int(x + 1), int(z + 1)));
+	return (1 - ratioLength) * ((1 - ratioWidth) * getHeight(int(x), int(z)) + ratioWidth * getHeight(over_x, int(z))) +
+		ratioLength * ((1 - ratioWidth) * getHeight(int(x), over_z) + ratioWidth * getHeight(over_x, over_z));
 }
 
 glm::vec3 Terrain::getNormal(int x, int z) const
