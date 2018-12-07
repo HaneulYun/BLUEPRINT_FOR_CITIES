@@ -3,7 +3,9 @@
 
 class TimeBar
 {
-	ObjectUI obj;
+	ObjectUI frame;
+	ObjectUI bar;
+
 public:
 	TimeBar();
 	~TimeBar();

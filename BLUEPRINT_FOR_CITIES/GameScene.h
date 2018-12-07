@@ -7,6 +7,7 @@
 #include "LowerBar.h"
 #include "CarAmbo.h"
 #include "Cloud.h"
+#include "TimeBar.h"
 
 class GameScene : public Scene
 {
@@ -17,6 +18,7 @@ class GameScene : public Scene
 	LowerBar lowerBar;
 	CarAmbo carAmbo[20];
 	Cloud cloud[10];
+	TimeBar timeBar;
 
 public:
 	Terrain terrain;

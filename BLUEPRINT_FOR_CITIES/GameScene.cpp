@@ -42,6 +42,7 @@ void GameScene::initialize()
 		v.initialize();
 	topBar.initialize();
 	lowerBar.initialize();
+	timeBar.initialize();
 }
 
 void GameScene::update()
@@ -57,6 +58,7 @@ void GameScene::update()
 		v.update();
 	topBar.update();
 	lowerBar.update();
+	timeBar.update();
 }
 
 void GameScene::render()
@@ -70,6 +72,7 @@ void GameScene::render()
 		v.render();
 	topBar.render();
 	lowerBar.render();
+	timeBar.render();
 }
 
 void GameScene::release()
@@ -83,4 +86,5 @@ void GameScene::release()
 		v.release();
 	topBar.release();
 	lowerBar.release();
+	timeBar.release();
 }
