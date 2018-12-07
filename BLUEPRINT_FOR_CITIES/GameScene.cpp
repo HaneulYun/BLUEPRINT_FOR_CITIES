@@ -44,16 +44,22 @@ void GameScene::update()
 	computeMatricesFromInputs();
 	for (auto& v : tree)
 		v.update();
+	topBar.update();
+	terrain.update();
 }
 
 void GameScene::render()
 {
 	for (auto& v : tree)
 		v.render();
+	topBar.render();
+	terrain.render();
 }
 
 void GameScene::release()
 {
 	for (auto& v : tree)
 		v.release();
+	topBar.release();
+	terrain.release();
 }
