@@ -299,7 +299,11 @@ float Terrain::getHeight(int x, int z) const
 
 float Terrain::getHeight(float x, float z) const
 {
-	return 0;
+	float ratioWidth = x - int(x);
+	float ratioLength = z - int(z);
+
+	return (1 - ratioLength) * ((1 - ratioWidth) * getHeight(int(x), int(z)) + ratioWidth * getHeight(int(x + 1), int(z))) +
+		ratioLength * ((1 - ratioWidth) * getHeight(int(x), int(z + 1)) + ratioWidth * getHeight(int(x + 1), int(z + 1)));
 }
 
 glm::vec3 Terrain::getNormal(int x, int z) const
