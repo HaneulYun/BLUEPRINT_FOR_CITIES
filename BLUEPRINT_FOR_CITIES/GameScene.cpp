@@ -32,30 +32,30 @@ GameScene* GameScene::instance()
 
 void GameScene::initialize()
 {
+	terrain.loadTerrain("resources\\map.bmp", 5);
 	for (auto& v : tree)
 		v.initialize();
-	terrain.loadTerrain("resources\\map.bmp", 5);
 }
 
 void GameScene::update()
 {
 	Object::radian += 0.01f;
 	computeMatricesFromInputs();
+	terrain.update();
 	for (auto& v : tree)
 		v.update();
-	terrain.update();
 }
 
 void GameScene::render()
 {
+	terrain.render();
 	for (auto& v : tree)
 		v.render();
-	terrain.render();
 }
 
 void GameScene::release()
 {
+	terrain.release();
 	for (auto& v : tree)
 		v.release();
-	terrain.release();
 }

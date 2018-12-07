@@ -8,8 +8,10 @@ class GameScene : public Scene
 {
 	static GameScene* m_instance;
 
-	Terrain terrain;
 	Tree tree[100];
+
+public:
+	Terrain terrain;
 
 public:
 	bool viewMode{ true };

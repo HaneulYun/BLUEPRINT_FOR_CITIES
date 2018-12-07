@@ -23,11 +23,13 @@ class Terrain : public Object
 
 	GLuint lightID;
 
+	bool computedNormals{ false };
+
+public:
 	int width{ 0 };
 	int length{ 0 };
 	float** heights{ nullptr };
 	glm::vec3** normals{ nullptr };
-	bool computedNormals{ false };
 	
 public:
 	Terrain();
@@ -50,5 +52,6 @@ public:
 	int getWidth() const;
 	int getLength() const;
 	float getHeight(int x, int z) const;
+	float getHeight(float x, float z) const;
 	glm::vec3 getNormal(int x, int z) const;
 };

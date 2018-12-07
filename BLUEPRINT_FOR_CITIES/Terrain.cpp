@@ -297,6 +297,11 @@ float Terrain::getHeight(int x, int z) const
 	return heights[z][x];
 }
 
+float Terrain::getHeight(float x, float z) const
+{
+	return 0;
+}
+
 glm::vec3 Terrain::getNormal(int x, int z) const
 {
 	return normals[z][x];
