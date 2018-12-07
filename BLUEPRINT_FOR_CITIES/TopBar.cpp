@@ -14,6 +14,7 @@ void TopBar::initialize()
 	obj.setOBJ("resources/menubar.obj");
 	obj.initialize();
 	obj.setPosition(0, float(0.95), 0);
+	obj.setColor(209.f / 255, 178.f / 255, 255.f / 255);
 }
 
 void TopBar::update()

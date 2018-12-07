@@ -29,6 +29,7 @@ void ObjectUI::initialize()
 	meshData = meshManager.loadOBJ(urlOBJ);
 
 	glUseProgram(programID);
+	colorID = glGetUniformLocation(programID, "Color_ui");
 	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 }
 
@@ -44,6 +45,7 @@ void ObjectUI::render()
 
 	vec3 lightPos = vec3(20 * cos(radian), 20 * sin(radian), 0);
 	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
+	glUniform3f(colorID, color.r, color.g, color.b);
 
 	mat4 projectionMatrix = getProjectionMatrix();
 	mat4 viewMatrix = getViewMatrix();

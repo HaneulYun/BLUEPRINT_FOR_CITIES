@@ -14,6 +14,7 @@ out vec3 color;
 uniform sampler2D myTextureSampler;
 uniform mat4 MV;
 uniform vec3 LightPosition_worldspace;
+uniform vec3 Color_ui;
 
 void main(){
 
@@ -51,7 +52,7 @@ void main(){
 	//  - Looking elsewhere -> < 1
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
 	
-	color = vec3(209.0/255, 178.0/255, 255/255);
+	color = Color_ui;
 		// Ambient : simulates indirect lighting
 		//MaterialAmbientColor +
 		// Diffuse : "color" of the object
