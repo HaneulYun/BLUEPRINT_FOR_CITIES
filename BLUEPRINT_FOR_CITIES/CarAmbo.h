@@ -1,15 +1,16 @@
 #pragma once
 #include "Object3d.h"
 
-class Tree
+class CarAmbo
 {
 	Object3d obj;
 
 public:
-	Tree();
-	~Tree();
+	CarAmbo();
+	~CarAmbo();
 	void initialize();
 	void update();
 	void render();
 	void release();
 };
+

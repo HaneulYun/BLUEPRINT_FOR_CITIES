@@ -96,6 +96,9 @@
     <ClCompile Include="LowerBar.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClCompile>
+    <ClCompile Include="CarAmbo.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -141,6 +144,9 @@
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
     <ClInclude Include="LowerBar.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="CarAmbo.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
   </ItemGroup>

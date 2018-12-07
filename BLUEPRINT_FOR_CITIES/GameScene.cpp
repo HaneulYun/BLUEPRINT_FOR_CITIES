@@ -36,6 +36,8 @@ void GameScene::initialize()
 	terrain.loadTerrain("resources\\terrain01.bmp", 5);
 	for (auto& v : tree)
 		v.initialize();
+	for (auto& v : carAmbo)
+		v.initialize();
 	topBar.initialize();
 	lowerBar.initialize();
 }
@@ -47,6 +49,8 @@ void GameScene::update()
 	terrain.update();
 	for (auto& v : tree)
 		v.update();
+	for (auto& v : carAmbo)
+		v.update();
 	topBar.update();
 	lowerBar.update();
 }
@@ -56,6 +60,8 @@ void GameScene::render()
 	terrain.render();
 	for (auto& v : tree)
 		v.render();
+	for (auto& v : carAmbo)
+		v.render();
 	topBar.render();
 	lowerBar.render();
 }
@@ -64,6 +70,8 @@ void GameScene::release()
 {
 	terrain.release();
 	for (auto& v : tree)
+		v.release();
+	for (auto& v : carAmbo)
 		v.release();
 	topBar.release();
 	lowerBar.release();

@@ -27,7 +27,7 @@ protected:
 	static MeshManager meshManager;
 
 public:
-	static float radian;
+	static float radian;//ÇØ °¢µµ
 
 public:
 	Object();

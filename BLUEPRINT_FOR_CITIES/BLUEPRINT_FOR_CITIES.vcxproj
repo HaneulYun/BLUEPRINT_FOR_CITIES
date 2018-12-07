@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="CarAmbo.cpp" />
     <ClCompile Include="controls.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="CarAmbo.h" />
     <ClInclude Include="controls.hpp" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="InputManager.h" />
