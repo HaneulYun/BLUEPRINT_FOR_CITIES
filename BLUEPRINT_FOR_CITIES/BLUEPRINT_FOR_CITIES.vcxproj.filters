@@ -87,6 +87,9 @@
     <ClCompile Include="controls.cpp">
       <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
     </ClCompile>
+    <ClCompile Include="TopBar.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="ObjectUI.h">
       <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
+    </ClInclude>
+    <ClInclude Include="TopBar.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

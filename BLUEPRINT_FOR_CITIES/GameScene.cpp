@@ -35,6 +35,7 @@ void GameScene::initialize()
 	terrain.loadTerrain("resources\\map.bmp", 5);
 	for (auto& v : tree)
 		v.initialize();
+	topBar.initialize();
 }
 
 void GameScene::update()

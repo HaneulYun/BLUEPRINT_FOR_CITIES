@@ -7,6 +7,7 @@
 
 MeshIDData MeshManager::loadOBJ(const std::string path)
 {
+	float maxDistance = 0;
 	auto iter = meshDatas.find(path);
 	if (iter == meshDatas.end())
 	{
@@ -41,6 +42,9 @@ MeshIDData MeshManager::loadOBJ(const std::string path)
 				glm::vec3 vertex;
 				fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
 				temp_vertices.push_back(vertex);
+				auto dist = glm::distance(vertex, { 0,0,0 });
+				if (maxDistance < dist)
+					maxDistance = dist;
 			}
 			else if (strcmp(lineHeader, "vt") == 0)
 			{
@@ -97,7 +101,7 @@ MeshIDData MeshManager::loadOBJ(const std::string path)
 		}
 
 		for (auto& v : out_vertices)
-			v /= 400.f;
+			v /= maxDistance;
 
 		meshDatas.insert(std::pair<std::string, MeshIDData>(path, {out_vertices.size(), 0, 0, 0}));
 

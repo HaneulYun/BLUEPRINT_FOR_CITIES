@@ -3,12 +3,14 @@
 #include "Object3d.h"
 #include "Tree.h"
 #include "Terrain.h"
+#include "TopBar.h"
 
 class GameScene : public Scene
 {
 	static GameScene* m_instance;
 
 	Tree tree[100];
+	TopBar topBar;
 
 public:
 	Terrain terrain;
