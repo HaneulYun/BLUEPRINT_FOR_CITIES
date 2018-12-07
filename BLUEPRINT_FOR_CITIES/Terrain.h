@@ -13,6 +13,7 @@ struct Image
 class Terrain : public Object
 {
 	GLuint vertexbufferID;
+	GLuint normalbufferID;
 	unsigned int verticesSize;
 
 	GLuint programID;

@@ -29,6 +29,7 @@ void Terrain::initialize()
 	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 
 	std::vector<glm::vec3> out_vertices;
+	std::vector<glm::vec3> out_normals;
 
 	for (int z = 0; z < length - 1; z++) {
 		for (int x = 0; x < width; x++) {
@@ -36,18 +37,26 @@ void Terrain::initialize()
 			//glNormal3f(normal[0], normal[1], normal[2]);
 			if(x)
 			{
-				out_vertices.push_back({ (x - 30) / 3, heights[z][x], (z - 30) / 3 });
-				out_vertices.push_back({ (x - 30) / 3, heights[z][x], (z - 30) / 3 });
-				out_vertices.push_back({ (x - 30) / 3 - 1, heights[z + 1][x - 1], (z + 1 - 30) / 3 });
-				out_vertices.push_back({ (x - 30) / 3, heights[z + 1][x], (z + 1 - 30) / 3 });
+				out_vertices.push_back({ (x - 30) / 3.f, heights[z][x], (z - 30) / 3.f });
+				out_vertices.push_back({ (x - 30) / 3.f, heights[z][x], (z - 30) / 3.f });
+				out_vertices.push_back({ (x - 1 - 30) / 3.f, heights[z + 1][x - 1], (z + 1 - 30) / 3.f });
+				out_vertices.push_back({ (x - 30) / 3.f, heights[z + 1][x], (z + 1 - 30) / 3.f });
+
+				out_normals.push_back(normals[z][x]);
+				out_normals.push_back(normals[z][x]);
+				out_normals.push_back(normals[z + 1][x - 1]);
+				out_normals.push_back(normals[z + 1][x]);
 			}
 
 			//normal = _terrain->getNormal(x, z + 1);
 			//glNormal3f(normal[0], normal[1], normal[2]);
 			if (x < width - 1)
 			{
-				out_vertices.push_back({ (x - 30) / 3, heights[z][x], (z - 30) / 3 });
-				out_vertices.push_back({ (x - 30) / 3, heights[z + 1][x], (z + 1 - 30) / 3 });
+				out_vertices.push_back({ (x - 30) / 3.f, heights[z][x], (z - 30) / 3.f });
+				out_vertices.push_back({ (x - 30) / 3.f, heights[z + 1][x], (z + 1 - 30) / 3.f });
+
+				out_normals.push_back(normals[z][x]);
+				out_normals.push_back(normals[z + 1][x]);
 			}
 		}
 	}
@@ -56,6 +65,10 @@ void Terrain::initialize()
 	glGenBuffers(1, &vertexbufferID);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbufferID);
 	glBufferData(GL_ARRAY_BUFFER, out_vertices.size() * sizeof(glm::vec3), &out_vertices[0], GL_STATIC_DRAW);
+
+	glGenBuffers(1, &normalbufferID);
+	glBindBuffer(GL_ARRAY_BUFFER, normalbufferID);
+	glBufferData(GL_ARRAY_BUFFER, out_normals.size() * sizeof(glm::vec3), &out_normals[0], GL_STATIC_DRAW);
 
 	computedNormals = false;
 }
@@ -86,13 +99,18 @@ void Terrain::render()
 	//glUniform1i(textureData.textureSID, 0);
 
 	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(2);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbufferID);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
+	glBindBuffer(GL_ARRAY_BUFFER, normalbufferID);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
 	glDrawArrays(GL_TRIANGLES, 0, verticesSize);
 
 	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(2);
 
 	Object::postRender();
 }
@@ -209,7 +227,53 @@ void Terrain::loadTerrain(std::string path, float height)
 
 void Terrain::computeNormals()
 {
+	if (computedNormals) {
+		return;
+	}
 
+	vec3** normals2 = new vec3*[length];
+	for (int i = 0; i < length; i++) {
+		normals2[i] = new vec3[width];
+	}
+
+	for (int z = 0; z < length; z++) {
+		for (int x = 0; x < width; x++) {
+			vec3 sum(0.0f, 0.0f, 0.0f);
+
+			vec3 out;
+			if (z > 0) {
+				out = vec3(0.0f, heights[z - 1][x] - heights[z][x], -1.0f);
+			}
+			vec3 in;
+			if (z < length - 1) {
+				in = vec3(0.0f, heights[z + 1][x] - heights[z][x], 1.0f);
+			}
+			vec3 left;
+			if (x > 0) {
+				left = vec3(-1.0f, heights[z][x - 1] - heights[z][x], 0.0f);
+			}
+			vec3 right;
+			if (x < width - 1) {
+				right = vec3(1.0f, heights[z][x + 1] - heights[z][x], 0.0f);
+			}
+
+			if (x > 0 && z > 0) {
+				sum += glm::normalize(glm::cross(out, left));
+			}
+			if (x > 0 && z < length - 1) {
+				sum += glm::normalize(glm::cross(left, in));
+			}
+			if (x < width - 1 && z < length - 1) {
+				sum += glm::normalize(glm::cross(in, right));
+			}
+			if (x < width - 1 && z > 0) {
+				sum += glm::normalize(glm::cross(right, out));
+			}
+
+			normals2[z][x] = sum;
+			normals[z][x] = sum;
+		}
+	}
 }
 
 void Terrain::setHeight(int x, int z, float y)
