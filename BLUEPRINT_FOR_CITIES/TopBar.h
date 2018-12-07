@@ -1,13 +1,12 @@
 #pragma once
-#include "Object.h"
+#include "Object3d.h"
 
-class ObjectUI : public Object
+class TopBar
 {
-
+	Object3d obj;
 public:
-	ObjectUI();
-	~ObjectUI();
-
+	TopBar();
+	~TopBar();
 	void initialize();
 	void update();
 	void render();
