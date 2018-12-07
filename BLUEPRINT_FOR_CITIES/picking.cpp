@@ -1,5 +1,11 @@
-#include <glm/glm.hpp>
 #include "picking.h"
+#include "App.h"
+
+extern GLFWwindow* window;
+extern glm::vec3 position;
+
+int MousePicker::RECURSION_COUNT = 200;
+float MousePicker::RAY_RANGE = 600;
 
 bool TestRayOBBIntersection(glm::vec3 ray_origin, glm::vec3 ray_direction, glm::vec3 aabb_min, glm::vec3 aabb_max, glm::mat4 ModelMatrix, float& intersection_distance)
 {
@@ -110,4 +116,106 @@ bool TestRayOBBIntersection(glm::vec3 ray_origin, glm::vec3 ray_direction, glm::
 
 	intersection_distance = tMin;
 	return true;
+}
+
+MousePicker::MousePicker(glm::mat4 projection, Terrain* terrain) {
+	projectionMatrix = projection;
+	viewMatrix = getViewMatrix();
+	this->terrain = terrain;
+}
+
+glm::vec3 MousePicker::getCurrentTerrainPoint() {
+	return currentTerrainPoint;
+}
+
+glm::vec3 MousePicker::getCurrentRay() {
+	return currentRay;
+}
+
+void MousePicker::update() {
+	viewMatrix = getViewMatrix();
+	currentRay = calculateMouseRay();
+	if (intersectionInRange(0, RAY_RANGE, currentRay))
+		currentTerrainPoint = binarySearch(0, 0, RAY_RANGE, currentRay);
+	else
+		currentTerrainPoint = {};
+}
+
+glm::vec3 MousePicker::calculateMouseRay() {
+	double xpos, ypos;
+	glfwGetCursorPos(window, &xpos, &ypos);
+
+	float mouseX = xpos;
+	float mouseY = ypos;
+	glm::vec2 normalizedCoords = getNormalisedDeviceCoordinates(mouseX, mouseY);
+	glm::vec4 clipCoords = glm::vec4(normalizedCoords.x, normalizedCoords.y, -1.0f, 1.0f);
+	glm::vec4 eyeCoords = toEyeCoords(clipCoords);
+	glm::vec3 worldRay = toWorldCoords(eyeCoords);
+	return worldRay;
+}
+
+glm::vec3 MousePicker::toWorldCoords(glm::vec4 eyeCoords) {
+	glm::mat4 invertedView = glm::inverse(viewMatrix);
+	glm::vec4 rayWorld = invertedView * eyeCoords;
+	glm::vec3 mouseRay = glm::vec3(rayWorld.x, rayWorld.y, rayWorld.z);
+	glm::normalize(mouseRay);
+	return mouseRay;
+}
+
+glm::vec4 MousePicker::toEyeCoords(glm::vec4 clipCoords) {
+	glm::mat4 invertedProjection = glm::inverse(projectionMatrix);
+	glm::vec4 eyeCoords = invertedProjection * clipCoords;
+	return glm::vec4(eyeCoords.x, eyeCoords.y, -1.f, 0.f);
+}
+
+glm::vec2 MousePicker::getNormalisedDeviceCoordinates(float mouseX, float mouseY) {
+	float x = (2.0f * mouseX) / g_app->getSize().cx - 1.f;
+	float y = (2.0f * mouseY) / g_app->getSize().cy - 1.f;
+	return glm::vec2(x, y);
+}
+
+glm::vec3 MousePicker::getPointOnRay(glm::vec3 ray, float distance) {
+	glm::vec3 start = position;
+	glm::vec3 scaledRay = glm::vec3(ray.x * distance, ray.y * distance, ray.z * distance);
+	return start + scaledRay;
+}
+
+glm::vec3 MousePicker::binarySearch(int count, float start, float finish, glm::vec3 ray) {
+	float half = start + ((finish - start) / 2.f);
+	if (count >= RECURSION_COUNT) {
+		glm::vec3 endPoint = getPointOnRay(ray, half);
+		bool exist = terrain->existInner(endPoint.x, endPoint.z);
+		if (exist) {
+			return endPoint;
+		}
+		else {
+			return {};
+		}
+	}
+	if (intersectionInRange(start, half, ray))
+		return binarySearch(count + 1, start, half, ray);
+	else
+		return binarySearch(count + 1, half, finish, ray);
+}
+
+bool MousePicker::intersectionInRange(float start, float finish, glm::vec3 ray) {
+	glm::vec3 startPoint = getPointOnRay(ray, start);
+	glm::vec3 endPoint = getPointOnRay(ray, finish);
+	if (!isUnderGround(startPoint) && isUnderGround(endPoint))
+		return true;
+	else
+		return false;
+}
+
+bool MousePicker::isUnderGround(glm::vec3 testPoint) {
+	float height = 0;
+	if (terrain != nullptr) {
+		height = terrain->getHeightByPosition(testPoint.x, testPoint.z);
+	}
+	if (testPoint.y < height) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }

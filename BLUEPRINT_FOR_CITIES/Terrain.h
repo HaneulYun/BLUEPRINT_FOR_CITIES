@@ -56,5 +56,6 @@ public:
 	int getLength() const;
 	float getHeight(int x, int z) const;
 	float getHeightByPosition(float x, float z) const;
+	bool existInner(float x, float z) const;
 	glm::vec3 getNormal(int x, int z) const;
 };

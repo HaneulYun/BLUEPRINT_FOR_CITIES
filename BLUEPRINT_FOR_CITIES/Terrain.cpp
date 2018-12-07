@@ -316,6 +316,17 @@ float Terrain::getHeightByPosition(float x, float z) const
 		ratioLength * ((1 - ratioWidth) * getHeight(x_terrain, over_z) + ratioWidth * getHeight(over_x, over_z));
 }
 
+bool Terrain::existInner(float x, float z) const
+{
+	float x_terrain = (x + terrainWidth / 2) / terrainWidth * width;
+	float z_terrain = (z + terrainLength / 2) / terrainLength * length;
+	if (x_terrain > width - 1 || x_terrain < 0)
+		return false;
+	if (z_terrain > length - 1 || z_terrain < 0)
+		return false;
+	return true;
+}
+
 glm::vec3 Terrain::getNormal(int x, int z) const
 {
 	return normals[z][x];
