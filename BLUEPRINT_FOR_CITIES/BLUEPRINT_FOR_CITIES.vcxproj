@@ -181,6 +181,8 @@
   <ItemGroup>
     <None Include="StandardShading.fragmentshader" />
     <None Include="StandardShading.vertexshader" />
+    <None Include="terrain.fs" />
+    <None Include="terrain.vs" />
     <None Include="ui.fs" />
     <None Include="ui.vs" />
   </ItemGroup>
