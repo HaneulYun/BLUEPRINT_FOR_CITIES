@@ -1,6 +1,9 @@
 #pragma once
 #include <list>
 #include <glm/glm.hpp>
+#include "shader.hpp"
+#include "texture.hpp"
+#include "objloader.hpp"
 
 class Object
 {
@@ -17,6 +20,14 @@ protected:
 	int hierarchyLevel{ 0 };
 
 	bool bVisible{ true };
+
+protected:
+	static ShaderManager shagerManager;
+	static TextureManager textureManager;
+	static MeshManager meshManager;
+
+public:
+	static float radian;
 
 public:
 	Object();

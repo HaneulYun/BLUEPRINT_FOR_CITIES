@@ -5,17 +5,9 @@
 #include <glm/gtx/transform.hpp>
 
 #include "Object3d.h"
-
-#include "shader.hpp"
-#include "texture.hpp"
 #include "controls.hpp"
-#include "objloader.hpp"
 
 using namespace glm;
-
-ShaderManager Object3d::shagerManager;
-TextureManager Object3d::textureManager;
-MeshManager Object3d::meshManager;
 
 Object3d::Object3d()
 {

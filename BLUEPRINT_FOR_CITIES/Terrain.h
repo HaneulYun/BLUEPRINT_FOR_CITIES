@@ -1,10 +1,27 @@
 #pragma once
 #include <iostream>
 #include <glm/glm.hpp>
-#include "Object3d.h"
+#include "Object.h"
 
-class Terrain : public Object3d
+struct Image
 {
+	int width;
+	int height;
+	char** pixels;
+};
+
+class Terrain : public Object
+{
+	GLuint vertexbufferID;
+	unsigned int verticesSize;
+
+	GLuint programID;
+	GLuint matrixID;
+	GLuint viewMatrixID;
+	GLuint modelMatrixID;
+
+	GLuint lightID;
+
 	int width{ 0 };
 	int length{ 0 };
 	float** heights{ nullptr };
@@ -15,10 +32,15 @@ public:
 	Terrain();
 	~Terrain();
 
-	void initialize(int _width, int _length);
+
+	void initialize();
 	void update();
 	void render();
 	void release();
+
+	void setSize(int _width, int _length);
+	Image* loadBMP(std::string path);
+	void loadTerrain(std::string path, float height);
 
 	void computeNormals();
 
