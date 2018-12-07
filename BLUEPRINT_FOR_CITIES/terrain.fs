@@ -23,7 +23,7 @@ void main(){
 	float LightPower = 500.0f;
 	
 	// Material properties
-	vec3 MaterialDiffuseColor = vec3(89.0/255,147.0/255,89.0/255);
+	vec3 MaterialDiffuseColor = vec3(89.0/255,90.0/255,44.0/255);
 	vec3 MaterialAmbientColor = vec3(0.2,0.2,0.2) * MaterialDiffuseColor;
 	vec3 MaterialSpecularColor = vec3(0.05,0.05,0.05);
 

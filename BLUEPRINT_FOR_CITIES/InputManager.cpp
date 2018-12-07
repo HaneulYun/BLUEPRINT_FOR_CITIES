@@ -1,3 +1,8 @@
+// Include GLFW
+#include <gl/glew.h>
+#include <GLFW/glfw3.h>
+extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
+
 #include <iostream>
 #include "InputManager.h"
 
@@ -35,9 +40,11 @@ void InputManager::initialize()
 		m_OldKeyState[i] = false;
 		m_CurKeyState[i] = false;
 	}
+	glfwGetCursorPos(window, &xpos, &ypos);
 }
 
 void InputManager::update()
 {
 	memcpy(m_OldKeyState, m_CurKeyState, 348);
+	glfwGetCursorPos(window, &xpos, &ypos);
 }

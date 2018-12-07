@@ -16,8 +16,8 @@ public:
 	virtual ~TimeManager(void);
 
 	bool initialize();
-	void terminate();
-	void pulse();
+	void release();
+	void update();
 
 public:
 	__inline float getTime() const;

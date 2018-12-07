@@ -17,7 +17,7 @@ TimeManager::TimeManager(void)
 
 TimeManager::~TimeManager(void)
 {
-	terminate();
+	release();
 }
 
 bool TimeManager::initialize()
@@ -27,12 +27,12 @@ bool TimeManager::initialize()
 	return true;
 }
 
-void TimeManager::terminate()
+void TimeManager::release()
 {
 	//timeEndPeriod(1);
 }
 
-void TimeManager::pulse()
+void TimeManager::update()
 {
 	unsigned long time = GetTickCount();
 

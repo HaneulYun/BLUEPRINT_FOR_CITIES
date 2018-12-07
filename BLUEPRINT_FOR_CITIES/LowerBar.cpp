@@ -15,7 +15,7 @@ void LowerBar::initialize()
 	obj.setOBJ("resources/lowerbar.obj");
 	obj.initialize();
 	obj.setPosition(0, -float(2.0), 0);
-	obj.setColor(209.f / 255, 178.f / 255, 255.f / 255);
+	obj.setColor(43.f / 255, 63.f / 255, 74.f / 255);
 }
 
 void LowerBar::update()
