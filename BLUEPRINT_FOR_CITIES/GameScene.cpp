@@ -46,7 +46,6 @@ void GameScene::update()
 	for (auto& v : tree)
 		v.update();
 	topBar.update();
-	terrain.update();
 }
 
 void GameScene::render()
@@ -55,7 +54,6 @@ void GameScene::render()
 	for (auto& v : tree)
 		v.render();
 	topBar.render();
-	terrain.render();
 }
 
 void GameScene::release()
@@ -64,5 +62,4 @@ void GameScene::release()
 	for (auto& v : tree)
 		v.release();
 	topBar.release();
-	terrain.release();
 }

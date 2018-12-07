@@ -34,12 +34,13 @@ void Object3d::initialize()
 
 void Object3d::update()
 {
-	glUseProgram(programID);
 }
 
 void Object3d::render()
 {
 	Object::preRender();
+
+	glUseProgram(programID);
 
 	vec3 lightPos = vec3(20 * cos(radian), 20 * sin(radian), 0);
 	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
