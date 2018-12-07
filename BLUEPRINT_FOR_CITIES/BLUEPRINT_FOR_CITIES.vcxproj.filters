@@ -105,6 +105,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
     </ClCompile>
+    <ClCompile Include="picking.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -152,15 +155,6 @@
     <ClInclude Include="LowerBar.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
-    <ClInclude Include="CarAmbo.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="StandardShading.fragmentshader">
@@ -173,6 +167,12 @@
       <Filter>쉐이더 파일</Filter>
     </None>
     <None Include="ui.vs">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="terrain.fs">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="terrain.vs">
       <Filter>쉐이더 파일</Filter>
     </None>
   </ItemGroup>

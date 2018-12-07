@@ -153,6 +153,7 @@
     <ClCompile Include="Object3d.cpp" />
     <ClCompile Include="ObjectUI.cpp" />
     <ClCompile Include="objloader.cpp" />
+    <ClCompile Include="picking.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="Terrain.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Object3d.h" />
     <ClInclude Include="ObjectUI.h" />
     <ClInclude Include="objloader.hpp" />
+    <ClInclude Include="picking.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="shader.hpp" />
     <ClInclude Include="Terrain.h" />
@@ -185,6 +187,8 @@
   <ItemGroup>
     <None Include="StandardShading.fragmentshader" />
     <None Include="StandardShading.vertexshader" />
+    <None Include="terrain.fs" />
+    <None Include="terrain.vs" />
     <None Include="ui.fs" />
     <None Include="ui.vs" />
   </ItemGroup>

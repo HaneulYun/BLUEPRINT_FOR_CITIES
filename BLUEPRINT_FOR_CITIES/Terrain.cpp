@@ -20,7 +20,7 @@ Terrain::~Terrain()
 
 void Terrain::initialize()
 {
-	programID = shagerManager.loadShaders("StandardShading.vertexshader", "StandardShading.fragmentshader");
+	programID = shagerManager.loadShaders("terrain.vs", "terrain.fs");
 	matrixID = glGetUniformLocation(programID, "MVP");
 	viewMatrixID = glGetUniformLocation(programID, "V");
 	modelMatrixID = glGetUniformLocation(programID, "M");
