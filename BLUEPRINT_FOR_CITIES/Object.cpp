@@ -1,6 +1,10 @@
 #include "Object.h"
 #include <glm/gtx/transform.hpp>
 
+ShaderManager Object::shagerManager;
+TextureManager Object::textureManager;
+MeshManager Object::meshManager;
+
 Object::Object()
 {
 }

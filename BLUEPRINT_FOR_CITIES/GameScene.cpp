@@ -6,7 +6,7 @@
 
 GameScene* GameScene::m_instance = nullptr;
 
-float Object3d::radian = 0;
+float Object::radian = 0;
 
 GameScene::GameScene()
 {
@@ -35,27 +35,25 @@ void GameScene::initialize()
 	for (auto& v : tree)
 		v.initialize();
 	topBar.initialize();
+	terrain.loadTerrain("resources\\map.bmp", 5);
 }
 
 void GameScene::update()
 {
-	Object3d::radian += 0.01f;
+	Object::radian += 0.01f;
 	computeMatricesFromInputs();
 	for (auto& v : tree)
 		v.update();
-	topBar.update();
 }
 
 void GameScene::render()
 {
 	for (auto& v : tree)
 		v.render();
-	topBar.render();
 }
 
 void GameScene::release()
 {
 	for (auto& v : tree)
 		v.release();
-	topBar.release();
 }

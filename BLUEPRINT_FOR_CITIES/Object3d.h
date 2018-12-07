@@ -4,16 +4,9 @@
 #include <gl/glew.h>
 #include <glm/glm.hpp>
 #include "Object.h"
-#include "shader.hpp"
-#include "texture.hpp"
-#include "objloader.hpp"
 
 class Object3d : public Object
 {
-	static ShaderManager shagerManager;
-	static TextureManager textureManager;
-	static MeshManager meshManager;
-
 	MeshIDData meshData;
 	TextureIDData textureData;
 
@@ -29,7 +22,6 @@ class Object3d : public Object
 
 
 public:
-	static float radian;
 
 	Object3d();
 	~Object3d();
