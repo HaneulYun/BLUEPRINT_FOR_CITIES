@@ -21,10 +21,8 @@ void Segment::initialize()
 	position.y = g_gameScene->terrain->getHeightByPosition(position.x, position.z);
 	obj.setPosition(position);
 	obj.setScale(0.5f);
-	for (int i = 0; i < 3; ++i)
-	{
-		node[i] = nullptr;
-	}
+	for (auto& v : node)
+		v = nullptr;
 }
 
 void Segment::update()

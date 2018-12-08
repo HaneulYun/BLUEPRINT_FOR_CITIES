@@ -1,4 +1,5 @@
 #pragma once
+#include <glm/glm.hpp>
 #include "Object3d.h"
 extern class Segment;
 
@@ -16,4 +17,6 @@ public:
 	void update();
 	void render();
 	void release();
+
+	glm::vec3 getPosition() const { return obj.getPosition(); }
 };

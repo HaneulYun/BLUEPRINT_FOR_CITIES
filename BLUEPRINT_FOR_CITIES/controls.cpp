@@ -93,45 +93,42 @@ void computeMatricesFromInputs(){
 	glm::vec3 up = glm::cross(right, direction);
 
 
-	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
-		if (g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_2] == false)
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
+		if (g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_1] == false)
 		{
 			if (!g_gameScene->viewMode)
 			{
-				if (!g_gameScene->drawPath)//나무그리기
+				if (!g_gameScene->pathManager.drawState)//나무그리기
 				{
 					g_gameScene->tree.push_back(new Tree());
 					g_gameScene->tree.back()->initialize();
 					g_gameScene->tree.back()->obj.setPosition(g_gameScene->treeOnMouse.obj.getPosition());
 				}
-				else//길 그리기
+				else
 				{
-					//auto& node = g_gameScene->node;
-					//auto& segment = g_gameScene->segment;
-					//
-					//node.push_back(new Node());
-					//node.back()->initialize();
-					//node.back()->obj.setPosition(g_gameScene->burgerOnMouse.obj.getPosition());
-					//
-					//if (segment.size() == 0 || segment.back()->node[2] != nullptr) {
-					//	segment.push_back(new Segment());
-					//	segment.back()->initialize();
-					//	segment.back()->node[0] = node.back();
-					//	segment.back()->node[1] = nullptr;
-					//	segment.back()->node[2] = nullptr;
-					//}
-					//else if (g_gameScene->straight&&segment.back()->node[0] != nullptr)
-					//{
-					//	segment.back()->node[2] = node.back();
-					//}
-					//else if (!g_gameScene->straight && segment.back()->node[1] == nullptr)
-					//{
-					//	segment.back()->node[1] = node.back();
-					//}
-					//else if (!g_gameScene->straight && segment.back()->node[1] != nullptr && segment.back()->node[2] == nullptr)
-					//{
-					//	segment.back()->node[2] = node.back();
-					//}
+					Node* node = new Node();
+					node->initialize();
+					glm::vec3 v = g_gameScene->mousePicker->currentTerrainPoint;
+					if (v != glm::vec3{})
+						v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+					node->obj.setPosition(v);
+					g_gameScene->pathManager.inputNode(node);
+				}
+			}
+		}
+		g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_1] = true;
+	}
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_RELEASE) {
+		g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_1] = false;
+	}
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
+		if (g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_2] == false)
+		{
+			if (!g_gameScene->viewMode)
+			{
+				if (g_gameScene->pathManager.drawState)
+				{
+					g_gameScene->pathManager.inputInitialize();
 				}
 			}
 		}
@@ -185,7 +182,7 @@ void computeMatricesFromInputs(){
 	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
 		if (g_pInputManager->curKeyState[GLFW_KEY_P] == false && !g_gameScene->viewMode)
 		{
-			g_gameScene->drawPath = !g_gameScene->drawPath;
+			g_gameScene->pathManager.drawState = !g_gameScene->pathManager.drawState;
 		}
 		g_pInputManager->curKeyState[GLFW_KEY_P] = true;
 	}
@@ -194,9 +191,9 @@ void computeMatricesFromInputs(){
 	}
 	// straight
 	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
-		if (g_pInputManager->curKeyState[GLFW_KEY_O] == false && !g_gameScene->viewMode && g_gameScene->drawPath)
+		if (g_pInputManager->curKeyState[GLFW_KEY_O] == false && !g_gameScene->viewMode && g_gameScene->pathManager.drawState)
 		{
-			g_gameScene->straight = !g_gameScene->straight;
+			g_gameScene->pathManager.drawMode = !g_gameScene->pathManager.drawMode;
 		}
 		g_pInputManager->curKeyState[GLFW_KEY_O] = true;
 	}

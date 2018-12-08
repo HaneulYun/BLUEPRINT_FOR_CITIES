@@ -41,8 +41,6 @@ public:
 public:
 	bool viewMode{ true };
 	bool destroyMode{ false };
-	bool drawPath{ true };// p
-	bool straight{ true };// o
 
 private:
 	GameScene();

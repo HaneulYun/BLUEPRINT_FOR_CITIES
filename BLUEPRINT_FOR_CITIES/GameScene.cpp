@@ -67,25 +67,15 @@ void GameScene::update()
 
 	if (!viewMode)
 	{
-		if (!drawPath)
+		mousePicker->update();
+		glm::vec3 v = mousePicker->currentTerrainPoint;
+		if (v != glm::vec3{})
 		{
-			mousePicker->update();
-			glm::vec3 v = mousePicker->currentTerrainPoint;
-			if (v != glm::vec3{})
-			{
-				v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+			if (!pathManager.drawState)
 				treeOnMouse.obj.setPosition(v);
-			}
-		}
-		else
-		{
-			mousePicker->update();
-			glm::vec3 v = mousePicker->currentTerrainPoint;
-			if (v != glm::vec3{})
-			{
-				v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+			else
 				burgerOnMouse.obj.setPosition(v);
-			}
 		}
 	}
 	
@@ -128,7 +118,7 @@ void GameScene::render()
 	destroyEffect.render();
 	if (!viewMode)
 	{
-		if (!drawPath)
+		if (!pathManager.drawState)
 			treeOnMouse.render();
 		else
 		{
