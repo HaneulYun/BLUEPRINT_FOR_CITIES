@@ -171,6 +171,9 @@
     <ClCompile Include="MailBox.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
     </ClCompile>
+    <ClCompile Include="Pause.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="MailBox.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
+    </ClInclude>
+    <ClInclude Include="Pause.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

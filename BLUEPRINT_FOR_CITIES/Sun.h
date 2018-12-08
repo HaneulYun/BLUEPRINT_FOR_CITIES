@@ -15,6 +15,7 @@ public:
 	void render();
 	void release();
 
+	bool pause;
 	float sunclock;
 	float getRadianPosition() const;
 	glm::vec3 getLightPos() const;

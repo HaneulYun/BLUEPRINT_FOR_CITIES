@@ -178,15 +178,15 @@ void computeMatricesFromInputs(){
 		g_pInputManager->curKeyState[GLFW_KEY_B] = false;
 	}
 	// drawPath
-	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
-		if (g_pInputManager->curKeyState[GLFW_KEY_P] == false && !g_gameScene->viewMode)
+	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+		if (g_pInputManager->curKeyState[GLFW_KEY_R] == false && !g_gameScene->viewMode)
 		{
 			g_gameScene->pathManager.drawState = !g_gameScene->pathManager.drawState;
 		}
-		g_pInputManager->curKeyState[GLFW_KEY_P] = true;
+		g_pInputManager->curKeyState[GLFW_KEY_R] = true;
 	}
-	else if (glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE) {
-		g_pInputManager->curKeyState[GLFW_KEY_P] = false;
+	else if (glfwGetKey(window, GLFW_KEY_R) == GLFW_RELEASE) {
+		g_pInputManager->curKeyState[GLFW_KEY_R] = false;
 	}
 	// straight
 	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
@@ -201,7 +201,7 @@ void computeMatricesFromInputs(){
 	}
 	// faster
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
-		if (g_pInputManager->curKeyState[GLFW_KEY_F] == false && !g_gameScene->viewMode)
+		if (g_pInputManager->curKeyState[GLFW_KEY_F] == false)
 		{
 			g_gameScene->fasterImage.faster = !g_gameScene->fasterImage.faster;
 			if (g_gameScene->fasterImage.faster)
@@ -213,6 +213,17 @@ void computeMatricesFromInputs(){
 	}
 	else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE) {
 		g_pInputManager->curKeyState[GLFW_KEY_F] = false;
+	}
+	// pause
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+		if (g_pInputManager->curKeyState[GLFW_KEY_P] == false)
+		{
+			g_gameScene->sun.pause = !g_gameScene->sun.pause;
+		}
+		g_pInputManager->curKeyState[GLFW_KEY_P] = true;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE) {
+		g_pInputManager->curKeyState[GLFW_KEY_P] = false;
 	}
 	// tree
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {

@@ -11,6 +11,7 @@
 #include "DestroyEffect.h"
 #include "Sun.h"
 #include "Faster.h"
+#include "Pause.h"
 
 #include "PathManager.h"
 #include "PropManager.h"
@@ -30,6 +31,7 @@ public:
 	PathManager pathManager;
 	PropManager propManager;
 	Faster fasterImage;
+	Pause pauseImage;
 	Sun sun;
 	Node burgerOnMouse;
 	Terrain* terrain;

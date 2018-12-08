@@ -12,11 +12,13 @@ void Sun::initialize()
 {
 	radianPosition = 0.f;
 	sunclock = 0.005f;
+	pause = false;
 }
 
 void Sun::update()
 {
-	radianPosition += sunclock;
+	if (!pause)
+		radianPosition += sunclock;
 	if (radianPosition >= 2 * 3.141592f)
 	{
 		radianPosition = 0.0;
