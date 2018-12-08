@@ -12,6 +12,7 @@
 #include "TimeBar.h"
 #include "StreetLight.h"
 #include "DestroyEffect.h"
+#include "Sun.h"
 
 class GameScene : public Scene
 {

@@ -7,9 +7,9 @@
 
 #define PI 3.141592
 
-GameScene* GameScene::m_instance = nullptr;
+float Object::radian = 0.f;
 
-float Object::radian = 0;
+GameScene* GameScene::m_instance = nullptr;
 
 GameScene::GameScene()
 {
