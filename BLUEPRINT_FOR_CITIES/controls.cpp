@@ -135,6 +135,17 @@ void computeMatricesFromInputs(){
 	else if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_RELEASE) {
 		g_pInputManager->curKeyState[GLFW_KEY_LEFT_CONTROL] = false;
 	}
+	// destroyMode
+	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS) {
+		if (g_pInputManager->curKeyState[GLFW_KEY_B] == false && !g_gameScene->viewMode)
+		{
+			g_gameScene->destroyMode = !g_gameScene->destroyMode;
+		}
+		g_pInputManager->curKeyState[GLFW_KEY_B] = true;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE) {
+		g_pInputManager->curKeyState[GLFW_KEY_B] = false;
+	}
 
 	float FoV = initialFoV;// -5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 

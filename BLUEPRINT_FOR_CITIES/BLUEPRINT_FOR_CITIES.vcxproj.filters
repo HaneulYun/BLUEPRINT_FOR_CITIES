@@ -127,7 +127,7 @@
       <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
     </ClCompile>
     <ClCompile Include="DestroyEffect.cpp">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE\03_UI</Filter>
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,14 +179,8 @@
     <ClInclude Include="picking.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="text2D.hpp">
       <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
     <ClInclude Include="TimeBar.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
@@ -207,7 +201,13 @@
       <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
     </ClInclude>
     <ClInclude Include="DestroyEffect.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE\03_UI</Filter>
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
