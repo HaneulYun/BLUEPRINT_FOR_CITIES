@@ -37,8 +37,8 @@ void TimeBar::update()
 	}
 	else
 	{
-		frame.setPosition(-720, 405.f, 1.0f);
-		bar.setPosition(-765 + 45 * Object::radian / 2 / PI, 405.f, 1.0f);
+		frame.setPosition(-720, 405.f, 0.1f);
+		bar.setPosition(-765 + 45 * Object::radian / 2 / PI, 405.f, 0.1f);
 	}
 }
 

@@ -57,6 +57,7 @@ void GameScene::initialize()
 	topBar.initialize();
 	lowerBar.initialize();
 	timeBar.initialize();
+	destroyEffect.initialize();
 }
 
 void GameScene::update()
@@ -92,6 +93,7 @@ void GameScene::update()
 	topBar.update();
 	lowerBar.update();
 	timeBar.update();
+	destroyEffect.update();
 }
 
 void GameScene::render()
@@ -108,6 +110,7 @@ void GameScene::render()
 	topBar.render();
 	lowerBar.render();
 	timeBar.render();
+	destroyEffect.render();
 	if (!viewMode)
 		treeOnMouse.render();
 }
@@ -127,4 +130,5 @@ void GameScene::release()
 	topBar.release();
 	lowerBar.release();
 	timeBar.release();
+	destroyEffect.release();
 }

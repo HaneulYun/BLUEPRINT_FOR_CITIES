@@ -146,6 +146,7 @@
     <ClCompile Include="CarAmbo.cpp" />
     <ClCompile Include="Cloud.cpp" />
     <ClCompile Include="controls.cpp" />
+    <ClCompile Include="DestroyEffect.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LowerBar.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="CarAmbo.h" />
     <ClInclude Include="Cloud.h" />
     <ClInclude Include="controls.hpp" />
+    <ClInclude Include="DestroyEffect.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LowerBar.h" />

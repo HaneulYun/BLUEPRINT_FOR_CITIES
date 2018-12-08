@@ -135,6 +135,9 @@
     <ClCompile Include="shadow.cpp">
       <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
     </ClCompile>
+    <ClCompile Include="DestroyEffect.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\03_UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -208,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="shadow.h">
       <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="DestroyEffect.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\03_UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

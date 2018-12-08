@@ -11,6 +11,7 @@
 #include "Cloud.h"
 #include "TimeBar.h"
 #include "StreetLight.h"
+#include "DestroyEffect.h"
 
 class GameScene : public Scene
 {
@@ -21,6 +22,7 @@ class GameScene : public Scene
 	CarAmbo carAmbo[20];
 	Cloud cloud[10];
 	TimeBar timeBar;
+	DestroyEffect destroyEffect;
 	StreetLight streetLight[50];
 
 public:
