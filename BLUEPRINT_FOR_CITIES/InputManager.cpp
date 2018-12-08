@@ -37,14 +37,20 @@ void InputManager::initialize()
 {
 	for (int i = 0; i < 348; ++i)
 	{
-		m_OldKeyState[i] = false;
-		m_CurKeyState[i] = false;
+		oldKeyState[i] = false;
+		curKeyState[i] = false;
+	}
+	for (int i = 0; i < 2; ++i)
+	{
+		oldMouseState[i] = false;
+		curMouseState[i] = false;
 	}
 	glfwGetCursorPos(window, &xpos, &ypos);
 }
 
 void InputManager::update()
 {
-	memcpy(m_OldKeyState, m_CurKeyState, 348);
+	memcpy(oldKeyState, curKeyState, 348);
+	memcpy(oldMouseState, curMouseState, 2);
 	glfwGetCursorPos(window, &xpos, &ypos);
 }

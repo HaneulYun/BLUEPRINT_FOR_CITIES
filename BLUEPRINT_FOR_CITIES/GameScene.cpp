@@ -41,8 +41,12 @@ void GameScene::initialize()
 
 	mousePicker = new MousePicker(getProjectionMatrix(), terrain);
 
+	tree.resize(100);
 	for (auto& v : tree)
-		v.initialize();
+	{
+		v = new Tree();
+		v->initialize();
+	}
 	for (auto& v : carAmbo)
 		v.initialize();
 	for (auto& v : cloud)
@@ -57,7 +61,7 @@ void GameScene::initialize()
 
 void GameScene::update()
 {
-	Object::radian += 0.01f;
+	Object::radian += 0.005f;
 	if (Object::radian >= 2 * PI)
 	{
 		Object::radian = 0.0;
@@ -77,7 +81,7 @@ void GameScene::update()
 	terrain->update();
 
 	for (auto& v : tree)
-		v.update();
+		v->update();
 	for (auto& v : carAmbo)
 		v.update();
 	for (auto& v : cloud)
@@ -94,7 +98,7 @@ void GameScene::render()
 {
 	terrain->render();
 	for (auto& v : tree)
-		v.render();
+		v->render();
 	for (auto& v : carAmbo)
 		v.render();
 	for (auto& v : cloud)
@@ -104,14 +108,15 @@ void GameScene::render()
 	topBar.render();
 	lowerBar.render();
 	timeBar.render();
-	treeOnMouse.render();
+	if (!viewMode)
+		treeOnMouse.render();
 }
 
 void GameScene::release()
 {
 	terrain->release();
 	for (auto& v : tree)
-		v.release();
+		v->release();
 	for (auto& v : carAmbo)
 		v.release();
 	for (auto& v : cloud)
