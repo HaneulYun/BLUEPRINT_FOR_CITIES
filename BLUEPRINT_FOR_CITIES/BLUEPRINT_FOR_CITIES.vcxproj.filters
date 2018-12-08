@@ -120,6 +120,9 @@
     <ClCompile Include="StreetLight.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClCompile>
+    <ClCompile Include="shadow.cpp">
+      <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="StreetLight.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+    </ClInclude>
+    <ClInclude Include="shadow.h">
+      <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

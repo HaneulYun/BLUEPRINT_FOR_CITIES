@@ -21,7 +21,7 @@ protected:
 
 	bool bVisible{ true };
 
-protected:
+public:
 	static ShaderManager shagerManager;
 	static TextureManager textureManager;
 	static MeshManager meshManager;
