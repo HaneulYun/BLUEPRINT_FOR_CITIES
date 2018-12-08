@@ -91,14 +91,48 @@ void computeMatricesFromInputs(){
 
 	// Up vector
 	glm::vec3 up = glm::cross(right, direction);
+
+
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
 		if (g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_2] == false)
 		{
 			if (!g_gameScene->viewMode)
 			{
-				g_gameScene->tree.push_back(new Tree());
-				g_gameScene->tree.back()->initialize();
-				g_gameScene->tree.back()->obj.setPosition(g_gameScene->treeOnMouse.obj.getPosition());
+				if (!g_gameScene->drawPath)//나무그리기
+				{
+					g_gameScene->tree.push_back(new Tree());
+					g_gameScene->tree.back()->initialize();
+					g_gameScene->tree.back()->obj.setPosition(g_gameScene->treeOnMouse.obj.getPosition());
+				}
+				else//길 그리기
+				{
+					//auto& node = g_gameScene->node;
+					//auto& segment = g_gameScene->segment;
+					//
+					//node.push_back(new Node());
+					//node.back()->initialize();
+					//node.back()->obj.setPosition(g_gameScene->burgerOnMouse.obj.getPosition());
+					//
+					//if (segment.size() == 0 || segment.back()->node[2] != nullptr) {
+					//	segment.push_back(new Segment());
+					//	segment.back()->initialize();
+					//	segment.back()->node[0] = node.back();
+					//	segment.back()->node[1] = nullptr;
+					//	segment.back()->node[2] = nullptr;
+					//}
+					//else if (g_gameScene->straight&&segment.back()->node[0] != nullptr)
+					//{
+					//	segment.back()->node[2] = node.back();
+					//}
+					//else if (!g_gameScene->straight && segment.back()->node[1] == nullptr)
+					//{
+					//	segment.back()->node[1] = node.back();
+					//}
+					//else if (!g_gameScene->straight && segment.back()->node[1] != nullptr && segment.back()->node[2] == nullptr)
+					//{
+					//	segment.back()->node[2] = node.back();
+					//}
+				}
 			}
 		}
 		g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_2] = true;
@@ -127,8 +161,9 @@ void computeMatricesFromInputs(){
 		if (g_pInputManager->curKeyState[GLFW_KEY_LEFT_CONTROL] == false)
 		{
 			g_gameScene->viewMode = !g_gameScene->viewMode;
-			if(g_gameScene->viewMode)
+			if (g_gameScene->viewMode)
 				glfwSetCursorPos(window, size.cx / 2, size.cy / 2);
+				g_gameScene->destroyMode = false;
 		}
 		g_pInputManager->curKeyState[GLFW_KEY_LEFT_CONTROL] = true;
 	}
@@ -145,6 +180,28 @@ void computeMatricesFromInputs(){
 	}
 	else if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE) {
 		g_pInputManager->curKeyState[GLFW_KEY_B] = false;
+	}
+	// drawPath
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+		if (g_pInputManager->curKeyState[GLFW_KEY_P] == false && !g_gameScene->viewMode)
+		{
+			g_gameScene->drawPath = !g_gameScene->drawPath;
+		}
+		g_pInputManager->curKeyState[GLFW_KEY_P] = true;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE) {
+		g_pInputManager->curKeyState[GLFW_KEY_P] = false;
+	}
+	// straight
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
+		if (g_pInputManager->curKeyState[GLFW_KEY_O] == false && !g_gameScene->viewMode && g_gameScene->drawPath)
+		{
+			g_gameScene->straight = !g_gameScene->straight;
+		}
+		g_pInputManager->curKeyState[GLFW_KEY_O] = true;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_O) == GLFW_RELEASE) {
+		g_pInputManager->curKeyState[GLFW_KEY_O] = false;
 	}
 
 	float FoV = initialFoV;// -5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.

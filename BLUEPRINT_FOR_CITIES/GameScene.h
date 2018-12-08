@@ -14,6 +14,8 @@
 #include "DestroyEffect.h"
 #include "Sun.h"
 
+#include "PathManager.h"
+
 class GameScene : public Scene
 {
 	static GameScene* m_instance;
@@ -27,10 +29,11 @@ class GameScene : public Scene
 	Cloud cloud[10];
 	StreetLight streetLight[50];
 
-
 public:
+	PathManager pathManager;
 	Sun sun;
 	Tree treeOnMouse;
+	Node burgerOnMouse;
 	std::list<Tree*> tree;
 	Terrain* terrain;
 	MousePicker* mousePicker;
@@ -38,6 +41,8 @@ public:
 public:
 	bool viewMode{ true };
 	bool destroyMode{ false };
+	bool drawPath{ true };// p
+	bool straight{ true };// o
 
 private:
 	GameScene();

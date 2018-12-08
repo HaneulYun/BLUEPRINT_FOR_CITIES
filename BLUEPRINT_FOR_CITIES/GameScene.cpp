@@ -40,7 +40,7 @@ void GameScene::initialize()
 	mousePicker = new MousePicker(getProjectionMatrix(), terrain);
 
 	sun.initialize();
-
+	pathManager.initialize();
 	tree.resize(100);
 	for (auto& v : tree)
 	{
@@ -54,6 +54,7 @@ void GameScene::initialize()
 	for (auto& v : streetLight)
 		v.initialize();
 	treeOnMouse.initialize();
+	burgerOnMouse.initialize();
 	topBar.initialize();
 	lowerBar.initialize();
 	timeBar.initialize();
@@ -66,17 +67,31 @@ void GameScene::update()
 
 	if (!viewMode)
 	{
-		mousePicker->update();
-		glm::vec3 v = mousePicker->currentTerrainPoint;
-		if (v != glm::vec3{})
+		if (!drawPath)
 		{
-			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
-			treeOnMouse.obj.setPosition(v);
+			mousePicker->update();
+			glm::vec3 v = mousePicker->currentTerrainPoint;
+			if (v != glm::vec3{})
+			{
+				v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+				treeOnMouse.obj.setPosition(v);
+			}
+		}
+		else
+		{
+			mousePicker->update();
+			glm::vec3 v = mousePicker->currentTerrainPoint;
+			if (v != glm::vec3{})
+			{
+				v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+				burgerOnMouse.obj.setPosition(v);
+			}
 		}
 	}
 	
 	terrain->update();
 	sun.update();
+	pathManager.update();
 
 	for (auto& v : tree)
 		v->update();
@@ -87,6 +102,7 @@ void GameScene::update()
 	for (auto& v : streetLight)
 		v.update();
 	treeOnMouse.update();
+	burgerOnMouse.update();
 	topBar.update();
 	lowerBar.update();
 	timeBar.update();
@@ -97,6 +113,7 @@ void GameScene::render()
 {
 	terrain->render();
 	sun.render();
+	pathManager.render();
 	for (auto& v : tree)
 		v->render();
 	for (auto& v : carAmbo)
@@ -110,13 +127,21 @@ void GameScene::render()
 	timeBar.render();
 	destroyEffect.render();
 	if (!viewMode)
-		treeOnMouse.render();
+	{
+		if (!drawPath)
+			treeOnMouse.render();
+		else
+		{
+			burgerOnMouse.render();
+		}
+	}
 }
 
 void GameScene::release()
 {
 	terrain->release();
 	sun.release();
+	pathManager.release();
 	for (auto& v : tree)
 		v->release();
 	for (auto& v : carAmbo)
@@ -126,6 +151,7 @@ void GameScene::release()
 	for (auto& v : streetLight)
 		v.release();
 	treeOnMouse.release();
+	burgerOnMouse.release();
 	topBar.release();
 	lowerBar.release();
 	timeBar.release();
