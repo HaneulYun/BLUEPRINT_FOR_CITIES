@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include <glfw3.h>
 #include <time.h>
 #include "Timer.h"
 
@@ -12,13 +12,13 @@ Timer::~Timer(void)
 
 void Timer::initTimer(unsigned long _delayTime)
 {
-	oldTime = GetTickCount();
+	oldTime = glfwGetTime();
 	delayTime = _delayTime;
 }
 
 bool Timer::isElapseTimer()
 {
-	unsigned long curTime = GetTickCount();
+	unsigned long curTime = glfwGetTime();
 	unsigned long elapsed = curTime - oldTime;
 
 	if (elapsed >= delayTime)

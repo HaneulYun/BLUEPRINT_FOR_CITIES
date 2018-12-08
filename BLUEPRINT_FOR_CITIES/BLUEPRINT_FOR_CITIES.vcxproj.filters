@@ -46,6 +46,18 @@
     <Filter Include="쉐이더 파일">
       <UniqueIdentifier>{5ea7ed4b-c113-46d5-81df-f7171d82144e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02_OBJECT\03_INSTANCE\00_ENVIROMENT">
+      <UniqueIdentifier>{92ef0a23-0d6a-4eae-bbf4-fbcbfdaece45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02_OBJECT\03_INSTANCE\01_PROP">
+      <UniqueIdentifier>{f50ec7c3-d1be-4116-a1ae-0be84ba5bbff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02_OBJECT\03_INSTANCE\03_UI">
+      <UniqueIdentifier>{a5705235-2763-459d-a796-86b49b5a7095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02_OBJECT\03_INSTANCE\02_CAR">
+      <UniqueIdentifier>{297a4a7c-5c7c-4db6-87d4-9f6e87b8c4df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -75,29 +87,14 @@
     <ClCompile Include="texture.cpp">
       <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
     </ClCompile>
-    <ClCompile Include="Tree.cpp">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectUI.cpp">
       <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
     </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClCompile>
     <ClCompile Include="controls.cpp">
       <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
-    </ClCompile>
-    <ClCompile Include="TopBar.cpp">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClCompile>
-    <ClCompile Include="LowerBar.cpp">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClCompile>
-    <ClCompile Include="CarAmbo.cpp">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
       <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
@@ -111,14 +108,29 @@
     <ClCompile Include="text2D.cpp">
       <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
     </ClCompile>
-    <ClCompile Include="TimeBar.cpp">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClCompile>
     <ClCompile Include="Cloud.cpp">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_ENVIROMENT</Filter>
     </ClCompile>
     <ClCompile Include="StreetLight.cpp">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_ENVIROMENT</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_ENVIROMENT</Filter>
+    </ClCompile>
+    <ClCompile Include="CarAmbo.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\02_CAR</Filter>
+    </ClCompile>
+    <ClCompile Include="TopBar.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\03_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeBar.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\03_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="LowerBar.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\03_UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,12 +158,6 @@
     <ClInclude Include="objloader.hpp">
       <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
     </ClInclude>
-    <ClInclude Include="Tree.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClInclude>
     <ClInclude Include="controls.hpp">
       <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
     </ClInclude>
@@ -160,12 +166,6 @@
     </ClInclude>
     <ClInclude Include="ObjectUI.h">
       <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
-    </ClInclude>
-    <ClInclude Include="TopBar.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClInclude>
-    <ClInclude Include="LowerBar.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
     </ClInclude>
     <ClInclude Include="picking.h">
       <Filter>헤더 파일</Filter>
@@ -176,20 +176,32 @@
     <ClInclude Include="text2D.hpp">
       <Filter>소스 파일\02_OBJECT\00_CORE</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeBar.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClInclude>
     <ClInclude Include="Cloud.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
-    </ClInclude>
-    <ClInclude Include="CarAmbo.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_ENVIROMENT</Filter>
     </ClInclude>
     <ClInclude Include="StreetLight.h">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE</Filter>
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_ENVIROMENT</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_ENVIROMENT</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="CarAmbo.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\02_CAR</Filter>
+    </ClInclude>
+    <ClInclude Include="TopBar.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\03_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeBar.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\03_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="LowerBar.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\03_UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

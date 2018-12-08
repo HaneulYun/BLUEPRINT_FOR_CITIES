@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include <glfw3.h>
 #include <time.h>
 #include "TimeManager.h"
 
@@ -22,7 +22,7 @@ TimeManager::~TimeManager(void)
 
 bool TimeManager::initialize()
 {
-	beforeTime = GetTickCount();
+	beforeTime = glfwGetTime();
 
 	return true;
 }
@@ -34,7 +34,7 @@ void TimeManager::release()
 
 void TimeManager::update()
 {
-	unsigned long time = GetTickCount();
+	unsigned long time = glfwGetTime();
 
 	unsigned long tick = time - beforeTime;
 	timeStep = (float)tick * 0.001f;
