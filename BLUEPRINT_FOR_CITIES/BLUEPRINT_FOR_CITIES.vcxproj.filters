@@ -156,6 +156,9 @@
     <ClCompile Include="CarAmbo.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\04_NPC</Filter>
     </ClCompile>
+    <ClCompile Include="Faster.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="CarAmbo.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\04_NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Faster.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

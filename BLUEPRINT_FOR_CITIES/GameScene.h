@@ -13,6 +13,7 @@
 #include "StreetLight.h"
 #include "DestroyEffect.h"
 #include "Sun.h"
+#include "Faster.h"
 
 #include "PathManager.h"
 
@@ -31,6 +32,7 @@ class GameScene : public Scene
 
 public:
 	PathManager pathManager;
+	Faster fasterImage;
 	Sun sun;
 	Tree treeOnMouse;
 	Node burgerOnMouse;

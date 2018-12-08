@@ -59,6 +59,7 @@ void GameScene::initialize()
 	lowerBar.initialize();
 	timeBar.initialize();
 	destroyEffect.initialize();
+	fasterImage.initialize();
 }
 
 void GameScene::update()
@@ -97,6 +98,7 @@ void GameScene::update()
 	lowerBar.update();
 	timeBar.update();
 	destroyEffect.update();
+	fasterImage.update();
 }
 
 void GameScene::render()
@@ -116,6 +118,7 @@ void GameScene::render()
 	lowerBar.render();
 	timeBar.render();
 	destroyEffect.render();
+	fasterImage.render();
 	if (!viewMode)
 	{
 		if (!pathManager.drawState)
@@ -146,4 +149,5 @@ void GameScene::release()
 	lowerBar.release();
 	timeBar.release();
 	destroyEffect.release();
+	fasterImage.release();
 }

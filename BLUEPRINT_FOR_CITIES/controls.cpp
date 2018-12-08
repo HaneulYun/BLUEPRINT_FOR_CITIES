@@ -92,7 +92,6 @@ void computeMatricesFromInputs(){
 	// Up vector
 	glm::vec3 up = glm::cross(right, direction);
 
-
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
 		if (g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_1] == false)
 		{
@@ -199,6 +198,21 @@ void computeMatricesFromInputs(){
 	}
 	else if (glfwGetKey(window, GLFW_KEY_O) == GLFW_RELEASE) {
 		g_pInputManager->curKeyState[GLFW_KEY_O] = false;
+	}
+	// faster
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
+		if (g_pInputManager->curKeyState[GLFW_KEY_F] == false && !g_gameScene->viewMode)
+		{
+			g_gameScene->fasterImage.faster = !g_gameScene->fasterImage.faster;
+			if (g_gameScene->fasterImage.faster)
+				g_gameScene->sun.sunclock = 0.015;
+			else
+				g_gameScene->sun.sunclock = 0.005;
+		}
+		g_pInputManager->curKeyState[GLFW_KEY_F] = true;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE) {
+		g_pInputManager->curKeyState[GLFW_KEY_F] = false;
 	}
 
 	float FoV = initialFoV;// -5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
