@@ -13,6 +13,8 @@
 #include "StreetLight.h"
 #include "DestroyEffect.h"
 #include "Sun.h"
+#include "Segment.h"
+#include "Node.h"
 
 class GameScene : public Scene
 {
@@ -27,17 +29,21 @@ class GameScene : public Scene
 	Cloud cloud[10];
 	StreetLight streetLight[50];
 
-
 public:
 	Sun sun;
 	Tree treeOnMouse;
+	Node burgerOnMouse;
 	std::list<Tree*> tree;
+	std::list<Node*> node;
+	std::list<Segment*> segment;
 	Terrain* terrain;
 	MousePicker* mousePicker;
 
 public:
 	bool viewMode{ true };
 	bool destroyMode{ false };
+	bool drawPath{ true };// p
+	bool straight{ true };// o
 
 private:
 	GameScene();

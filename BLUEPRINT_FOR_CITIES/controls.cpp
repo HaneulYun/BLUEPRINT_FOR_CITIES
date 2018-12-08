@@ -96,9 +96,18 @@ void computeMatricesFromInputs(){
 		{
 			if (!g_gameScene->viewMode)
 			{
-				g_gameScene->tree.push_back(new Tree());
-				g_gameScene->tree.back()->initialize();
-				g_gameScene->tree.back()->obj.setPosition(g_gameScene->treeOnMouse.obj.getPosition());
+				if (!g_gameScene->drawPath)
+				{
+					g_gameScene->tree.push_back(new Tree());
+					g_gameScene->tree.back()->initialize();
+					g_gameScene->tree.back()->obj.setPosition(g_gameScene->treeOnMouse.obj.getPosition());
+				}
+				else
+				{
+					g_gameScene->node.push_back(new Node());
+					g_gameScene->node.back()->initialize();
+					g_gameScene->node.back()->obj.setPosition(g_gameScene->burgerOnMouse.obj.getPosition());
+				}
 			}
 		}
 		g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_2] = true;
@@ -127,8 +136,9 @@ void computeMatricesFromInputs(){
 		if (g_pInputManager->curKeyState[GLFW_KEY_LEFT_CONTROL] == false)
 		{
 			g_gameScene->viewMode = !g_gameScene->viewMode;
-			if(g_gameScene->viewMode)
+			if (g_gameScene->viewMode)
 				glfwSetCursorPos(window, size.cx / 2, size.cy / 2);
+				g_gameScene->destroyMode = false;
 		}
 		g_pInputManager->curKeyState[GLFW_KEY_LEFT_CONTROL] = true;
 	}
@@ -145,6 +155,28 @@ void computeMatricesFromInputs(){
 	}
 	else if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE) {
 		g_pInputManager->curKeyState[GLFW_KEY_B] = false;
+	}
+	// drawPath
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+		if (g_pInputManager->curKeyState[GLFW_KEY_P] == false && !g_gameScene->viewMode)
+		{
+			g_gameScene->drawPath = !g_gameScene->drawPath;
+		}
+		g_pInputManager->curKeyState[GLFW_KEY_P] = true;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE) {
+		g_pInputManager->curKeyState[GLFW_KEY_P] = false;
+	}
+	// straight
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
+		if (g_pInputManager->curKeyState[GLFW_KEY_O] == false && !g_gameScene->viewMode && g_gameScene->drawPath)
+		{
+			g_gameScene->straight = !g_gameScene->straight;
+		}
+		g_pInputManager->curKeyState[GLFW_KEY_O] = true;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_O) == GLFW_RELEASE) {
+		g_pInputManager->curKeyState[GLFW_KEY_O] = false;
 	}
 
 	float FoV = initialFoV;// -5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
