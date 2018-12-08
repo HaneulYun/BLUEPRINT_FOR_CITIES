@@ -9,6 +9,8 @@ struct MeshIDData
 	GLuint vertexbufferID{ 0 };
 	GLuint uvbufferID{ 0 };
 	GLuint normalbufferID{ 0 };
+
+	float scale{ 1 };
 };
 
 class MeshManager

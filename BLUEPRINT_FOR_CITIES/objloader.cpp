@@ -42,9 +42,12 @@ MeshIDData MeshManager::loadOBJ(const std::string path)
 				glm::vec3 vertex;
 				fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
 				temp_vertices.push_back(vertex);
-				auto dist = glm::distance(vertex, { 0,0,0 });
-				if (maxDistance < dist)
-					maxDistance = dist;
+				if (maxDistance < glm::abs(vertex.x))
+					maxDistance = glm::abs(vertex.x);
+				if (maxDistance < glm::abs(vertex.y))
+					maxDistance = glm::abs(vertex.y);
+				if (maxDistance < glm::abs(vertex.z))
+					maxDistance = glm::abs(vertex.z);
 			}
 			else if (strcmp(lineHeader, "vt") == 0)
 			{
@@ -104,6 +107,7 @@ MeshIDData MeshManager::loadOBJ(const std::string path)
 			v /= maxDistance;
 
 		meshDatas.insert(std::pair<std::string, MeshIDData>(path, {out_vertices.size(), 0, 0, 0}));
+		meshDatas[path].scale = 1 / maxDistance;
 
 		glGenBuffers(1, &meshDatas[path].vertexbufferID);
 		glBindBuffer(GL_ARRAY_BUFFER, meshDatas[path].vertexbufferID);

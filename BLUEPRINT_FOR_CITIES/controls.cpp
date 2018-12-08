@@ -126,7 +126,7 @@ void computeMatricesFromInputs(){
 
 	// Projection matrix : 45?Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	ProjectionMatrix = glm::perspective(FoV, 16.0f / 9.0f, 0.1f, 100.0f);
-	UIProjectionMatrix = glm::ortho(-800, 800, -450, 450, -1000, 1000);
+	UIProjectionMatrix = glm::ortho(-800.f, 800.f, -450.f, 450.f, -1.f, 1000.f);
 	// Camera matrix
 	ViewMatrix       = glm::lookAt(
 								position,           // Camera is here
