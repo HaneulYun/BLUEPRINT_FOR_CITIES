@@ -33,7 +33,6 @@ public:
 	Faster fasterImage;
 	Pause pauseImage;
 	Sun sun;
-	Node burgerOnMouse;
 	Terrain* terrain;
 	MousePicker* mousePicker;
 

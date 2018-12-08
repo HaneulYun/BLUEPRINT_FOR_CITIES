@@ -44,7 +44,6 @@ void GameScene::initialize()
 	for (auto& v : carAmbo)
 		v.initialize();
 	sun.initialize();
-	burgerOnMouse.initialize();
 	topBar.initialize();
 	lowerBar.initialize();
 	timeBar.initialize();
@@ -56,7 +55,6 @@ void GameScene::initialize()
 void GameScene::update()
 {
 	computeMatricesFromInputs();
-
 	if (!viewMode)
 	{
 		mousePicker->update();
@@ -64,18 +62,14 @@ void GameScene::update()
 		if (v != glm::vec3{})
 		{
 			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
-			if (pathManager.drawState)
-				burgerOnMouse.obj.setPosition(v);
 		}
 	}
-	
 	terrain->update();
 	sun.update();
 	pathManager.update();
 	propManager.update();
 	for (auto& v : carAmbo)
 		v.update();
-	burgerOnMouse.update();
 	topBar.update();
 	lowerBar.update();
 	timeBar.update();
@@ -97,11 +91,6 @@ void GameScene::render()
 	destroyEffect.render();
 	fasterImage.render();
 	pauseImage.render();
-	if (!viewMode)
-	{
-		if (pathManager.drawState)
-			burgerOnMouse.render();
-	}
 }
 
 void GameScene::release()
@@ -112,7 +101,6 @@ void GameScene::release()
 	propManager.release();
 	for (auto& v : carAmbo)
 		v.release();
-	burgerOnMouse.release();
 	topBar.release();
 	lowerBar.release();
 	timeBar.release();

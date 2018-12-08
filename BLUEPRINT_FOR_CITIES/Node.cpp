@@ -14,8 +14,8 @@ Node::~Node()
 
 void Node::initialize()
 {
-	obj.setBMP("resources/T_PolygonCity_Texture_01_A.bmp");
-	obj.setOBJ("resources/SM_Prop_LargeSign_Burger_01_Internal.obj");
+	obj.setBMP("resources/menucolor.bmp");
+	obj.setOBJ("resources/path.obj");
 	obj.initialize();
 	glm::vec3 position{ 0.f, 0, 0.f };
 	position.y = g_gameScene->terrain->getHeightByPosition(position.x, position.z);

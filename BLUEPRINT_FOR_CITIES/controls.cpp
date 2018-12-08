@@ -97,7 +97,7 @@ void computeMatricesFromInputs(){
 		{
 			if (!g_gameScene->viewMode)
 			{
-				if (!g_gameScene->pathManager.drawState)//나무그리기
+				if (!g_gameScene->pathManager.drawState)
 				{
 					g_gameScene->propManager.inputProp(g_gameScene->propManager.chooseProp);
 				}

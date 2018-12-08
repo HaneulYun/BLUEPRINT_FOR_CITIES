@@ -21,8 +21,6 @@ void PathManager::update()
 
 void PathManager::render()
 {
-	if (drawState)
-		builder.render();
 	for (auto& v : node)
 		v->render();
 	for (auto& v : segment)
