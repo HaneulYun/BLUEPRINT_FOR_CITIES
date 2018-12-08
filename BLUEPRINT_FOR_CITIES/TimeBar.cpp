@@ -29,7 +29,7 @@ void TimeBar::update()
 {
 	frame.update();
 	bar.update();
-	bar.setScale(45.f * Object::radian / 2 / PI, 45.f, 1.f);
+	bar.setScale(45.f * g_gameScene->sun.getRadianPosition() / 2 / PI, 45.f, 1.f);
 	if (g_gameScene->viewMode)
 	{
 		frame.setPosition(0, 500.f, 0);
@@ -38,7 +38,7 @@ void TimeBar::update()
 	else
 	{
 		frame.setPosition(-720, 405.f, 0.1f);
-		bar.setPosition(-765 + 45 * Object::radian / 2 / PI, 405.f, 0.1f);
+		bar.setPosition(-765 + 45 * g_gameScene->sun.getRadianPosition() / 2 / PI, 405.f, 0.1f);
 	}
 }
 

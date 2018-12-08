@@ -6,6 +6,7 @@
 
 #include "Object3d.h"
 #include "controls.hpp"
+#include "GameScene.h"
 
 using namespace glm;
 
@@ -42,7 +43,7 @@ void Object3d::render()
 
 	glUseProgram(programID);
 
-	vec3 lightPos = vec3(20 * cos(radian), 20 * sin(radian), 0);
+	vec3 lightPos = g_gameScene->sun.getLightPos();
 	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
 
 	mat4 projectionMatrix = getProjectionMatrix();

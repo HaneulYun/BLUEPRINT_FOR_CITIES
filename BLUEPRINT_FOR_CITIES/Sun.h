@@ -14,5 +14,8 @@ public:
 	void update();
 	void render();
 	void release();
+
+	float getRadianPosition() const;
+	glm::vec3 getLightPos() const;
 };
 

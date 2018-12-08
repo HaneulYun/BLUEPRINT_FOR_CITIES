@@ -6,6 +6,7 @@
 
 #include "ObjectUI.h"
 #include "controls.hpp"
+#include "GameScene.h"
 
 using namespace glm;
 
@@ -43,7 +44,7 @@ void ObjectUI::render()
 
 	glUseProgram(programID);
 
-	vec3 lightPos = vec3(20 * cos(radian), 20 * sin(radian), 0);
+	vec3 lightPos = g_gameScene->sun.getLightPos();
 	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
 	glUniform3f(colorID, color.r, color.g, color.b);
 

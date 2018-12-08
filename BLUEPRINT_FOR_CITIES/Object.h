@@ -27,9 +27,6 @@ public:
 	static MeshManager meshManager;
 
 public:
-	static float radian;//ÇØ °¢µµ
-
-public:
 	Object();
 	virtual ~Object();
 

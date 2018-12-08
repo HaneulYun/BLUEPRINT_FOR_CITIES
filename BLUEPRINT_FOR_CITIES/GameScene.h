@@ -20,13 +20,16 @@ class GameScene : public Scene
 
 	TopBar topBar;
 	LowerBar lowerBar;
-	CarAmbo carAmbo[20];
-	Cloud cloud[10];
 	TimeBar timeBar;
 	DestroyEffect destroyEffect;
+
+	CarAmbo carAmbo[20];
+	Cloud cloud[10];
 	StreetLight streetLight[50];
 
+
 public:
+	Sun sun;
 	Tree treeOnMouse;
 	std::list<Tree*> tree;
 	Terrain* terrain;

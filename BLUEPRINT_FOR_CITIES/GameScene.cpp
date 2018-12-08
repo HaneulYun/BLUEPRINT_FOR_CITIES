@@ -7,8 +7,6 @@
 
 #define PI 3.141592
 
-float Object::radian = 0.f;
-
 GameScene* GameScene::m_instance = nullptr;
 
 GameScene::GameScene()
@@ -41,6 +39,8 @@ void GameScene::initialize()
 
 	mousePicker = new MousePicker(getProjectionMatrix(), terrain);
 
+	sun.initialize();
+
 	tree.resize(100);
 	for (auto& v : tree)
 	{
@@ -62,12 +62,8 @@ void GameScene::initialize()
 
 void GameScene::update()
 {
-	Object::radian += 0.005f;
-	if (Object::radian >= 2 * PI)
-	{
-		Object::radian = 0.0;
-	}
 	computeMatricesFromInputs();
+
 	if (!viewMode)
 	{
 		mousePicker->update();
@@ -80,6 +76,7 @@ void GameScene::update()
 	}
 	
 	terrain->update();
+	sun.update();
 
 	for (auto& v : tree)
 		v->update();
@@ -99,6 +96,7 @@ void GameScene::update()
 void GameScene::render()
 {
 	terrain->render();
+	sun.render();
 	for (auto& v : tree)
 		v->render();
 	for (auto& v : carAmbo)
@@ -118,6 +116,7 @@ void GameScene::render()
 void GameScene::release()
 {
 	terrain->release();
+	sun.release();
 	for (auto& v : tree)
 		v->release();
 	for (auto& v : carAmbo)

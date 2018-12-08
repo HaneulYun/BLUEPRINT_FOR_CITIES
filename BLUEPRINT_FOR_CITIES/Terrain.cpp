@@ -6,6 +6,7 @@
 
 #include "Terrain.h"
 #include "controls.hpp"
+#include "GameScene.h"
 
 using namespace glm;
 
@@ -82,7 +83,7 @@ void Terrain::render()
 {
 	Object::preRender();
 
-	vec3 lightPos = vec3(20 * cos(radian), 20 * sin(radian), 0);
+	vec3 lightPos = g_gameScene->sun.getLightPos();
 	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
 
 	mat4 projectionMatrix = getProjectionMatrix();
