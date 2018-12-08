@@ -7,8 +7,10 @@
 class InputManager
 {
 public:
-	bool m_OldKeyState[348];
-	bool m_CurKeyState[348];
+	bool oldKeyState[348];
+	bool curKeyState[348];
+	bool oldMouseState[2];
+	bool curMouseState[2];
 	double xpos;
 	double ypos;
 	static InputManager* m_instance;

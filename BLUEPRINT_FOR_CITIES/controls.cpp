@@ -91,7 +91,21 @@ void computeMatricesFromInputs(){
 
 	// Up vector
 	glm::vec3 up = glm::cross(right, direction);
-
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
+		if (g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_2] == false)
+		{
+			if (!g_gameScene->viewMode)
+			{
+				g_gameScene->tree.push_back(new Tree());
+				g_gameScene->tree.back()->initialize();
+				g_gameScene->tree.back()->obj.setPosition(g_gameScene->treeOnMouse.obj.getPosition());
+			}
+		}
+		g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_2] = true;
+	}
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_RELEASE) {
+		g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_2] = false;
+	}
 	// Move forward
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
 		position += direction * deltaTime * speed;
@@ -110,16 +124,16 @@ void computeMatricesFromInputs(){
 	}
 	// viewMode
 	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
-		if (g_pInputManager->m_CurKeyState[GLFW_KEY_LEFT_CONTROL] == false)
+		if (g_pInputManager->curKeyState[GLFW_KEY_LEFT_CONTROL] == false)
 		{
 			g_gameScene->viewMode = !g_gameScene->viewMode;
 			if(g_gameScene->viewMode)
 				glfwSetCursorPos(window, size.cx / 2, size.cy / 2);
 		}
-		g_pInputManager->m_CurKeyState[GLFW_KEY_LEFT_CONTROL] = true;
+		g_pInputManager->curKeyState[GLFW_KEY_LEFT_CONTROL] = true;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_RELEASE) {
-		g_pInputManager->m_CurKeyState[GLFW_KEY_LEFT_CONTROL] = false;
+		g_pInputManager->curKeyState[GLFW_KEY_LEFT_CONTROL] = false;
 	}
 
 	float FoV = initialFoV;// -5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.

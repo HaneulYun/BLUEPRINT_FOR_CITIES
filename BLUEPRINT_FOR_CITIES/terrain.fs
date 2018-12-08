@@ -19,7 +19,7 @@ void main(){
 
 	// Light emission properties
 	// You probably want to put them as uniforms
-	vec3 LightColor = vec3(1,1,1);
+	vec3 LightColor = vec3(1,0.5,0.5);
 	float LightPower = 500.0f;
 	
 	// Material properties
@@ -50,7 +50,10 @@ void main(){
 	//  - Looking into the reflection -> 1
 	//  - Looking elsewhere -> < 1
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
-	
+
+	//cosTheta *= cosTheta;
+	LightColor = vec3(1,cosTheta ,cosTheta);
+
 	color = 
 		// Ambient : simulates indirect lighting
 		MaterialAmbientColor +

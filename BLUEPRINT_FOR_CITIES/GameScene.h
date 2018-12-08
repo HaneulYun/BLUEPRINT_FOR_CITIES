@@ -16,8 +16,6 @@ class GameScene : public Scene
 {
 	static GameScene* m_instance;
 
-	Tree tree[100];
-	Tree treeOnMouse;
 	TopBar topBar;
 	LowerBar lowerBar;
 	CarAmbo carAmbo[20];
@@ -26,11 +24,14 @@ class GameScene : public Scene
 	StreetLight streetLight[50];
 
 public:
+	Tree treeOnMouse;
+	std::list<Tree*> tree;
 	Terrain* terrain;
 	MousePicker* mousePicker;
 
 public:
 	bool viewMode{ true };
+	bool destroyMode{ false };
 
 private:
 	GameScene();
