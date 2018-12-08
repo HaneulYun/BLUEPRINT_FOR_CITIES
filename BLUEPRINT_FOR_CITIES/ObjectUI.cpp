@@ -50,7 +50,8 @@ void ObjectUI::render()
 	mat4 projectionMatrix = getUIProjectionMatrix();
 	mat4 viewMatrix = getViewMatrix();
 	mat4 modelMatrix = mat;
-	mat4 mvp = modelMatrix;
+	mat4 mvp = projectionMatrix * modelMatrix;
+	
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);

@@ -58,7 +58,10 @@ void GameScene::initialize()
 void GameScene::update()
 {
 	Object::radian += 0.01f;
-	//Object::radian = (Object::radian + 0.01f) % 2 * PI;
+	if (Object::radian >= 2 * PI)
+	{
+		Object::radian = 0.0;
+	}
 	computeMatricesFromInputs();
 	if (!viewMode)
 	{
@@ -98,13 +101,10 @@ void GameScene::render()
 		v.render();
 	for (auto& v : streetLight)
 		v.render();
-	//topBar.render();
-	//lowerBar.render();
-	//timeBar.render();
+	topBar.render();
+	lowerBar.render();
+	timeBar.render();
 	treeOnMouse.render();
-	//topBar.render();
-	//lowerBar.render();
-	//timeBar.render();
 }
 
 void GameScene::release()
