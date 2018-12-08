@@ -40,7 +40,7 @@ void GameScene::initialize()
 	mousePicker = new MousePicker(getProjectionMatrix(), terrain);
 
 	sun.initialize();
-
+	pathManager.initialize();
 	tree.resize(100);
 	for (auto& v : tree)
 	{
@@ -91,12 +91,9 @@ void GameScene::update()
 	
 	terrain->update();
 	sun.update();
+	pathManager.update();
 
 	for (auto& v : tree)
-		v->update();
-	for (auto& v : node)
-		v->update();
-	for (auto& v : segment)
 		v->update();
 	for (auto& v : carAmbo)
 		v.update();
@@ -116,9 +113,8 @@ void GameScene::render()
 {
 	terrain->render();
 	sun.render();
+	pathManager.render();
 	for (auto& v : tree)
-		v->render();
-	for (auto& v : segment)
 		v->render();
 	for (auto& v : carAmbo)
 		v.render();
@@ -137,8 +133,6 @@ void GameScene::render()
 		else
 		{
 			burgerOnMouse.render();
-			for (auto& v : node)
-				v->render();
 		}
 	}
 }
@@ -147,11 +141,8 @@ void GameScene::release()
 {
 	terrain->release();
 	sun.release();
+	pathManager.release();
 	for (auto& v : tree)
-		v->release();
-	for (auto& v : node)
-		v->release();
-	for (auto& v : segment)
 		v->release();
 	for (auto& v : carAmbo)
 		v.release();

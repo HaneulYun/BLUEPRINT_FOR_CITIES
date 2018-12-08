@@ -138,6 +138,9 @@
     <ClCompile Include="Segment.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="PathManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -226,6 +229,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Segment.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PathManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

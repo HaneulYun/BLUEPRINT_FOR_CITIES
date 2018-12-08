@@ -21,16 +21,16 @@ void Segment::initialize()
 	position.y = g_gameScene->terrain->getHeightByPosition(position.x, position.z);
 	obj.setPosition(position);
 	obj.setScale(0.5f);
+	for (int i = 0; i < 3; ++i)
+	{
+		node[i] = nullptr;
+	}
 }
 
 void Segment::update()
 {
 	obj.update();
-	if (g_gameScene->straight)//Á÷¼±±×¸±²¨ÀÓ ±×·²²¨ÀÓ
-	{
-
-	}
-	else if (!g_gameScene->straight)//°î¼±±×¸±²¨ÀÓ ±×·²²¨ÀÓ
+	if (node[1] == nullptr)//Á÷¼±
 	{
 
 	}

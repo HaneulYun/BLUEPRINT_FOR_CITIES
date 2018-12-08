@@ -91,22 +91,47 @@ void computeMatricesFromInputs(){
 
 	// Up vector
 	glm::vec3 up = glm::cross(right, direction);
+
+
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
 		if (g_pInputManager->curMouseState[GLFW_MOUSE_BUTTON_2] == false)
 		{
 			if (!g_gameScene->viewMode)
 			{
-				if (!g_gameScene->drawPath)
+				if (!g_gameScene->drawPath)//나무그리기
 				{
 					g_gameScene->tree.push_back(new Tree());
 					g_gameScene->tree.back()->initialize();
 					g_gameScene->tree.back()->obj.setPosition(g_gameScene->treeOnMouse.obj.getPosition());
 				}
-				else
+				else//길 그리기
 				{
-					g_gameScene->node.push_back(new Node());
-					g_gameScene->node.back()->initialize();
-					g_gameScene->node.back()->obj.setPosition(g_gameScene->burgerOnMouse.obj.getPosition());
+					//auto& node = g_gameScene->node;
+					//auto& segment = g_gameScene->segment;
+					//
+					//node.push_back(new Node());
+					//node.back()->initialize();
+					//node.back()->obj.setPosition(g_gameScene->burgerOnMouse.obj.getPosition());
+					//
+					//if (segment.size() == 0 || segment.back()->node[2] != nullptr) {
+					//	segment.push_back(new Segment());
+					//	segment.back()->initialize();
+					//	segment.back()->node[0] = node.back();
+					//	segment.back()->node[1] = nullptr;
+					//	segment.back()->node[2] = nullptr;
+					//}
+					//else if (g_gameScene->straight&&segment.back()->node[0] != nullptr)
+					//{
+					//	segment.back()->node[2] = node.back();
+					//}
+					//else if (!g_gameScene->straight && segment.back()->node[1] == nullptr)
+					//{
+					//	segment.back()->node[1] = node.back();
+					//}
+					//else if (!g_gameScene->straight && segment.back()->node[1] != nullptr && segment.back()->node[2] == nullptr)
+					//{
+					//	segment.back()->node[2] = node.back();
+					//}
 				}
 			}
 		}

@@ -157,6 +157,7 @@
     <ClCompile Include="ObjectUI.cpp" />
     <ClCompile Include="objloader.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="PathManager.cpp" />
     <ClCompile Include="picking.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Segment.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="ObjectUI.h" />
     <ClInclude Include="objloader.hpp" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="PathManager.h" />
     <ClInclude Include="picking.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Segment.h" />

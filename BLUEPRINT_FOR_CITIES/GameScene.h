@@ -13,8 +13,8 @@
 #include "StreetLight.h"
 #include "DestroyEffect.h"
 #include "Sun.h"
-#include "Segment.h"
-#include "Node.h"
+
+#include "PathManager.h"
 
 class GameScene : public Scene
 {
@@ -30,12 +30,11 @@ class GameScene : public Scene
 	StreetLight streetLight[50];
 
 public:
+	PathManager pathManager;
 	Sun sun;
 	Tree treeOnMouse;
 	Node burgerOnMouse;
 	std::list<Tree*> tree;
-	std::list<Node*> node;
-	std::list<Segment*> segment;
 	Terrain* terrain;
 	MousePicker* mousePicker;
 

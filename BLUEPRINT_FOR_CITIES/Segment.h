@@ -6,9 +6,7 @@ class Segment
 {
 public:
 	Object3d obj;
-	Node* node1;
-	Node* node2;
-	Node* node3;
+	Node* node[3];
 
 public:
 	Segment();
