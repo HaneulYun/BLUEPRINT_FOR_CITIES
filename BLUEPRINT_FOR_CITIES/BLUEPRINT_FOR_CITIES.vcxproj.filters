@@ -162,6 +162,15 @@
     <ClCompile Include="PropManager.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
     </ClCompile>
+    <ClCompile Include="Cone.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
+    </ClCompile>
+    <ClCompile Include="Hydrant.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
+    </ClCompile>
+    <ClCompile Include="MailBox.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -258,6 +267,15 @@
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClInclude>
     <ClInclude Include="PropManager.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
+    </ClInclude>
+    <ClInclude Include="Cone.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
+    </ClInclude>
+    <ClInclude Include="Hydrant.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
+    </ClInclude>
+    <ClInclude Include="MailBox.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
     </ClInclude>
   </ItemGroup>

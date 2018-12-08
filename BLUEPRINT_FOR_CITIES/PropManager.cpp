@@ -31,6 +31,27 @@ void PropManager::initialize()
 		v = new Cloud();
 		v->initialize();
 	}
+
+	mailbox.resize(10);
+	for (auto& v : mailbox)
+	{
+		v = new MailBox();
+		v->initialize();
+	}
+
+	hydrant.resize(10);
+	for (auto& v : hydrant)
+	{
+		v = new Hydrant();
+		v->initialize();
+	}
+
+	cone.resize(10);
+	for (auto& v : cone)
+	{
+		v = new Cone();
+		v->initialize();
+	}
 }
 
 void PropManager::update()
@@ -40,6 +61,12 @@ void PropManager::update()
 	for (auto& v : streetLight)
 		v->update();
 	for (auto& v : cloud)
+		v->update();
+	for (auto& v : mailbox)
+		v->update();
+	for (auto& v : hydrant)
+		v->update();
+	for (auto& v : cone)
 		v->update();
 }
 
@@ -51,6 +78,12 @@ void PropManager::render()
 		v->render();
 	for (auto& v : cloud)
 		v->render();
+	for (auto& v : mailbox)
+		v->render();
+	for (auto& v : hydrant)
+		v->render();
+	for (auto& v : cone)
+		v->render();
 }
 
 void PropManager::release()
@@ -60,6 +93,12 @@ void PropManager::release()
 	for (auto& v : streetLight)
 		v->release();
 	for (auto& v : cloud)
+		v->release();
+	for (auto& v : mailbox)
+		v->release();
+	for (auto& v : hydrant)
+		v->release();
+	for (auto& v : cone)
 		v->release();
 }
 
@@ -87,7 +126,7 @@ void PropManager::inputProp(Choose prop)
 		glm::vec3 v = g_gameScene->mousePicker->currentTerrainPoint;
 		if (v != glm::vec3{})
 		{
-			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z) + 4.f;
 		}
 		cloud.back()->obj.setPosition(v);
 	}
@@ -101,5 +140,38 @@ void PropManager::inputProp(Choose prop)
 			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
 		}
 		streetLight.back()->obj.setPosition(v);
+	}
+	else if (prop == MAILBOX)
+	{
+		mailbox.push_back(new MailBox());
+		mailbox.back()->initialize();
+		glm::vec3 v = g_gameScene->mousePicker->currentTerrainPoint;
+		if (v != glm::vec3{})
+		{
+			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+		}
+		mailbox.back()->obj.setPosition(v);
+	}
+	else if (prop == HYDRANT)
+	{
+		hydrant.push_back(new Hydrant());
+		hydrant.back()->initialize();
+		glm::vec3 v = g_gameScene->mousePicker->currentTerrainPoint;
+		if (v != glm::vec3{})
+		{
+			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+		}
+		hydrant.back()->obj.setPosition(v);
+	}
+	else if (prop == CONE)
+	{
+		cone.push_back(new Cone());
+		cone.back()->initialize();
+		glm::vec3 v = g_gameScene->mousePicker->currentTerrainPoint;
+		if (v != glm::vec3{})
+		{
+			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+		}
+		cone.back()->obj.setPosition(v);
 	}
 }

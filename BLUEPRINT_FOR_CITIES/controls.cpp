@@ -226,6 +226,18 @@ void computeMatricesFromInputs(){
 	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
 		g_gameScene->propManager.chooseProp = STREETLIGHT;
 	}
+	// mailBox
+	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
+		g_gameScene->propManager.chooseProp = MAILBOX;
+	}
+	// hydrant
+	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS) {
+		g_gameScene->propManager.chooseProp = HYDRANT;
+	}
+	// cone
+	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS) {
+		g_gameScene->propManager.chooseProp = CONE;
+	}
 
 	float FoV = initialFoV;// -5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
