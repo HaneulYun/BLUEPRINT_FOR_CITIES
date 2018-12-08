@@ -160,6 +160,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="PathManager.cpp" />
     <ClCompile Include="picking.cpp" />
+    <ClCompile Include="PropManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Segment.cpp" />
     <ClCompile Include="shader.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="PathManager.h" />
     <ClInclude Include="picking.h" />
+    <ClInclude Include="PropManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Segment.h" />
     <ClInclude Include="shader.hpp" />

@@ -4,18 +4,16 @@
 #include "Terrain.h"
 #include "picking.h"
 
-#include "Tree.h"
 #include "TopBar.h"
 #include "LowerBar.h"
 #include "CarAmbo.h"
-#include "Cloud.h"
 #include "TimeBar.h"
-#include "StreetLight.h"
 #include "DestroyEffect.h"
 #include "Sun.h"
 #include "Faster.h"
 
 #include "PathManager.h"
+#include "PropManager.h"
 
 class GameScene : public Scene
 {
@@ -27,16 +25,13 @@ class GameScene : public Scene
 	DestroyEffect destroyEffect;
 
 	CarAmbo carAmbo[20];
-	Cloud cloud[10];
-	StreetLight streetLight[50];
 
 public:
 	PathManager pathManager;
+	PropManager propManager;
 	Faster fasterImage;
 	Sun sun;
-	Tree treeOnMouse;
 	Node burgerOnMouse;
-	std::list<Tree*> tree;
 	Terrain* terrain;
 	MousePicker* mousePicker;
 

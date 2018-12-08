@@ -3,9 +3,9 @@
 
 class StreetLight
 {
-	Object3d obj;
 
 public:
+	Object3d obj;
 	StreetLight();
 	~StreetLight();
 	void initialize();

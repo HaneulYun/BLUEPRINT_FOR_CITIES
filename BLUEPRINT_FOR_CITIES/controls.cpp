@@ -99,9 +99,7 @@ void computeMatricesFromInputs(){
 			{
 				if (!g_gameScene->pathManager.drawState)//나무그리기
 				{
-					g_gameScene->tree.push_back(new Tree());
-					g_gameScene->tree.back()->initialize();
-					g_gameScene->tree.back()->obj.setPosition(g_gameScene->treeOnMouse.obj.getPosition());
+					g_gameScene->propManager.inputProp(g_gameScene->propManager.chooseProp);
 				}
 				else
 				{
@@ -109,7 +107,9 @@ void computeMatricesFromInputs(){
 					node->initialize();
 					glm::vec3 v = g_gameScene->mousePicker->currentTerrainPoint;
 					if (v != glm::vec3{})
+					{
 						v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+					}
 					node->obj.setPosition(v);
 					g_gameScene->pathManager.inputNode(node);
 				}
@@ -213,6 +213,18 @@ void computeMatricesFromInputs(){
 	}
 	else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE) {
 		g_pInputManager->curKeyState[GLFW_KEY_F] = false;
+	}
+	// tree
+	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+		g_gameScene->propManager.chooseProp = TREE;
+	}
+	// cloud
+	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
+		g_gameScene->propManager.chooseProp = CLOUD;
+	}
+	// streetlight
+	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
+		g_gameScene->propManager.chooseProp = STREETLIGHT;
 	}
 
 	float FoV = initialFoV;// -5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.

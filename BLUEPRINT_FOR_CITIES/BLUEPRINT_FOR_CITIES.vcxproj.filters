@@ -159,6 +159,9 @@
     <ClCompile Include="Faster.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClCompile>
+    <ClCompile Include="PropManager.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -253,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="Faster.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PropManager.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\01_PROP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

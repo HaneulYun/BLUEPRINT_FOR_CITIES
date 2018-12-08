@@ -39,21 +39,11 @@ void GameScene::initialize()
 
 	mousePicker = new MousePicker(getProjectionMatrix(), terrain);
 
-	sun.initialize();
 	pathManager.initialize();
-	tree.resize(100);
-	for (auto& v : tree)
-	{
-		v = new Tree();
-		v->initialize();
-	}
+	propManager.initialize();
 	for (auto& v : carAmbo)
 		v.initialize();
-	for (auto& v : cloud)
-		v.initialize();
-	for (auto& v : streetLight)
-		v.initialize();
-	treeOnMouse.initialize();
+	sun.initialize();
 	burgerOnMouse.initialize();
 	topBar.initialize();
 	lowerBar.initialize();
@@ -73,9 +63,7 @@ void GameScene::update()
 		if (v != glm::vec3{})
 		{
 			v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
-			if (!pathManager.drawState)
-				treeOnMouse.obj.setPosition(v);
-			else
+			if (pathManager.drawState)
 				burgerOnMouse.obj.setPosition(v);
 		}
 	}
@@ -83,16 +71,9 @@ void GameScene::update()
 	terrain->update();
 	sun.update();
 	pathManager.update();
-
-	for (auto& v : tree)
-		v->update();
+	propManager.update();
 	for (auto& v : carAmbo)
 		v.update();
-	for (auto& v : cloud)
-		v.update();
-	for (auto& v : streetLight)
-		v.update();
-	treeOnMouse.update();
 	burgerOnMouse.update();
 	topBar.update();
 	lowerBar.update();
@@ -106,14 +87,8 @@ void GameScene::render()
 	terrain->render();
 	sun.render();
 	pathManager.render();
-	for (auto& v : tree)
-		v->render();
+	propManager.render();
 	for (auto& v : carAmbo)
-		v.render();
-	for (auto& v : cloud)
-		v.render();
-	for (auto& v : streetLight)
-		v.render();
 	topBar.render();
 	lowerBar.render();
 	timeBar.render();
@@ -121,12 +96,8 @@ void GameScene::render()
 	fasterImage.render();
 	if (!viewMode)
 	{
-		if (!pathManager.drawState)
-			treeOnMouse.render();
-		else
-		{
+		if (pathManager.drawState)
 			burgerOnMouse.render();
-		}
 	}
 }
 
@@ -135,15 +106,9 @@ void GameScene::release()
 	terrain->release();
 	sun.release();
 	pathManager.release();
-	for (auto& v : tree)
-		v->release();
+	propManager.release();
 	for (auto& v : carAmbo)
 		v.release();
-	for (auto& v : cloud)
-		v.release();
-	for (auto& v : streetLight)
-		v.release();
-	treeOnMouse.release();
 	burgerOnMouse.release();
 	topBar.release();
 	lowerBar.release();

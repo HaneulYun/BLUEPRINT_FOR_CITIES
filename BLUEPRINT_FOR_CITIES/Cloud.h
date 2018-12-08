@@ -3,10 +3,10 @@
 
 class Cloud
 {
-	Object3d obj;
 	float oriScale;
 	float elapsedTime;
 public:
+	Object3d obj;
 	Cloud();
 	~Cloud();
 	void initialize();
