@@ -15,13 +15,13 @@ void TimeBar::initialize()
 	frame.setBMP("resources/menucolor.bmp");
 	frame.setOBJ("resources/dayframe.obj");
 	frame.initialize();
-	frame.setColor(222.f / 255, 215.f / 255, 71.f / 255);
+	frame.setColor(255.f / 255, 137.f / 255, 81.f / 255);
 	frame.setScale(50.f, 50.f, 1.f);
 
 	bar.setBMP("resources/menucolor.bmp");
 	bar.setOBJ("resources/daybar.obj");
 	bar.initialize();
-	bar.setColor(222.f / 255, 215.f / 255, 71.f / 255);
+	bar.setColor(255.f / 255, 137.f / 255, 81.f / 255);
 	bar.setScale(45.f, 45.f, 1.f);
 }
 

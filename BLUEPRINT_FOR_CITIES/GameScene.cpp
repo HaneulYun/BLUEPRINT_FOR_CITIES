@@ -61,7 +61,6 @@ void GameScene::update()
 	if (Object::radian >= 2 * PI)
 	{
 		Object::radian = 0.0;
-		printf("*\n");
 	}
 	computeMatricesFromInputs();
 	if (!viewMode)
