@@ -13,4 +13,3 @@ public:
 	void render();
 	void release();
 };
-

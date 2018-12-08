@@ -1,5 +1,6 @@
 #include "DestroyEffect.h"
 #include "GameScene.h"
+#define PI 3.141592
 
 DestroyEffect::DestroyEffect()
 {
@@ -14,13 +15,13 @@ void DestroyEffect::initialize()
 	frame.setBMP("resources/menucolor.bmp");
 	frame.setOBJ("resources/destroyframe.obj");
 	frame.initialize();
-	frame.setColor(234.f / 255, 223.f / 255, 94.f / 255);
-	frame.setScale(100.f, 100.f, 1.f);
+	frame.setColor(231.f / 25, 205.f / 255, 103.f / 255);
+	frame.setScale(800.f, 800.f, 1.f);
 
 	ppip.setBMP("resources/menucolor.bmp");
 	ppip.setOBJ("resources/destroyppip.obj");
 	ppip.initialize();
-	ppip.setColor(64.f / 255, 60.f / 255, 9.f / 255);
+	ppip.setColor(61.f / 255, 50.f / 255, 10.f / 255);
 	ppip.setScale(800.f, 800.f, 1.f);
 }
 
@@ -28,15 +29,15 @@ void DestroyEffect::update()
 {
 	frame.update();
 	ppip.update();
-	if (g_gameScene->viewMode)
+	if (!g_gameScene->destroyMode)
 	{
-		frame.setPosition(0, -900, 0);
-		ppip.setPosition(0, -900, 0);
+		frame.setPosition(0, 1000.f, 0);
+		ppip.setPosition(0, 1000.f, 0);
 	}
 	else
 	{
-		frame.setPosition(0, 0, 0.2f);
-		ppip.setPosition(0, 0, 0.3f);
+		frame.setPosition(0, 0.f, 0.2f);
+		ppip.setPosition(0, 0.f, 0.3f);
 	}
 }
 
