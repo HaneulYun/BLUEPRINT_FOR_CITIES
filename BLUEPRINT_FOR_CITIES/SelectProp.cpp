@@ -35,7 +35,7 @@ void SelectProp::update()
 
 void SelectProp::render()
 {
-	mainobj.render();
+	if (!select) mainobj.render();
 }
 
 void SelectProp::release()
