@@ -66,7 +66,7 @@ void PathManager::inputNode(Node* _node)
 			auto n = g_gameScene->terrain->getNormalByPosition(v.x, v.z);
 			n = glm::normalize(n);
 			node.back()->obj.setAxisRotation(glm::cross(glm::vec3{ 0, 1, 0 }, n));
-			node.back()->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n)));
+			node.back()->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n))*2);
 		}
 		if (!drawMode)
 		{
@@ -84,7 +84,7 @@ void PathManager::inputNode(Node* _node)
 				auto n = g_gameScene->terrain->getNormalByPosition(v.x, v.z);
 				n = glm::normalize(n);
 				newNode->obj.setAxisRotation(glm::cross(glm::vec3{ 0, 1, 0 }, n));
-				newNode->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n)));
+				newNode->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n))*2);
 				newNode->obj.setPosition(v);
 				node.push_back(newNode);
 			}
@@ -109,7 +109,7 @@ void PathManager::inputNode(Node* _node)
 				auto n = g_gameScene->terrain->getNormalByPosition(v.x, v.z);
 				n = glm::normalize(n);
 				newNode->obj.setAxisRotation(glm::cross(glm::vec3{ 0, 1, 0 }, n));
-				newNode->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n)));
+				newNode->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n))*2);
 				newNode->obj.setPosition(v);
 				node.push_back(newNode);
 			}
@@ -120,7 +120,7 @@ void PathManager::inputNode(Node* _node)
 			auto n = g_gameScene->terrain->getNormalByPosition(v.x, v.z);
 			n = glm::normalize(n);
 			node.back()->obj.setAxisRotation(glm::cross(glm::vec3{ 0, 1, 0 }, n));
-			node.back()->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n)));
+			node.back()->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n))*2);
 		}
 
 		builder.initialize();
