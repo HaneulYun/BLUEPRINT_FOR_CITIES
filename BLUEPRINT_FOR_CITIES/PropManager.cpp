@@ -102,6 +102,22 @@ void PropManager::release()
 		v->release();
 }
 
+void PropManager::extractDepthmap()
+{
+	for (auto& v : tree)
+		v->extractDepthmap();
+	for (auto& v : streetLight)
+		v->extractDepthmap();
+	for (auto& v : cloud)
+		v->extractDepthmap();
+	for (auto& v : mailbox)
+		v->extractDepthmap();
+	for (auto& v : hydrant)
+		v->extractDepthmap();
+	for (auto& v : cone)
+		v->extractDepthmap();
+}
+
 void PropManager::inputInitialize()
 {
 }

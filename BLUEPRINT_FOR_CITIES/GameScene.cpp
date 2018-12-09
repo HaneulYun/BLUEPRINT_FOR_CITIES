@@ -85,39 +85,22 @@ void GameScene::render()
 	texture.bindTexture();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	pathManager.extractDepthmap();
+	propManager.extractDepthmap();
 	terrain->extractDepthmap();
-	for (auto& v : tree)
-		v->extractDepthmap();
-	for (auto& v : carAmbo)
-		v.extractDepthmap();
-	for (auto& v : cloud)
-		v.extractDepthmap();
-	for (auto& v : streetLight)
-		v.extractDepthmap();
 
 	texture.freeTexture();
 	sun.render();
 	pathManager.render();
 	propManager.render();
 	terrain->render();
-	for (auto& v : tree)
-		v->render();
 	for (auto& v : carAmbo)
+		v.render();
 	topBar.render();
 	lowerBar.render();
 	timeBar.render();
 	destroyEffect.render();
 	fasterImage.render();
 	pauseImage.render();
-	if (!viewMode)
-	{
-		if (!pathManager.drawState)
-			treeOnMouse.render();
-		else
-		{
-			burgerOnMouse.render();
-		}
-	}
 
 	glViewport(0, 0, 1600, 900);
 	//texture.render();

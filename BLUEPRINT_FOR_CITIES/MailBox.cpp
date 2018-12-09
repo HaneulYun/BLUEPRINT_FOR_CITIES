@@ -41,3 +41,8 @@ void MailBox::release()
 {
 	obj.release();
 }
+
+void MailBox::extractDepthmap()
+{
+	obj.extractDepthmap();
+}

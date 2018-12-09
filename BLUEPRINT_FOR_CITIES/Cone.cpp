@@ -41,3 +41,8 @@ void Cone::release()
 {
 	obj.release();
 }
+
+void Cone::extractDepthmap()
+{
+	obj.extractDepthmap();
+}

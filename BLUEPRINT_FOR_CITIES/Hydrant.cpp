@@ -41,3 +41,8 @@ void Hydrant::release()
 {
 	obj.release();
 }
+
+void Hydrant::extractDepthmap()
+{
+	obj.extractDepthmap();
+}

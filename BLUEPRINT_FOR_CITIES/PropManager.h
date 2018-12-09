@@ -28,6 +28,7 @@ public:
 	void update();
 	void render();
 	void release();
+	void extractDepthmap();
 
 	void inputInitialize();
 	void inputProp(Choose prop);
