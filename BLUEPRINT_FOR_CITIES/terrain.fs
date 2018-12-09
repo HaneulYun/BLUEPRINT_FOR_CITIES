@@ -47,15 +47,15 @@ void main(){
 
 	// Light emission properties
 	vec3 LightColor = vec3(1,1,1);
-	float LightPower = 1.0f;
+	float LightPower = 500.0f;
 	
 	// Material properties
 	vec3 MaterialDiffuseColor = vec3(89.0/255,90.0/255,44.0/255);
-	vec3 MaterialAmbientColor = vec3(0.1,0.1,0.1) * MaterialDiffuseColor;
-	vec3 MaterialSpecularColor = vec3(0.3,0.3,0.3);
+	vec3 MaterialAmbientColor = vec3(0.2,0.2,0.2) * MaterialDiffuseColor;
+	vec3 MaterialSpecularColor = vec3(0.05,0.05,0.05);
 
 	// Distance to the light
-	//float distance = length( LightPosition_worldspace - Position_worldspace );
+	float distance = length( LightPosition_worldspace - Position_worldspace );
 
 	// Normal of the computed fragment, in camera space
 	vec3 n = normalize( Normal_cameraspace );
@@ -78,11 +78,15 @@ void main(){
 	//  - Looking elsewhere -> < 1
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
 	
+	float visibility=1.0;
 
 	// Fixed bias, or...
 	float bias = 0.00005*tan(acos(cosTheta)); // cosTheta is dot( n,l ), clamped between 0 and 1
-	float visibility=1.0;
 	bias = clamp(bias, 0,0.01);
+	//
+	//if ( texture( shadowMap, ShadowCoord.xy ).z  <  ShadowCoord.z-bias){
+	//	visibility = 0.5;
+	//}
 
 	// ...variable bias
 
@@ -107,13 +111,13 @@ void main(){
 	// For spot lights, use either one of these lines instead.
 	// if ( texture( shadowMap, (ShadowCoord.xy/ShadowCoord.w) ).z  <  (ShadowCoord.z-bias)/ShadowCoord.w )
 	// if ( textureProj( shadowMap, ShadowCoord.xyw ).z  <  (ShadowCoord.z-bias)/ShadowCoord.w )
-	
+	LightColor = vec3(1,cosTheta ,cosTheta);
+
 	color = 
 		// Ambient : simulates indirect lighting
 		MaterialAmbientColor +
 		// Diffuse : "color" of the object
-		visibility * MaterialDiffuseColor * LightColor * LightPower * cosTheta+
+		visibility * MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) +
 		// Specular : reflective highlight, like a mirror
-		visibility * MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5);
-
+		visibility * MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,10) / (distance*distance) ;
 }
