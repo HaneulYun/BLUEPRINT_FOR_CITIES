@@ -29,15 +29,15 @@ void DestroyEffect::update()
 {
 	frame.update();
 	ppip.update();
-	if (!g_gameScene->destroyMode)
-	{
-		frame.setPosition(0, 1000.f, 0);
-		ppip.setPosition(0, 1000.f, 0);
-	}
-	else
+	if (g_gameScene->destroyMode)
 	{
 		frame.setPosition(0, 0.f, 0.2f);
 		ppip.setPosition(0, 0.f, 0.3f);
+	}
+	else
+	{
+		frame.setPosition(0, 1000.f, 0);
+		ppip.setPosition(0, 1000.f, 0);
 	}
 }
 

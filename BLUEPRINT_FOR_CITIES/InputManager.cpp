@@ -5,6 +5,7 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 
 #include <iostream>
 #include "InputManager.h"
+#include "GameScene.h"
 
 InputManager* InputManager::m_instance = nullptr;
 
