@@ -13,6 +13,9 @@ protected:
 	glm::vec3 scale{ 1 };
 	glm::vec3 color{ 1 };
 
+	glm::vec3 axisRotation{};
+	float rotationAxis{};
+
 	glm::mat4 mat{ 1 };
 	glm::vec4 transformedVector{ 0 };
 
@@ -39,6 +42,13 @@ public:
 
 	void addChild(Object* _child);
 	void deleteChild(Object* _child);
+
+	// axis-
+	void setAxisRotation(float _x, float _y, float _z);
+	void setAxisRotation(const glm::vec3 _axis);
+	glm::vec3 getAxisRotation() const;
+	void setRotationAxis(float _r);
+	float getRotationAxis() const;
 
 	void setPosition(float _x, float _y, float _z);
 	void setPosition(const glm::vec3 _position);

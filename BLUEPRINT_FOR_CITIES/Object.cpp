@@ -31,6 +31,8 @@ void Object::preRender()
 	glm::mat4 matTranslation = glm::translate(glm::mat4(), position);
 	glm::mat4 matRotation = glm::rotate(rotation.y, glm::vec3{ 0, 1, 0 }) *
 		glm::rotate(rotation.z, glm::vec3{ 0, 0, 1 }) * glm::rotate(rotation.x, glm::vec3{ 1, 0, 0 });
+	if (rotationAxis != 0)
+		matRotation *= glm::rotate(rotationAxis, axisRotation);
 	glm::mat4 matScale = glm::scale(scale);
 
 	mat = matTranslation * matRotation * matScale;
@@ -62,6 +64,27 @@ void Object::addChild(Object* _child)
 void Object::deleteChild(Object* _child)
 {
 	child.remove(_child);
+}
+
+void Object::setAxisRotation(float _x, float _y, float _z)
+{
+	axisRotation = { _x, _y, _z };
+}
+void Object::setAxisRotation(const glm::vec3 _axis)
+{
+	axisRotation = _axis;
+}
+glm::vec3 Object::getAxisRotation() const
+{
+	return axisRotation;
+}
+void Object::setRotationAxis(float _r)
+{
+	rotationAxis = _r;
+}
+float Object::getRotationAxis() const
+{
+	return rotationAxis;
 }
 
 void Object::setVisible(const bool _b)

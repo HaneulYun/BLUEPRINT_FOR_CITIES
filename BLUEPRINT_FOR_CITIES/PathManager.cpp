@@ -61,6 +61,13 @@ void PathManager::inputNode(Node* _node)
 		int stack = 1;
 		float offset = 0.25f;
 		node.push_back(builder.node[0]);
+		{
+			auto v = builder.node[0]->getPosition();
+			auto n = g_gameScene->terrain->getNormalByPosition(v.x, v.z);
+			n = glm::normalize(n);
+			node.back()->obj.setAxisRotation(glm::cross(glm::vec3{ 0, 1, 0 }, n));
+			node.back()->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n)));
+		}
 		if (!drawMode)
 		{
 			float distance = glm::distance(builder.node[2]->getPosition() - builder.node[0]->getPosition(), {});
@@ -74,6 +81,10 @@ void PathManager::inputNode(Node* _node)
 				newNode->initialize();
 				glm::vec3 v = (1 - t) * builder.node[0]->getPosition() + t * builder.node[2]->getPosition();
 				v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+				auto n = g_gameScene->terrain->getNormalByPosition(v.x, v.z);
+				n = glm::normalize(n);
+				newNode->obj.setAxisRotation(glm::cross(glm::vec3{ 0, 1, 0 }, n));
+				newNode->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n)));
 				newNode->obj.setPosition(v);
 				node.push_back(newNode);
 			}
@@ -95,11 +106,22 @@ void PathManager::inputNode(Node* _node)
 				glm::vec3 v = (1-t) * ((1 - t) * builder.node[0]->getPosition() + t * builder.node[1]->getPosition())
 					+ t * ((1 - t) * builder.node[1]->getPosition() + t * builder.node[2]->getPosition());
 				v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+				auto n = g_gameScene->terrain->getNormalByPosition(v.x, v.z);
+				n = glm::normalize(n);
+				newNode->obj.setAxisRotation(glm::cross(glm::vec3{ 0, 1, 0 }, n));
+				newNode->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n)));
 				newNode->obj.setPosition(v);
 				node.push_back(newNode);
 			}
 		}
 		node.push_back(builder.node[2]);
+		{
+			auto v = builder.node[2]->getPosition();
+			auto n = g_gameScene->terrain->getNormalByPosition(v.x, v.z);
+			n = glm::normalize(n);
+			node.back()->obj.setAxisRotation(glm::cross(glm::vec3{ 0, 1, 0 }, n));
+			node.back()->obj.setRotationAxis(acosf(glm::dot(glm::vec3{ 0, 1, 0 }, n)));
+		}
 
 		builder.initialize();
 		builder.node[0] = _node;

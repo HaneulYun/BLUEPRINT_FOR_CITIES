@@ -380,6 +380,25 @@ float Terrain::getHeightByPosition(float x, float z) const
 		ratioLength * ((1 - ratioWidth) * getHeight(x_terrain, over_z) + ratioWidth * getHeight(over_x, over_z));
 }
 
+vec3 Terrain::getNormal(int x, int z) const
+{
+	return normals[z][x];
+}
+
+vec3 Terrain::getNormalByPosition(float x, float z) const
+{
+	float x_terrain = (x + terrainWidth / 2) / terrainWidth * width;
+	float z_terrain = (z + terrainLength / 2) / terrainLength * length;
+	float ratioWidth = x_terrain - int(x_terrain);
+	float ratioLength = z_terrain - int(z_terrain);
+	int over_x = x_terrain + 1 < width ? x_terrain + 1 : x_terrain;
+	int over_z = z_terrain + 1 < length ? z_terrain + 1 : z_terrain;
+
+	return (1 - ratioLength) * ((1 - ratioWidth) * getNormal(x_terrain, z_terrain) + ratioWidth * getNormal(over_x, z_terrain)) +
+		ratioLength * ((1 - ratioWidth) * getNormal(x_terrain, over_z) + ratioWidth * getNormal(over_x, over_z));
+
+}
+
 bool Terrain::existInner(float x, float z) const
 {
 	float x_terrain = (x + terrainWidth / 2) / terrainWidth * width;
@@ -389,9 +408,4 @@ bool Terrain::existInner(float x, float z) const
 	if (z_terrain > length - 1 || z_terrain < 0)
 		return false;
 	return true;
-}
-
-glm::vec3 Terrain::getNormal(int x, int z) const
-{
-	return normals[z][x];
 }
