@@ -15,6 +15,11 @@ public:
 	double ypos;
 	static InputManager* m_instance;
 
+	double tx;
+	double ty;
+
+	bool cursorOnBar{ false };
+
 public:
 	InputManager();
 	~InputManager();

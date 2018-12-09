@@ -186,6 +186,9 @@
     <ClCompile Include="SelectGrid.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -306,6 +309,9 @@
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClInclude>
     <ClInclude Include="SelectGrid.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBox.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

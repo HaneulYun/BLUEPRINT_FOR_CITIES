@@ -97,21 +97,39 @@ void computeMatricesFromInputs(){
 		{
 			if (!g_gameScene->viewMode)
 			{
-				if (!g_gameScene->pathManager.drawState)
+				if (!g_pInputManager->cursorOnBar)
 				{
-					g_gameScene->propManager.inputProp(g_gameScene->propManager.chooseProp);
+					if (g_gameScene->propManager.drawPropState == true)
+					{
+						g_gameScene->propManager.inputProp(g_gameScene->propManager.chooseProp);
+					}
+					else if (g_gameScene->pathManager.drawRoadState == true)
+					{
+						Node* node = new Node();
+						node->initialize();
+						glm::vec3 v = g_gameScene->mousePicker->currentTerrainPoint;
+						if (v != glm::vec3{})
+						{
+							v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+						}
+						node->obj.setPosition(v);
+						g_gameScene->pathManager.inputNode(node);
+					}
 				}
 				else
 				{
-					Node* node = new Node();
-					node->initialize();
-					glm::vec3 v = g_gameScene->mousePicker->currentTerrainPoint;
-					if (v != glm::vec3{})
+					for (int i = 0; i < 7; ++i)
 					{
-						v.y = g_gameScene->terrain->getHeightByPosition(v.x, v.z);
+
+						if (g_gameScene->lowerBar.checkBox[i].check == true)
+						{
+							if (g_gameScene->lowerBar.getChoose == i)
+							{
+								g_gameScene->lowerBar.goNextLevel();
+							}
+							else g_gameScene->lowerBar.getChoose = i;
+						}
 					}
-					node->obj.setPosition(v);
-					g_gameScene->pathManager.inputNode(node);
 				}
 			}
 		}
@@ -125,7 +143,7 @@ void computeMatricesFromInputs(){
 		{
 			if (!g_gameScene->viewMode)
 			{
-				if (g_gameScene->pathManager.drawState)
+				if (g_gameScene->pathManager.drawRoadState)
 				{
 					g_gameScene->pathManager.inputInitialize();
 				}
@@ -177,28 +195,6 @@ void computeMatricesFromInputs(){
 	else if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE) {
 		g_pInputManager->curKeyState[GLFW_KEY_B] = false;
 	}
-	// drawPath
-	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
-		if (g_pInputManager->curKeyState[GLFW_KEY_R] == false && !g_gameScene->viewMode)
-		{
-			g_gameScene->pathManager.drawState = !g_gameScene->pathManager.drawState;
-		}
-		g_pInputManager->curKeyState[GLFW_KEY_R] = true;
-	}
-	else if (glfwGetKey(window, GLFW_KEY_R) == GLFW_RELEASE) {
-		g_pInputManager->curKeyState[GLFW_KEY_R] = false;
-	}
-	// straight
-	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
-		if (g_pInputManager->curKeyState[GLFW_KEY_O] == false && !g_gameScene->viewMode && g_gameScene->pathManager.drawState)
-		{
-			g_gameScene->pathManager.drawMode = !g_gameScene->pathManager.drawMode;
-		}
-		g_pInputManager->curKeyState[GLFW_KEY_O] = true;
-	}
-	else if (glfwGetKey(window, GLFW_KEY_O) == GLFW_RELEASE) {
-		g_pInputManager->curKeyState[GLFW_KEY_O] = false;
-	}
 	// faster
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
 		if (g_pInputManager->curKeyState[GLFW_KEY_F] == false)
@@ -225,29 +221,20 @@ void computeMatricesFromInputs(){
 	else if (glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE) {
 		g_pInputManager->curKeyState[GLFW_KEY_P] = false;
 	}
-	// tree
-	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
-		g_gameScene->propManager.chooseProp = TREE;
+	// backspace
+	if (glfwGetKey(window, GLFW_KEY_BACKSPACE) == GLFW_PRESS) {
+		if (g_pInputManager->curKeyState[GLFW_KEY_BACKSPACE] == false)
+		{
+			g_gameScene->selectGrid.select = false;
+			g_gameScene->selectProp.select = false;
+			g_gameScene->selectRoad.select = false;
+			g_gameScene->pathManager.drawRoadState = false;
+			g_gameScene->propManager.drawPropState = false;
+		}
+		g_pInputManager->curKeyState[GLFW_KEY_BACKSPACE] = true;
 	}
-	// cloud
-	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
-		g_gameScene->propManager.chooseProp = CLOUD;
-	}
-	// streetlight
-	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
-		g_gameScene->propManager.chooseProp = STREETLIGHT;
-	}
-	// mailBox
-	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
-		g_gameScene->propManager.chooseProp = MAILBOX;
-	}
-	// hydrant
-	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS) {
-		g_gameScene->propManager.chooseProp = HYDRANT;
-	}
-	// cone
-	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS) {
-		g_gameScene->propManager.chooseProp = CONE;
+	else if (glfwGetKey(window, GLFW_KEY_BACKSPACE) == GLFW_RELEASE) {
+		g_pInputManager->curKeyState[GLFW_KEY_BACKSPACE] = false;
 	}
 
 	float FoV = initialFoV;// -5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.

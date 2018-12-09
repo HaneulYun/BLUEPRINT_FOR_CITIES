@@ -5,6 +5,7 @@ extern GLFWwindow* window; // The "extern" keyword here is to access the variabl
 
 #include <iostream>
 #include "InputManager.h"
+#include "GameScene.h"
 
 InputManager* InputManager::m_instance = nullptr;
 
@@ -53,4 +54,22 @@ void InputManager::update()
 	memcpy(oldKeyState, curKeyState, 348);
 	memcpy(oldMouseState, curMouseState, 2);
 	glfwGetCursorPos(window, &xpos, &ypos);
+	if (g_gameScene->viewMode == false)
+	{
+		tx = xpos - 800;
+		ty = 900 - ypos - 450;
+		if (ty < -300) cursorOnBar = true;
+		else cursorOnBar = false;
+		for (auto& v : g_gameScene->lowerBar.checkBox)
+		{
+			if ((pow(v.x - tx, 2) + pow(v.y - ty, 2)) < 10000)
+			{
+				v.check = true;
+			}
+			else
+			{
+				v.check = false;
+			}
+		}
+	}
 }

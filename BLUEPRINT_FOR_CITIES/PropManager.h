@@ -21,6 +21,9 @@ public:
 	Choose chooseProp;
 
 public:
+	bool drawPropState{ false };
+
+public:
 	PropManager();
 	~PropManager();
 

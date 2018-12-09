@@ -35,7 +35,7 @@ void SelectGrid::update()
 
 void SelectGrid::render()
 {
-	if (!select) mainobj.render();
+	if (!select && !g_gameScene->selectRoad.select && !g_gameScene->selectProp.select) mainobj.render();
 }
 
 void SelectGrid::release()

@@ -33,7 +33,7 @@ void PathManager::release()
 
 void PathManager::extractDepthmap()
 {
-	if (drawState)
+	if (drawRoadState)
 		builder.obj.extractDepthmap();
 	for (auto& v : node)
 		v->obj.extractDepthmap();

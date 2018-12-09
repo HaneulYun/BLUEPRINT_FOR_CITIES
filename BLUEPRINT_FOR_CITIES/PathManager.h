@@ -12,7 +12,7 @@ class PathManager
 	std::list<Segment*> segment;
 
 public:
-	bool drawState{ false };
+	bool drawRoadState{ false };
 	bool drawMode{ false };	// E_DRAW_MODE
 
 public:

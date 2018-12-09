@@ -24,14 +24,14 @@ class GameScene : public Scene
 {
 	static GameScene* m_instance;
 
-	TopBar topBar;
-	LowerBar lowerBar;
 	TimeBar timeBar;
 	DestroyEffect destroyEffect;
 
 	CarAmbo carAmbo[20];
 
 public:
+	TopBar topBar;
+	LowerBar lowerBar;
 	SelectProp selectProp;
 	SelectRoad selectRoad;
 	SelectGrid selectGrid;

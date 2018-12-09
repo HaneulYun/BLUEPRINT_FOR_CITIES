@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="CarAmbo.cpp" />
+    <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="Cloud.cpp" />
     <ClCompile Include="Cone.cpp" />
     <ClCompile Include="controls.cpp" />
@@ -187,6 +188,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="CarAmbo.h" />
+    <ClInclude Include="CheckBox.h" />
     <ClInclude Include="Cloud.h" />
     <ClInclude Include="Cone.h" />
     <ClInclude Include="controls.hpp" />

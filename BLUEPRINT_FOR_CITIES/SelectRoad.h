@@ -4,6 +4,9 @@
 class SelectRoad
 {
 	ObjectUI mainobj;
+
+	ObjectUI subS;
+	ObjectUI subC;
 public:
 	SelectRoad();
 	~SelectRoad();
