@@ -1,4 +1,5 @@
 #include <random>
+#include <string.h>
 
 #include <gl/glew.h>
 #include <gl/gl.h>
@@ -27,6 +28,15 @@ void Object3d::initialize()
 	DepthBiasID = glGetUniformLocation(programID, "DepthBiasMVP");
 	ShadowMapID = glGetUniformLocation(programID, "shadowMap");
 
+	for (int i = 0; i < 16; ++i)
+	{
+		std::string str = "lightPosition[";
+		str += std::to_string(i);
+		str += "]";
+		lightPositionID[i] = glGetUniformLocation(programID, str.c_str());
+	}
+	lightNumID = glGetUniformLocation(programID, "lightNum_vs");
+
 	textureData = textureManager.loadBMP(urlBMP, programID);
 
 	meshData = meshManager.loadOBJ(urlOBJ);
@@ -49,8 +59,6 @@ void Object3d::render()
 
 	glUseProgram(programID);
 
-	vec3 lightPos = g_gameScene->sun.getLightPos();
-	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
 
 	mat4 projectionMatrix = getProjectionMatrix();
 	mat4 viewMatrix = getViewMatrix();
@@ -64,10 +72,15 @@ void Object3d::render()
 	);
 
 	mat4 depthBiasMVP = biasMatrix * depthMVP;
+	vec3 lightPos = g_gameScene->sun.getLightPos();
+	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
 	glUniformMatrix4fv(DepthBiasID, 1, GL_FALSE, &depthBiasMVP[0][0]);
+	for(int i = 0; i < 16; ++i)
+		glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
+	glUniform1d(lightNumID, 16);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureData.textureID);

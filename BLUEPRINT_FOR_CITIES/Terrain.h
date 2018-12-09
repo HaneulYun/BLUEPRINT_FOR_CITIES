@@ -23,6 +23,9 @@ class Terrain : public Object
 	GLuint DepthBiasID;
 	GLuint ShadowMapID;
 
+	GLuint lightPositionID[16];
+	GLuint lightNumID;
+
 	GLuint lightID;
 
 

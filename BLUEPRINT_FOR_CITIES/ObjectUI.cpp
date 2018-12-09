@@ -22,16 +22,11 @@ void ObjectUI::initialize()
 {
 	programID = shagerManager.loadShaders("ui.vs", "ui.fs");
 	matrixID = glGetUniformLocation(programID, "MVP");
-	viewMatrixID = glGetUniformLocation(programID, "V");
-	modelMatrixID = glGetUniformLocation(programID, "M");
-
-	textureData = textureManager.loadBMP(urlBMP, programID);
+	colorID = glGetUniformLocation(programID, "COLOR_VS");
 
 	meshData = meshManager.loadOBJ(urlOBJ);
 
 	glUseProgram(programID);
-	colorID = glGetUniformLocation(programID, "Color_ui");
-	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 }
 
 void ObjectUI::update()
@@ -44,42 +39,22 @@ void ObjectUI::render()
 
 	glUseProgram(programID);
 
-	vec3 lightPos = g_gameScene->sun.getLightPos();
-	glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
-	glUniform3f(colorID, color.r, color.g, color.b);
-
 	mat4 projectionMatrix = getUIProjectionMatrix();
 	mat4 viewMatrix = getViewMatrix();
 	mat4 modelMatrix = mat;
 	mat4 mvp = projectionMatrix * modelMatrix;
 	
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
-	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
-	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureData.textureID);
-
-	glUniform1i(textureData.textureSID, 0);
+	glUniform3f(colorID, color.r, color.g, color.b);
 
 	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
 
 	glBindBuffer(GL_ARRAY_BUFFER, meshData.vertexbufferID);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, meshData.uvbufferID);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, meshData.normalbufferID);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
 	glDrawArrays(GL_TRIANGLES, 0, meshData.verticesSize);
 
 	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
-	glDisableVertexAttribArray(2);
 
 	Object::postRender();
 }
