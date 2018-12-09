@@ -34,7 +34,7 @@ GameScene* GameScene::instance()
 void GameScene::initialize()
 {
 	terrain = new Terrain();
-	terrain->setTerrainSize(20, 20);
+	terrain->setTerrainSize(100, 100);
 	terrain->loadTerrain("resources\\map.bmp", 5);
 
 	mousePicker = new MousePicker(getProjectionMatrix(), terrain);

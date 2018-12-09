@@ -32,7 +32,7 @@ void Object::preRender()
 	glm::mat4 matRotation = glm::rotate(rotation.y, glm::vec3{ 0, 1, 0 }) *
 		glm::rotate(rotation.z, glm::vec3{ 0, 0, 1 }) * glm::rotate(rotation.x, glm::vec3{ 1, 0, 0 });
 	if (rotationAxis != 0)
-		matRotation *= glm::rotate(rotationAxis, axisRotation);
+		matRotation = glm::rotate(rotationAxis, axisRotation) * matRotation;
 	glm::mat4 matScale = glm::scale(scale);
 
 	mat = matTranslation * matRotation * matScale;
