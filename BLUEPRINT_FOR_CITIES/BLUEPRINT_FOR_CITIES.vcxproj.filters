@@ -328,28 +328,28 @@
     <None Include="terrain.vs">
       <Filter>쉐이더 파일</Filter>
     </None>
-    <None Include="DepthRTT.fragmentshader">
-      <Filter>쉐이더 파일</Filter>
-    </None>
-    <None Include="DepthRTT.vertexshader">
-      <Filter>쉐이더 파일</Filter>
-    </None>
     <None Include="Passthrough.vertexshader">
       <Filter>쉐이더 파일</Filter>
     </None>
     <None Include="SimpleTexture.fragmentshader">
       <Filter>쉐이더 파일</Filter>
     </None>
-    <None Include="ShadowMapping.fragmentshader">
-      <Filter>쉐이더 파일</Filter>
-    </None>
-    <None Include="ShadowMapping.vertexshader">
-      <Filter>쉐이더 파일</Filter>
-    </None>
     <None Include="ShadowMapping_SimpleVersion.fragmentshader">
       <Filter>쉐이더 파일</Filter>
     </None>
     <None Include="ShadowMapping_SimpleVersion.vertexshader">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="shadow.fs">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="shadow.vs">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="depth.fs">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="depth.vs">
       <Filter>쉐이더 파일</Filter>
     </None>
   </ItemGroup>

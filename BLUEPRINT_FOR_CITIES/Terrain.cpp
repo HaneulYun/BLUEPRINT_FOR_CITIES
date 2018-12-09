@@ -75,7 +75,7 @@ void Terrain::initialize()
 
 	computedNormals = false;
 
-	depthProgramID = shagerManager.loadShaders("DepthRTT.vertexshader", "DepthRTT.fragmentshader");
+	depthProgramID = shagerManager.loadShaders("depth.vs", "depth.fs");
 	depthMatrixID = glGetUniformLocation(depthProgramID, "depthMVP");
 }
 

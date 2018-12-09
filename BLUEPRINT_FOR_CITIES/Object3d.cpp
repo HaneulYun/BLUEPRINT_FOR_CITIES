@@ -20,7 +20,7 @@ Object3d::~Object3d()
 
 void Object3d::initialize()
 {
-	programID = shagerManager.loadShaders("ShadowMapping_SimpleVersion.vertexshader", "ShadowMapping_SimpleVersion.fragmentshader");
+	programID = shagerManager.loadShaders("shadow.vs", "shadow.fs");
 	matrixID = glGetUniformLocation(programID, "MVP");
 	viewMatrixID = glGetUniformLocation(programID, "V");
 	modelMatrixID = glGetUniformLocation(programID, "M");
@@ -35,7 +35,7 @@ void Object3d::initialize()
 	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 
 	// Shadow map
-	depthProgramID = shagerManager.loadShaders("DepthRTT.vertexshader", "DepthRTT.fragmentshader");
+	depthProgramID = shagerManager.loadShaders("depth.vs", "depth.fs");
 	depthMatrixID = glGetUniformLocation(depthProgramID, "depthMVP");
 }
 
