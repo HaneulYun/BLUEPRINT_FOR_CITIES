@@ -22,14 +22,14 @@ void CarAmbo::initialize()
 	obj.setBMP("resources/T_PolygonCity_Texture_01_A.bmp");
 	switch (uid_7(dre)) {
 	case 1: obj.setOBJ("resources/carAmbo.obj");	break;
-	case 2: obj.setOBJ("resources/muscle.obj");	break;
-	case 3: obj.setOBJ("resources/small.obj");	break;
-	default: obj.setOBJ("resources/van.obj");	break;
+	case 2: obj.setOBJ("resources/muscle.obj");		break;
+	case 3: obj.setOBJ("resources/small.obj");		break;
+	default: obj.setOBJ("resources/van.obj");		break;
 	}
 	obj.initialize();
 	glm::vec3 position{ uid_400(dre) / 20.f, 0, uid_400(dre) / 20.f };
 	position.y = g_gameScene->terrain->getHeightByPosition(position.x, position.z);
-	obj.setPosition(position + glm::vec3{0, 0.2, 0});
+	obj.setPosition(position + glm::vec3{0, 0.1, 0});
 	obj.setRotation(0, float(uid_360(dre)), 0);
 	obj.setScale(0.5f);
 
