@@ -153,9 +153,6 @@
     <ClCompile Include="picking.cpp">
       <Filter>소스 파일\00_ENTRY\00_CORE</Filter>
     </ClCompile>
-    <ClCompile Include="CarAmbo.cpp">
-      <Filter>소스 파일\02_OBJECT\03_INSTANCE\04_NPC</Filter>
-    </ClCompile>
     <ClCompile Include="Faster.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClCompile>
@@ -184,10 +181,13 @@
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClCompile>
     <ClCompile Include="SelectGrid.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClCompile>
     <ClCompile Include="CheckBox.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CarAmbo.cpp">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\04_NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,9 +199,6 @@
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>소스 파일\02_OBJECT\01_BASE</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>소스 파일\01_SCENE\01_INSTANCE</Filter>
     </ClInclude>
     <ClInclude Include="Object3d.h">
       <Filter>소스 파일\02_OBJECT\02_BASIC</Filter>
@@ -308,11 +305,14 @@
     <ClInclude Include="SelectProp.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClInclude>
-    <ClInclude Include="SelectGrid.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="GameScene.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClInclude>
     <ClInclude Include="CheckBox.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectGrid.h">
+      <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
