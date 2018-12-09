@@ -29,7 +29,16 @@ void PathManager::render()
 
 void PathManager::release()
 {
+}
 
+void PathManager::extractDepthmap()
+{
+	if (drawState)
+		builder.obj.extractDepthmap();
+	for (auto& v : node)
+		v->obj.extractDepthmap();
+	for (auto& v : segment)
+		v->obj.extractDepthmap();
 }
 
 void PathManager::inputInitialize()

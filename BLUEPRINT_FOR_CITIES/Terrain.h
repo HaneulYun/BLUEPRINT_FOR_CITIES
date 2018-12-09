@@ -20,8 +20,15 @@ class Terrain : public Object
 	GLuint matrixID;
 	GLuint viewMatrixID;
 	GLuint modelMatrixID;
+	GLuint DepthBiasID;
+	GLuint ShadowMapID;
 
 	GLuint lightID;
+
+
+	GLuint depthProgramID;
+	GLuint depthMatrixID;
+	glm::mat4 depthMVP;
 
 	float terrainWidth;
 	float terrainLength;
@@ -42,6 +49,7 @@ public:
 	void update();
 	void render();
 	void release();
+	void extractDepthmap();
 
 	void setTerrainSize(int _width, int _length);
 	void setSize(int _width, int _length);

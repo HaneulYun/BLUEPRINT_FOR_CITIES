@@ -12,5 +12,6 @@ public:
 	void update();
 	void render();
 	void release();
+	void extractDepthmap();
 };
 

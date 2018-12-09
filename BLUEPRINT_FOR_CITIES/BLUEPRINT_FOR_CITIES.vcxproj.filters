@@ -174,6 +174,9 @@
     <ClCompile Include="Pause.cpp">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClCompile>
+    <ClCompile Include="TextureFromRender.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -284,6 +287,9 @@
     <ClInclude Include="Pause.h">
       <Filter>소스 파일\02_OBJECT\03_INSTANCE\00_UI</Filter>
     </ClInclude>
+    <ClInclude Include="TextureFromRender.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="StandardShading.fragmentshader">
@@ -302,6 +308,30 @@
       <Filter>쉐이더 파일</Filter>
     </None>
     <None Include="terrain.vs">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="DepthRTT.fragmentshader">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="DepthRTT.vertexshader">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="Passthrough.vertexshader">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="SimpleTexture.fragmentshader">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="ShadowMapping.fragmentshader">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="ShadowMapping.vertexshader">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="ShadowMapping_SimpleVersion.fragmentshader">
+      <Filter>쉐이더 파일</Filter>
+    </None>
+    <None Include="ShadowMapping_SimpleVersion.vertexshader">
       <Filter>쉐이더 파일</Filter>
     </None>
   </ItemGroup>

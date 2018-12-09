@@ -174,6 +174,7 @@
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="text2D.cpp" />
     <ClCompile Include="texture.cpp" />
+    <ClCompile Include="TextureFromRender.cpp" />
     <ClCompile Include="TimeBar.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="text2D.hpp" />
     <ClInclude Include="texture.hpp" />
+    <ClInclude Include="TextureFromRender.h" />
     <ClInclude Include="TimeBar.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
@@ -219,6 +221,14 @@
     <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DepthRTT.fragmentshader" />
+    <None Include="DepthRTT.vertexshader" />
+    <None Include="Passthrough.vertexshader" />
+    <None Include="ShadowMapping.fragmentshader" />
+    <None Include="ShadowMapping.vertexshader" />
+    <None Include="ShadowMapping_SimpleVersion.fragmentshader" />
+    <None Include="ShadowMapping_SimpleVersion.vertexshader" />
+    <None Include="SimpleTexture.fragmentshader" />
     <None Include="StandardShading.fragmentshader" />
     <None Include="StandardShading.vertexshader" />
     <None Include="terrain.fs" />

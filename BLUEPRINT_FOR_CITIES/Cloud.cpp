@@ -44,3 +44,8 @@ void Cloud::release()
 {
 	obj.release();
 }
+
+void Cloud::extractDepthmap()
+{
+	obj.extractDepthmap();
+}

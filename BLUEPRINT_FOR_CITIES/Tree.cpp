@@ -47,3 +47,8 @@ void Tree::release()
 {
 	obj.release();
 }
+
+void Tree::extractDepthmap()
+{
+	obj.extractDepthmap();
+}

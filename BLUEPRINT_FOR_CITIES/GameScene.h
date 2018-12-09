@@ -15,6 +15,7 @@
 
 #include "PathManager.h"
 #include "PropManager.h"
+#include "TextureFromRender.h"
 
 class GameScene : public Scene
 {
@@ -28,6 +29,7 @@ class GameScene : public Scene
 	CarAmbo carAmbo[20];
 
 public:
+	TextureFromRender texture;
 	PathManager pathManager;
 	PropManager propManager;
 	Faster fasterImage;

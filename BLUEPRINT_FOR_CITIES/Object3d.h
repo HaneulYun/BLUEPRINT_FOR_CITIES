@@ -14,15 +14,18 @@ class Object3d : public Object
 	GLuint matrixID;
 	GLuint viewMatrixID;
 	GLuint modelMatrixID;
+	GLuint DepthBiasID;
+	GLuint ShadowMapID;
 
 	GLuint lightID;
 
 	std::string urlBMP;
 	std::string urlOBJ;
 
-
+	GLuint depthProgramID;
+	GLuint depthMatrixID;
+	glm::mat4 depthMVP;
 public:
-
 	Object3d();
 	~Object3d();
 
@@ -30,6 +33,7 @@ public:
 	void update();
 	void render();
 	void release();
+	void extractDepthmap();
 
 	void setBMP(std::string _url);
 	void setOBJ(std::string _url);
