@@ -12,7 +12,7 @@ class PropManager
 {
 public:
 	std::list<Tree*> tree;
-	std::list<StreetLight*> streetLight;
+	std::vector<StreetLight*> streetLight;
 	std::list<Cloud*> cloud;
 	std::list<MailBox*> mailbox;
 	std::list<Hydrant*> hydrant;

@@ -85,7 +85,7 @@ void main(){
 		float distance = length( lightPosition[i] - Position_worldspace );
 
 		vec3 n = normalize( toLightVector[i] );
-		vec3 l = normalize( lightPosition[i] - Position_worldspace );
+		vec3 l = normalize(vec3(0, 1, 0));
 		float cosTheta = clamp( dot( n,l ), 0,1 );
 		
 		vec3 E = normalize(EyeDirection_cameraspace);
