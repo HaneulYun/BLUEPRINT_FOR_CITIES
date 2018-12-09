@@ -28,6 +28,15 @@ void Terrain::initialize()
 	DepthBiasID = glGetUniformLocation(programID, "DepthBiasMVP");
 	ShadowMapID = glGetUniformLocation(programID, "shadowMap");
 
+	for (int i = 0; i < 16; ++i)
+	{
+		std::string str = "lightPosition[";
+		str += std::to_string(i);
+		str += "]";
+		lightPositionID[i] = glGetUniformLocation(programID, str.c_str());
+	}
+	lightNumID = glGetUniformLocation(programID, "lightNum_vs");
+
 	glUseProgram(programID);
 	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 
@@ -108,6 +117,14 @@ void Terrain::render()
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
 
 	glUniformMatrix4fv(DepthBiasID, 1, GL_FALSE, &depthBiasMVP[0][0]);
+	for (int i = 0; i < 16; ++i)
+	{
+		auto iter = g_gameScene->propManager.streetLight.begin();
+		lightPos = (*iter)->obj.getPosition() + glm::vec3{0, 0.5, 0};
+		glUniform3f(lightPositionID[i], lightPos.x, lightPos.y, lightPos.z);
+		++iter;
+	}
+	glUniform1d(lightNumID, 16);
 
 	//glActiveTexture(GL_TEXTURE0);
 	//glBindTexture(GL_TEXTURE_2D, textureData.textureID);

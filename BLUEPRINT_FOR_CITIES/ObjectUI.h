@@ -12,11 +12,8 @@ class ObjectUI : public Object
 
 	GLuint programID;
 	GLuint matrixID;
-	GLuint viewMatrixID;
-	GLuint modelMatrixID;
 
 	GLuint colorID;
-	GLuint lightID;
 
 	std::string urlBMP;
 	std::string urlOBJ;
