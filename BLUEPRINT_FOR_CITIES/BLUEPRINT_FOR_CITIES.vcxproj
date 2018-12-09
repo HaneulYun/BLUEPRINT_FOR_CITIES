@@ -167,6 +167,9 @@
     <ClCompile Include="PropManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Segment.cpp" />
+    <ClCompile Include="SelectGrid.cpp" />
+    <ClCompile Include="SelectProp.cpp" />
+    <ClCompile Include="SelectRoad.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="shadow.cpp" />
     <ClCompile Include="StreetLight.cpp" />
@@ -206,6 +209,9 @@
     <ClInclude Include="PropManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Segment.h" />
+    <ClInclude Include="SelectGrid.h" />
+    <ClInclude Include="SelectProp.h" />
+    <ClInclude Include="SelectRoad.h" />
     <ClInclude Include="shader.hpp" />
     <ClInclude Include="shadow.h" />
     <ClInclude Include="StreetLight.h" />

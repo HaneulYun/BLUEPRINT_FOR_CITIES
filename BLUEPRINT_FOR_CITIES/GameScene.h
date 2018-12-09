@@ -16,6 +16,9 @@
 #include "PathManager.h"
 #include "PropManager.h"
 #include "TextureFromRender.h"
+#include "SelectProp.h"
+#include "SelectRoad.h"
+#include "SelectGrid.h"
 
 class GameScene : public Scene
 {
@@ -29,6 +32,9 @@ class GameScene : public Scene
 	CarAmbo carAmbo[20];
 
 public:
+	SelectProp selectProp;
+	SelectRoad selectRoad;
+	SelectGrid selectGrid;
 	TextureFromRender texture;
 	PathManager pathManager;
 	PropManager propManager;

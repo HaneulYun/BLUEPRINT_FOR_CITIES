@@ -39,6 +39,9 @@ void GameScene::initialize()
 
 	mousePicker = new MousePicker(getProjectionMatrix(), terrain);
 
+	selectProp.initialize();
+	selectRoad.initialize();
+	selectGrid.initialize();
 	pathManager.initialize();
 	propManager.initialize();
 	for (auto& v : carAmbo)
@@ -68,6 +71,10 @@ void GameScene::update()
 	}
 	terrain->update();
 	sun.update();
+
+	selectProp.update();
+	selectRoad.update();
+	selectGrid.update();
 	pathManager.update();
 	propManager.update();
 	for (auto& v : carAmbo)
@@ -90,6 +97,10 @@ void GameScene::render()
 
 	texture.freeTexture();
 	sun.render();
+
+	selectProp.render();
+	selectRoad.render();
+	selectGrid.render();
 	pathManager.render();
 	propManager.render();
 	terrain->render();
@@ -110,6 +121,10 @@ void GameScene::release()
 {
 	terrain->release();
 	sun.release();
+
+	selectProp.release();
+	selectRoad.release();
+	selectGrid.release();
 	pathManager.release();
 	propManager.release();
 	for (auto& v : carAmbo)
