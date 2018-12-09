@@ -84,11 +84,14 @@ void GameScene::render()
 {
 	texture.bindTexture();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glCullFace(GL_FRONT);
 	pathManager.extractDepthmap();
 	propManager.extractDepthmap();
 	terrain->extractDepthmap();
 
 	texture.freeTexture();
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 	sun.render();
 	pathManager.render();
 	propManager.render();
@@ -102,7 +105,6 @@ void GameScene::render()
 	fasterImage.render();
 	pauseImage.render();
 
-	glViewport(0, 0, 1600, 900);
 	//texture.render();
 }
 

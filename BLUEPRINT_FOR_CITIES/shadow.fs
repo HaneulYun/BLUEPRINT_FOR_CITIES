@@ -81,12 +81,14 @@ void main(){
 	float visibility=1.0;
 
 	// Fixed bias, or...
-	float bias = 0.005*tan(acos(cosTheta)); // cosTheta is dot( n,l ), clamped between 0 and 1
+	float bias = 0.00005*tan(acos(cosTheta)); // cosTheta is dot( n,l ), clamped between 0 and 1
 	bias = clamp(bias, 0,0.01);
+	//
+	//if ( texture( shadowMap, ShadowCoord.xy ).z  <  ShadowCoord.z-bias){
+	//	visibility = 0.5;
+	//}
 
 	// ...variable bias
-	// float bias = 0.005*tan(acos(cosTheta));
-	// bias = clamp(bias, 0,0.01);
 
 	// Sample the shadow map 4 times
 	for (int i=0;i<4;i++){

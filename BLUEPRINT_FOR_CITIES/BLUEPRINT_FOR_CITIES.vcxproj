@@ -221,11 +221,11 @@
     <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DepthRTT.fragmentshader" />
-    <None Include="DepthRTT.vertexshader" />
+    <None Include="depth.fs" />
+    <None Include="depth.vs" />
     <None Include="Passthrough.vertexshader" />
-    <None Include="ShadowMapping.fragmentshader" />
-    <None Include="ShadowMapping.vertexshader" />
+    <None Include="shadow.fs" />
+    <None Include="shadow.vs" />
     <None Include="ShadowMapping_SimpleVersion.fragmentshader" />
     <None Include="ShadowMapping_SimpleVersion.vertexshader" />
     <None Include="SimpleTexture.fragmentshader" />
