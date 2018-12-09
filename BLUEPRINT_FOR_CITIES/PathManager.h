@@ -23,6 +23,7 @@ public:
 	void update();
 	void render();
 	void release();
+	void extractDepthmap();
 
 	void inputInitialize();
 	void inputNode(Node* _node);

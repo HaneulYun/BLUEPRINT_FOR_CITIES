@@ -41,3 +41,8 @@ void CarAmbo::release()
 {
 	obj.release();
 }
+
+void CarAmbo::extractDepthmap()
+{
+	obj.extractDepthmap();
+}

@@ -59,6 +59,8 @@ void GameScene::initialize()
 	lowerBar.initialize();
 	timeBar.initialize();
 	destroyEffect.initialize();
+
+	texture.initialize();
 }
 
 void GameScene::update()
@@ -101,9 +103,23 @@ void GameScene::update()
 
 void GameScene::render()
 {
-	terrain->render();
+	texture.bindTexture();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	pathManager.extractDepthmap();
+	terrain->extractDepthmap();
+	for (auto& v : tree)
+		v->extractDepthmap();
+	for (auto& v : carAmbo)
+		v.extractDepthmap();
+	for (auto& v : cloud)
+		v.extractDepthmap();
+	for (auto& v : streetLight)
+		v.extractDepthmap();
+
+	texture.freeTexture();
 	sun.render();
 	pathManager.render();
+	terrain->render();
 	for (auto& v : tree)
 		v->render();
 	for (auto& v : carAmbo)
@@ -125,6 +141,9 @@ void GameScene::render()
 			burgerOnMouse.render();
 		}
 	}
+
+	glViewport(0, 0, 1600, 900);
+	//texture.render();
 }
 
 void GameScene::release()

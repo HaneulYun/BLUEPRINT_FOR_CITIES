@@ -15,6 +15,7 @@
 #include "Sun.h"
 
 #include "PathManager.h"
+#include "TextureFromRender.h"
 
 class GameScene : public Scene
 {
@@ -29,7 +30,9 @@ class GameScene : public Scene
 	Cloud cloud[10];
 	StreetLight streetLight[50];
 
+
 public:
+	TextureFromRender texture;
 	PathManager pathManager;
 	Sun sun;
 	Tree treeOnMouse;

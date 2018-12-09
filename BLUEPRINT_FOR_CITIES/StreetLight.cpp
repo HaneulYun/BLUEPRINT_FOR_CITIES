@@ -41,3 +41,8 @@ void StreetLight::release()
 {
 	obj.release();
 }
+
+void StreetLight::extractDepthmap()
+{
+	obj.extractDepthmap();
+}
