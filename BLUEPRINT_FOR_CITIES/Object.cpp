@@ -7,6 +7,7 @@ MeshManager Object::meshManager;
 
 Object::Object()
 {
+
 }
 
 Object::~Object()

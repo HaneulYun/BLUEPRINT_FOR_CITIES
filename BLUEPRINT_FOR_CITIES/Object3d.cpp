@@ -13,6 +13,7 @@ using namespace glm;
 
 Object3d::Object3d()
 {
+
 }
 
 Object3d::~Object3d()
