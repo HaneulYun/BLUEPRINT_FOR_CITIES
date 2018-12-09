@@ -35,7 +35,7 @@ void Terrain::initialize()
 		str += "]";
 		lightPositionID[i] = glGetUniformLocation(programID, str.c_str());
 	}
-	lightNumID = glGetUniformLocation(programID, "lightNum_vs");
+	lightNumID = glGetUniformLocation(programID, "lightNum");
 
 	glUseProgram(programID);
 	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
@@ -123,7 +123,7 @@ void Terrain::render()
 		glUniform3f(lightPositionID[i], lightPos.x, lightPos.y + 0.45, lightPos.z);
 		++iter;
 	}
-	glUniform1d(lightNumID, 16);
+	glUniform1i(lightNumID, 16);
 
 	//glActiveTexture(GL_TEXTURE0);
 	//glBindTexture(GL_TEXTURE_2D, textureData.textureID);

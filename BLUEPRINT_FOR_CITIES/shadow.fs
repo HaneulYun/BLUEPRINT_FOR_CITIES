@@ -81,7 +81,7 @@ void main(){
 	totalDiffuse = totalDiffuse + visibility * MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) ;
 	totalSpecular = totalSpecular + visibility * MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,10) / (distance*distance) ;
 
-	for(int i = 0; i < 16; ++i){
+	for(int i = 0; i < lightNum; ++i){
 		float distance = length( lightPosition[i] - Position_worldspace );
 
 		vec3 n = normalize( toLightVector[i] );

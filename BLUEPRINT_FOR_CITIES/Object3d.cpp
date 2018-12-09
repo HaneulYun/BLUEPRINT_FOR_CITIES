@@ -28,6 +28,7 @@ void Object3d::initialize()
 	DepthBiasID = glGetUniformLocation(programID, "DepthBiasMVP");
 	ShadowMapID = glGetUniformLocation(programID, "shadowMap");
 
+	lightNumID = glGetUniformLocation(programID, "lightNum");
 	for (int i = 0; i < 16; ++i)
 	{
 		std::string str = "lightPosition[";
@@ -35,7 +36,6 @@ void Object3d::initialize()
 		str += "]";
 		lightPositionID[i] = glGetUniformLocation(programID, str.c_str());
 	}
-	lightNumID = glGetUniformLocation(programID, "lightNum_vs");
 
 	textureData = textureManager.loadBMP(urlBMP, programID);
 
@@ -85,7 +85,7 @@ void Object3d::render()
 		glUniform3f(lightPositionID[i], lightPos.x, lightPos.y + 0.45, lightPos.z);
 		++iter;
 	}
-	glUniform1d(lightNumID, 16);
+	glUniform1i(lightNumID, 16);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureData.textureID);
