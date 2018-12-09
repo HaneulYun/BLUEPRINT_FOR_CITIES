@@ -78,8 +78,13 @@ void Object3d::render()
 	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
 	glUniformMatrix4fv(DepthBiasID, 1, GL_FALSE, &depthBiasMVP[0][0]);
-	for(int i = 0; i < 16; ++i)
-		glUniform3f(lightID, lightPos.x, lightPos.y, lightPos.z);
+	auto iter = g_gameScene->propManager.streetLight.begin();
+	for (int i = 0; i < 16; ++i)
+	{
+		lightPos = (*iter)->obj.getPosition();
+		glUniform3f(lightPositionID[i], lightPos.x, lightPos.y + 0.45, lightPos.z);
+		++iter;
+	}
 	glUniform1d(lightNumID, 16);
 
 	glActiveTexture(GL_TEXTURE0);

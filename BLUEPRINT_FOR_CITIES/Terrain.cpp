@@ -115,13 +115,12 @@ void Terrain::render()
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
-
 	glUniformMatrix4fv(DepthBiasID, 1, GL_FALSE, &depthBiasMVP[0][0]);
+	auto iter = g_gameScene->propManager.streetLight.begin();
 	for (int i = 0; i < 16; ++i)
 	{
-		auto iter = g_gameScene->propManager.streetLight.begin();
-		lightPos = (*iter)->obj.getPosition() + glm::vec3{0, 0.5, 0};
-		glUniform3f(lightPositionID[i], lightPos.x, lightPos.y, lightPos.z);
+		lightPos = (*iter)->obj.getPosition();
+		glUniform3f(lightPositionID[i], lightPos.x, lightPos.y + 0.45, lightPos.z);
 		++iter;
 	}
 	glUniform1d(lightNumID, 16);

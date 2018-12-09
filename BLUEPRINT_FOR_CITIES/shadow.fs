@@ -7,12 +7,17 @@ in vec3 EyeDirection_cameraspace;
 in vec3 LightDirection_cameraspace;
 in vec4 ShadowCoord;
 
+in vec3 toLightVector[16];
+
 layout(location = 0) out vec3 color;
 
 uniform sampler2D myTextureSampler;
 uniform mat4 MV;
 uniform vec3 LightPosition_worldspace;
 uniform sampler2DShadow shadowMap;
+
+uniform vec3 lightPosition[16];
+uniform int lightNum;
 
 vec2 poissonDisk[16] = vec2[]( 
    vec2( -0.94201624, -0.39906216 ), 
@@ -42,6 +47,11 @@ float random(vec3 seed, int i){
 void main(){
 	vec3 LightColor = vec3(1,1,1);
 	float LightPower = 500.0f;
+	vec3 streetLightColor = vec3(250.f/255,160.f/255,12.f/255);
+	float streetLightPower = 5.0f;
+	
+	vec3 totalDiffuse = vec3(0.0);
+	vec3 totalSpecular = vec3(0.0);
 	
 	vec3 MaterialDiffuseColor = texture( myTextureSampler, UV ).rgb;
 	vec3 MaterialAmbientColor = vec3(0.2,0.2,0.2) * MaterialDiffuseColor;
@@ -58,7 +68,7 @@ void main(){
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
 	
 	float visibility=1.0;
-	float bias = 0.00005*tan(acos(cosTheta));
+	float bias = 0.0005*tan(acos(cosTheta));
 	bias = clamp(bias, 0,0.01);
 
 	for (int i=0;i<4;i++){
@@ -68,8 +78,31 @@ void main(){
 
 	LightColor = vec3(1,cosTheta ,cosTheta);
 
-	color = 
-		MaterialAmbientColor +
-		visibility * MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) +
-		visibility * MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,10) / (distance*distance) ;
+	totalDiffuse = totalDiffuse + visibility * MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) ;
+	totalSpecular = totalSpecular + visibility * MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,10) / (distance*distance) ;
+
+	for(int i = 0; i < 16; ++i){
+		float distance = length( lightPosition[i] - Position_worldspace );
+
+		vec3 n = normalize( toLightVector[i] );
+		vec3 l = normalize( lightPosition[i] - Position_worldspace );
+		float cosTheta = clamp( dot( n,l ), 0,1 );
+		
+		vec3 E = normalize(EyeDirection_cameraspace);
+		vec3 R = reflect(-l,n);
+		float cosAlpha = clamp( dot( E,R ), 0,1 );
+		
+		float visibility=1.0;
+		float bias = 0.0005*tan(acos(cosTheta));
+		bias = clamp(bias, 0,0.01);
+
+		for (int i=0;i<4;i++){
+			int index = int(16.0*random(gl_FragCoord.xyy, i))%16;
+			visibility -= 0.2*(1.0-texture( shadowMap, vec3(ShadowCoord.xy + poissonDisk[index]/700.0,  (ShadowCoord.z-bias)/ShadowCoord.w) ));
+		}
+
+		totalDiffuse = totalDiffuse + visibility * MaterialDiffuseColor * streetLightColor * streetLightPower * cosTheta / (distance*distance) / 16 ;
+		totalSpecular = totalSpecular + visibility * MaterialSpecularColor * streetLightColor * streetLightPower * pow(cosAlpha,5) / (distance*distance) / 16;
+	}
+	color = MaterialAmbientColor + totalDiffuse + totalSpecular;
 }
