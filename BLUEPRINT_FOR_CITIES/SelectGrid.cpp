@@ -35,7 +35,7 @@ void SelectGrid::update()
 
 void SelectGrid::render()
 {
-	mainobj.render();
+	if (!select) mainobj.render();
 }
 
 void SelectGrid::release()

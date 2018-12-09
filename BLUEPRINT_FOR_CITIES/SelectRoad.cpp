@@ -35,7 +35,7 @@ void SelectRoad::update()
 
 void SelectRoad::render()
 {
-	mainobj.render();
+	if (!select) mainobj.render();
 }
 
 void SelectRoad::release()
